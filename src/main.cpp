@@ -11,3 +11,10 @@ int main( ){
 	ofRunApp(new ofApp());
 
 }
+
+/*
+ C++ Term 2 Project - Work In Progress
+ Ecosystem Simulation by Uyen Le
+ 
+ Created on Tues,16 Feb 2016.
+*/

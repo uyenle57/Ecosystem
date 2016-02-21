@@ -1,8 +1,14 @@
 #include "ofApp.h"
+#include "ofMain.h"
+#include <vector>
+using std::vector;
+using namespace std;
+
+#include "Organism.hpp"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    
 }
 
 //--------------------------------------------------------------
@@ -12,7 +18,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    
+    ofColor centerColor = ofColor(85, 78, 68);
+    ofColor edgeColor(0, 0, 0);
+    ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
+    
+    org.Draw();
 }
 
 //--------------------------------------------------------------
