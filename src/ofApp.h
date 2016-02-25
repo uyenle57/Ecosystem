@@ -2,6 +2,10 @@
 
 #include "ofMain.h"
 #include "Organism.hpp"
+#include "Worms.hpp"
+#include "Leeches.hpp"
+#include "Tadpoles.hpp"
+
 
 class ofApp : public ofBaseApp{
 
@@ -22,5 +26,12 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    Organism org;
+    
+    // Organism derived classes
+    Worms worm;
+    Leeches leech;
+    vector <Tadpoles> tadpoles;
+    
+    // Animal derived classes
+    
 };

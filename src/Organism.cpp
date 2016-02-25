@@ -8,20 +8,40 @@
 
 #include "Organism.hpp"
 
-//Organism::Organism(int posx, int posy, int posz):mPosx(posx), mPosy(posy), mPosz(posz) {
 Organism::Organism() {
-    color.set(255);
+    mPosition.set(0, 0, 0);
+    mVelocity.set(0, 0, 0);
+    mAcceleration.set(0, 0, 0);
     
+    mTheta = 0;
+    mMaxForce = 0.05;
+    mMaxSpeed = 2;
 }
 
-void Organism::Draw() {
+//--------------------------------------------------------------
+void Organism::update() {
+    mVelocity = mVelocity + mAcceleration;
+    mVelocity.limit(mMaxSpeed);
     
-    ofSetColor(color);
-    //ofDrawEllipse(mPosx, mPosy, mPosz, 10);
-    ofDrawEllipse(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 10, 10);
+    mPosition = mPosition + mVelocity;
+    
+    mAcceleration = mAcceleration * 0; //reset acceleration to 0
 }
 
-void Organism::Move() {
+//--------------------------------------------------------------
+void Organism::applyForce(ofVec3f force) {
+    mAcceleration = mAcceleration + force; //force accumulation
+}
+
+//--------------------------------------------------------------
+void Organism::seek(ofVec3f target) {
+    ofVec3f mDesired = target - mPosition;  //A vector pointing from the location to the target
     
-    mPosx += 0.05;
+    mDesired.normalize();  // Normalize and scale to maximum speed
+    mDesired * mMaxSpeed;
+    
+    ofVec3f mSteer = mDesired - mVelocity;
+    mSteer.limit(mMaxForce);  //Limit to maximum steering force
+    
+    applyForce(mSteer);
 }
