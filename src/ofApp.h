@@ -1,10 +1,12 @@
 #pragma once
-
 #include "ofMain.h"
+
 #include "Organism.hpp"
 #include "Worms.hpp"
 #include "Leeches.hpp"
-#include "Tadpoles.hpp"
+#include "Mosquitoes.hpp"
+
+#include "Animals.hpp"
 
 
 class ofApp : public ofBaseApp{
@@ -28,10 +30,11 @@ class ofApp : public ofBaseApp{
     
     
     // Organism derived classes
-    Worms worm;
-    Leeches leech;
-    vector <Tadpoles> tadpoles;
+    vector <Worms> worms;
+    Worms *addWorm;
+    //Leeches Leeches;    //vector <Leeches> leeches;
+    //Mosquitoes Mosquitoes; //vector <Mosquitoes> mosquitoes;
     
-    // Animal derived classes
+    // Animals derived classes
     
 };

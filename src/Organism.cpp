@@ -7,34 +7,44 @@
 //
 
 #include "Organism.hpp"
+#include "Worms.hpp"
 
-Organism::Organism() {
+Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
     mPosition.set(0, 0, 0);
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
     mTheta = 0;
-    mMaxForce = 0.05;
-    mMaxSpeed = 2;
+    mMaxForce = 5.0;
+    mMaxSpeed = 5;
 }
 
+//Organism::~Organism() {
+//
+//}
+
 //--------------------------------------------------------------
-void Organism::update() {
-    mVelocity = mVelocity + mAcceleration;
+void Organism:: organism_Update() {
+    mVelocity += mAcceleration;
     mVelocity.limit(mMaxSpeed);
     
-    mPosition = mPosition + mVelocity;
+    mPosition += mVelocity;
     
-    mAcceleration = mAcceleration * 0; //reset acceleration to 0
+    resetForce();
 }
 
 //--------------------------------------------------------------
 void Organism::applyForce(ofVec3f force) {
-    mAcceleration = mAcceleration + force; //force accumulation
+    mAcceleration += force; //force accumulation
 }
 
 //--------------------------------------------------------------
-void Organism::seek(ofVec3f target) {
+void Organism::resetForce() {
+    mAcceleration.set(0,0,0);   //reset acceleration to 0
+}
+
+//--------------------------------------------------------------
+void Organism::seekTarget(ofVec3f target) {
     ofVec3f mDesired = target - mPosition;  //A vector pointing from the location to the target
     
     mDesired.normalize();  // Normalize and scale to maximum speed
@@ -45,3 +55,8 @@ void Organism::seek(ofVec3f target) {
     
     applyForce(mSteer);
 }
+
+//--------------------------------------------------------------
+
+
+

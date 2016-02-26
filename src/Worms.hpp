@@ -4,7 +4,9 @@
 //
 //  Created by Uyen Le on 21/02/2016.
 //
-// Derived Organism 1
+//  Derived Organism 1
+//  Worms wander around + Oscillate horizontally.
+
 
 #ifndef Worms_hpp
 #define Worms_hpp
@@ -12,17 +14,19 @@
 #include <stdio.h>
 #include "Organism.hpp"
 
+
 class Worms: public Organism {
     
-    
 public:
-    Worms();
-    ~Worms();
+    Worms(float wormPosX, float wormPosY, float wormPosZ);
+    //virtual ~Worms();
     
-    void draw(), swim(), movement(), mate();
-    void borders();
+    void eat(), swim(), movement(), returnToScreen(), draw();
+    void update();
     
-    void run();
+    float posx, posy, posz;
+
+    float r = 8; //an arbitrary variable
     
 private:
     

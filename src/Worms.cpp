@@ -4,55 +4,42 @@
 //
 //  Created by Uyen Le on 21/02/2016.
 //
-//
+// Derived Organism 1
 
 #include "Worms.hpp"
 
 
-Worms::Worms() {
-    
-    //mPosition.set(ofGetWindowWidth(), ofGetWindowHeight()/2, 15);
+Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX, wormPosY, wormPosZ) {
+    mPosition.set(wormPosX+300, wormPosY, wormPosZ);
 }
+
+//Worms::~Worms() {
+//    cout << "A worm has died" << endl;
+//}
 
 //--------------------------------------------------------------
-Worms::~Worms() {
-    
-}
+void Worms::eat() {
 
-void Worms::run() {
-    swim();
-    update();
 }
 
 //--------------------------------------------------------------
 void Worms:: swim() {
+    float radius = 20;
+    float distance = 80;
     
-    mTheta += ofRandom(-0.05, 0.05); //randomise wander theta
+    mTheta += ofRandom(-0.5, 0.5);
     
-    //Create a black spot as the "leader" for the Worm to follow
+    //Create an invisible "leader" for the Worm to follow
     ofVec3f leaderPos = mVelocity;
     leaderPos.normalize();
-    leaderPos = leaderPos * 80; //multiply by 80 (distance)
-    leaderPos = leaderPos + mPosition;  //make it relative to Worm's position
+    leaderPos *= distance;
+    leaderPos += mPosition;  //make it relative to Worm's position
     
     float h = mVelocity.angle(mPosition);
-    ofVec3f leaderOffset (25*cos(mTheta+h), 25*sin(mTheta+h));
-    
+    ofVec3f leaderOffset ( radius*cos(mTheta+h), radius*sin(mTheta+h) );
     ofVec3f target = leaderPos + leaderOffset;
     
-    seek(target);
-}
-
-//--------------------------------------------------------------
-void Worms:: draw() {
-    
-    float theta = mVelocity.x + ofDegToRad(90);
-    
-    //ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(theta);
-    
-    ofSetColor(255,0,0);
-    ofDrawCircle(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 15);
+    seekTarget(target);
 }
 
 //--------------------------------------------------------------
@@ -60,13 +47,31 @@ void Worms:: movement() {
 
 }
 
+// Wrap borders to make objects return to screen if they go offscreen
 //--------------------------------------------------------------
-void Worms:: mate() {
-
+void Worms::returnToScreen(){
+    
+    if (mPosition.x < -r)   mPosition.x = ofGetWindowWidth()+r;
+    if (mPosition.y < -r)   mPosition.y = ofGetWindowHeight()+r;
+    if (mPosition.x > ofGetWindowWidth()+r)    mPosition.x = -r;
+    if (mPosition.y > ofGetWindowHeight()+r)   mPosition.y = -r;
 }
 
 //--------------------------------------------------------------
-void Worms::borders() {
+void Worms::update() {
+    organism_Update();  //from Base class Organism
+    swim();
+    movement();
+    returnToScreen();
+}
 
+//--------------------------------------------------------------
+void Worms:: draw() {
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
+    float theta = mVelocity.x + ofDegToRad(45);
+    //ofRotate(theta);
+    
+    ofSetColor(255,0,0);
+    ofDrawTriangle(0,-r*2,-r,r*2,r,r*2);
 }
 
