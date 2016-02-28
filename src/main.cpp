@@ -21,9 +21,10 @@ int main( ){
 
 /*
 Organisms are: worms, leeches, mosquitoes.
-Animals are: frogs, snakes, flock of small fish, big fish.
+Animals are: frogs, squids, flock of small fish, big fish.
  
-All organisms and animals eat and swim. They don't mate and eat. Only die when eaten (Destructor call).
+All organisms and animals eat and swim.
+Organisms don't mate and eat. Only die when eaten (Destructor call).
 
 Animals don't eat each other, only eat Organisms. Die when run out of organisms to eat (Destructor call).
  

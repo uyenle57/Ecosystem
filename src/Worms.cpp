@@ -10,7 +10,11 @@
 
 
 Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX, wormPosY, wormPosZ) {
-    mPosition.set(wormPosX+300, wormPosY, wormPosZ);
+    
+    mPosition.set(wormPosX, wormPosY, wormPosZ);
+    
+//    rotateAmount.set(0,0,1);
+//    rotateAngle = ofDegToRad(90);
 }
 
 //Worms::~Worms() {
@@ -18,8 +22,20 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 //}
 
 //--------------------------------------------------------------
-void Worms::eat() {
+void Worms:: draw() {
+    
+    ofSetColor(255,145,6); //orange worms
+    
+    //ofTranslate(mPosition.x, mPosition.y, mPosition.z);
+    float theta = mPosition.angleRad(mVelocity);
+    //ofRotate(theta);
 
+    //mPosition.rotate(rotateAngle, rotateAmount);  //Make worm rotate in the direction of velocity
+    
+    //ofDrawTriangle(0,-r*2,-r,r*2,r,r*2);
+    ofDrawTriangle(mPosition.x+10, mPosition.y, mPosition.x-10, mPosition.y+10, mPosition.x+10, mPosition.y+25); //Head
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -35,11 +51,13 @@ void Worms:: swim() {
     leaderPos *= distance;
     leaderPos += mPosition;  //make it relative to Worm's position
     
-    float h = mVelocity.angle(mPosition);
-    ofVec3f leaderOffset ( radius*cos(mTheta+h), radius*sin(mTheta+h) );
+    float h = mVelocity.angle(mPosition); //return the angle between the Worm's velocity and position
+    
+    ofVec3f leaderOffset(radius*cos(mTheta+h), radius*sin(mTheta+h));
     ofVec3f target = leaderPos + leaderOffset;
     
     seekTarget(target);
+    
 }
 
 //--------------------------------------------------------------
@@ -63,15 +81,5 @@ void Worms::update() {
     swim();
     movement();
     returnToScreen();
-}
-
-//--------------------------------------------------------------
-void Worms:: draw() {
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    float theta = mVelocity.x + ofDegToRad(45);
-    //ofRotate(theta);
-    
-    ofSetColor(255,0,0);
-    ofDrawTriangle(0,-r*2,-r,r*2,r,r*2);
 }
 

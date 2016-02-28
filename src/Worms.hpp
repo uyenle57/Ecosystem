@@ -19,14 +19,16 @@ class Worms: public Organism {
     
 public:
     Worms(float wormPosX, float wormPosY, float wormPosZ);
-    //virtual ~Worms();
+    //virtual ~Worms(); //only called when eaten by Animals
     
-    void eat(), swim(), movement(), returnToScreen(), draw();
-    void update();
+    void draw(), swim(), movement(), returnToScreen(), update();
     
     float posx, posy, posz;
-
-    float r = 8; //an arbitrary variable
+    
+    float r = 8;
+    
+    float rotateAngle;
+    ofVec3f rotateAmount;
     
 private:
     

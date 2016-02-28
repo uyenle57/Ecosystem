@@ -1,3 +1,6 @@
+#include <vector>
+using std::vector;
+using namespace std;
 #include "ofApp.h"
 #include "ofMain.h"
 
@@ -8,17 +11,13 @@
 
 #include "Animals.hpp"
 
-#include <vector>
-using std::vector;
-using namespace std;
-
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     
     //Create 10 worms randomly throughout the screen
     for(int i=0; i < 5; i++) {
-        worms.push_back(Worms(ofGetWindowWidth()/2*i, ofGetWindowHeight()/2, 0));
+        worms.push_back(Worms(ofGetWindowWidth()/2*i, ofRandom(100,ofGetWindowHeight()-100), 0));
     }
     
     //Create 10 leeches
@@ -51,16 +50,25 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    
     if (key == 'w'){
-        cout << "new worms!" << endl;
-        addWorm = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0);
+        cout << "new worms added" << endl;
+        newWorm = new Worms( ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0 );
     }
+//    else if (key == 'x') {
+//        delete newWorm;
+//        cout << "worm deleted" << endl;
+//    }
     if (key == 'l') {
         
     }
     if (key == 'm'){
         
     }
+}
+
+//--------------------------------------------------------------
+void ofApp::addWorm() {
     
 }
 

@@ -12,13 +12,17 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
 
 }
 
-Leeches::~Leeches() {
-    cout << "A leech has died" << endl;
-}
+//Leeches::~Leeches() {
+//    cout << "A leech has died" << endl;
+//}
 
 //--------------------------------------------------------------
-void Leeches::eat() {
+void Leeches::draw() {
     
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
+    
+    ofSetColor(0,0,255);
+    ofDrawRectangle(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 20,20);
 }
 
 //--------------------------------------------------------------
@@ -39,17 +43,8 @@ void Leeches::returnToScreen() {
 //--------------------------------------------------------------
 void Leeches::update() {
     organism_Update();
-    eat();
     swim();
     movement();
     returnToScreen();
 }
 
-//--------------------------------------------------------------
-void Leeches::draw() {
-    
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    
-    ofSetColor(0,0,255);
-    ofDrawRectangle(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 20,20);
-}

@@ -12,12 +12,12 @@ Mosquitoes::Mosquitoes() {
     
 }
 
-Mosquitoes::~Mosquitoes() {
-    
-}
+//Mosquitoes::~Mosquitoes() {
+//    
+//}
 
 //--------------------------------------------------------------
-void Mosquitoes::eat() {
+void Mosquitoes::draw() {
     
 }
 
@@ -32,20 +32,17 @@ void Mosquitoes::movement() {
 }
 
 //--------------------------------------------------------------
-void Mosquitoes::update() {
-    eat();
-    swim();
-    movement();
-}
-
-//--------------------------------------------------------------
 void Mosquitoes::returnToScreen() {
     
 }
 
 //--------------------------------------------------------------
-void Mosquitoes::draw() {
-
+void Mosquitoes::update() {
+    //organism_Update();
+    swim();
+    movement();
+    returnToScreen();
 }
+
 
 

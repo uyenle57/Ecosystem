@@ -20,10 +20,9 @@ class Leeches: public Organism {
     
 public:
     Leeches(float leechPosX, float leechPosY, float leechPosZ);
-    ~Leeches();
+    //~Leeches();
     
-    void eat(), swim(), movement(), returnToScreen(), draw();
-    void update();
+    void draw(), swim(), movement(), returnToScreen(), update();
 
 };
 

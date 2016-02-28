@@ -19,10 +19,10 @@ class Mosquitoes {
     
 public:
     Mosquitoes();
-    ~Mosquitoes();
+    //~Mosquitoes();
     
-    void eat(), swim(), movement(), returnToScreen(), draw();
-    void update();
+    void draw(), swim(), movement(), returnToScreen(),update();
+    
 };
 
 #endif /* Mosquitoes_hpp */

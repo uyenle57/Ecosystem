@@ -34,17 +34,16 @@ protected:
     float mPosx, mPosy, mPosz; //position variables
     
     //Pure virtual functions - must be overriden in derived classes
-    virtual void eat() = 0;
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void movement() = 0;
     virtual void returnToScreen() = 0;
     
-    void organism_Update(); //contains all behaviour functions
-    
-    //Normal functions for Inheritance - as not all Organisms will have these
+    void organism_Update(); //contains all other void functions
     void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
-    //void addOrganism(int key); //shared function???
+    
+    bool isDead(); //call Destructor?
+    
 };
 
 #endif /* Organism_hpp */

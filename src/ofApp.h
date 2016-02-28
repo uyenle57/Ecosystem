@@ -29,11 +29,13 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     
-    // Organism derived classes
+    // Organism derived classes and functions
     vector <Worms> worms;
-    Worms *addWorm;
+    Worms * newWorm;
     //Leeches Leeches;    //vector <Leeches> leeches;
     //Mosquitoes Mosquitoes; //vector <Mosquitoes> mosquitoes;
+    
+    void addWorm(), addLeech(), addMosquito();
     
     // Animals derived classes
     
