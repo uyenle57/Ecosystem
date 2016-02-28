@@ -15,13 +15,13 @@
 #include "Organism.hpp"
 
 
-class Mosquitoes {
+class Mosquitoes : public Organism{
     
 public:
-    Mosquitoes();
+    Mosquitoes(float MosPosX, float MosPosY, float MosPosZ);
     //~Mosquitoes();
     
-    void draw(), swim(), movement(), returnToScreen(),update();
+    void draw(), swim(), movement(), returnToScreen(), update();
     
 };
 

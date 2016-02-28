@@ -31,9 +31,10 @@ class ofApp : public ofBaseApp{
     
     // Organism derived classes and functions
     vector <Worms> worms;
+    vector <Leeches> leeches;
+    vector <Mosquitoes> mosquitoes;
+    
     Worms * newWorm;
-    //Leeches Leeches;    //vector <Leeches> leeches;
-    //Mosquitoes Mosquitoes; //vector <Mosquitoes> mosquitoes;
     
     void addWorm(), addLeech(), addMosquito();
     

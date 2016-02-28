@@ -42,7 +42,7 @@ protected:
     void organism_Update(); //contains all other void functions
     void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
     
-    bool isDead(); //call Destructor?
+    bool isDead(); //call Destructor or return true/false??
     
 };
 

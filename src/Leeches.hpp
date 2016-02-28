@@ -24,6 +24,10 @@ public:
     
     void draw(), swim(), movement(), returnToScreen(), update();
 
+private:
+    //variables to draw the fish
+    float x, angle;
+    float a = ofRandom(-50,50);
 };
 
 #endif /* Leeches_hpp */
