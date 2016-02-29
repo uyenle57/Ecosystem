@@ -36,7 +36,6 @@ void Worms:: draw() {
     //ofDrawTriangle(0,-r*2,-r,r*2,r,r*2);
     ofDrawTriangle(mPosition.x+10, mPosition.y, mPosition.x-10, mPosition.y+10, mPosition.x+10, mPosition.y+25); //Head
     
-    
 }
 
 //--------------------------------------------------------------
@@ -66,21 +65,11 @@ void Worms:: movement() {
 
 }
 
-// Wrap borders to make objects return to screen if they go offscreen
-//--------------------------------------------------------------
-void Worms::returnToScreen(){
-    
-    if (mPosition.x < -r)   mPosition.x = ofGetWindowWidth()+r;
-    if (mPosition.y < -r)   mPosition.y = ofGetWindowHeight()+r;
-    if (mPosition.x > ofGetWindowWidth()+r)    mPosition.x = -r;
-    if (mPosition.y > ofGetWindowHeight()+r)   mPosition.y = -r;
-}
-
 //--------------------------------------------------------------
 void Worms::update() {
     organism_Update();  //from Base class Organism
+    organism_returnToScreen();
     swim();
     movement();
-    returnToScreen();
 }
 

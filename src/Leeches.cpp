@@ -9,7 +9,7 @@
 #include "Leeches.hpp"
 
 Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(leechPosX, leechPosY, leechPosZ) {
-    mPosition.set(leechPosX+300, leechPosY, leechPosZ);
+    mPosition.set(leechPosX, leechPosY, leechPosZ);
 }
 
 //Leeches::~Leeches() {
@@ -19,35 +19,42 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
 //--------------------------------------------------------------
 void Leeches::draw() {
     
+    ofPushMatrix();
+    ofTranslate(mPosition.x*0.4, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
     ofScale(0.1, 0.15);  //scale down because the original leech is quite big
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofSetColor(0);
     
     //Leech is made up of 2 wiggle lines
     ofBeginShape();
-    float speed = (abs(mPosition.x) + abs(mPosition.y)) *0.02;
+    float speed = (mPosition.x + mPosition.y) *0.02;
+    float bodyLength = 2;
+    int scale = 50;
     
     //right line
     for(int i=0; i < 180; i += 20) {
         x = sin(ofDegToRad(i)) * i/2;
-        angle = speed *sin( ofDegToRad(i+a+ofGetFrameNum()*50) *50); //the wiggle movement
-        ofVertex(x-angle, i*2.5);  //pass in the angle variable to the x position so that it wiggles
-        ofVertex(x-angle, i*2.5);
+        angle = speed *sin( ofDegToRad(i+oscillationAmount+ofGetFrameNum()*scale) *scale); //the wiggle movement
+        ofVertex(x-angle, i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
+        ofVertex(x-angle, i*bodyLength);
     }
     
     //left line
     for (int j= 180; j > 0; j -= 20) {
         x = sin(ofDegToRad(j)) * j/2;
-        angle = speed *sin( ofDegToRad(j+a+ofGetFrameNum()*50) *50);
-        ofVertex(-x-angle, j*2.5);  //reverse the x positions to draw opposite to the first line
-        ofVertex(-x-angle, j*2.5);
+        angle = speed *sin( ofDegToRad(j+oscillationAmount+ofGetFrameNum()*scale) *scale);
+        ofVertex(-x-angle, j*bodyLength);  //reverse the x positions to draw opposite to the first line
+        ofVertex(-x-angle, j*bodyLength);
     }
     ofEndShape();
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------
 void Leeches::swim() {
-    mPosition.y += 1.5;
+    float angle = mVelocity.x + ofDegToRad(ofRandom(-90,90));
+    ofRotate(angle);
+    
+    mPosition.x += ofRandom(-5,5);
 }
 
 //--------------------------------------------------------------
@@ -56,15 +63,10 @@ void Leeches::movement() {
 }
 
 //--------------------------------------------------------------
-void Leeches::returnToScreen() {
-    
-}
-
-//--------------------------------------------------------------
 void Leeches::update() {
     organism_Update();
+    organism_returnToScreen();
     swim();
     movement();
-    returnToScreen();
 }
 

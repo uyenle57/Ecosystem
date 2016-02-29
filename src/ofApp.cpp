@@ -1,4 +1,5 @@
 #include <vector>
+#include <math.h>
 using std::vector;
 using namespace std;
 #include "ofApp.h"
@@ -15,38 +16,40 @@ using namespace std;
 //--------------------------------------------------------------
 void ofApp::setup(){
     
+    //Load background image
+    backgroundImg.load("background.jpg");
+    backgroundImg.resize(ofGetWindowWidth(), ofGetWindowHeight());
+    
     //Create Organisms
     for(int i=0; i < 5; i++) {
         worms.push_back(Worms(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
-        //leeches.push_back(Leeches(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
+        leeches.push_back(Leeches(ofRandom(100,ofGetWindowWidth()-100)*i, ofRandom(100,ofGetWindowHeight()-100), 0));
         mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
-    }
-    for (int i=0; i<5; i++) {
-        leeches.push_back(Leeches(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
     
-    //for (auto & w: worms)  {   w.update();   }
+    for (auto & w: worms)  {   w.update();   }
     for (auto & l: leeches)  {   l.update();   }
-    //for (auto & m: mosquitoes)  {   m.update();   }
+    for (auto & m: mosquitoes)  {   m.update();   }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     
     ofBackground(255);
+    //backgroundImg.draw(0, 0);
+    
     ofColor centerColor(85, 78, 68);
     ofColor edgeColor(255,255,255,50);
     //ofBackgroundGradient(centerColor, edgeColor, OF_GRADIENT_CIRCULAR);
     
-    // TODO: Better way to repeat calling same class function???
-    //for (auto & w: worms)  {   w.draw();   }
+    // TODO: Better way to call same class function without repeating???
+    for (auto & w: worms)  {   w.draw();   }
     for (auto & l: leeches)  {   l.draw();   }
-    //for (auto & m: mosquitoes)  {   m.draw();   }
-    
+    for (auto & m: mosquitoes)  {   m.draw();   }
 }
 
 //--------------------------------------------------------------
@@ -54,7 +57,6 @@ void ofApp::keyPressed(int key){
     
     // TODO: fix add new organisms
     if (key == 'w'){
-        newWorm = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0);
         std::cout << "new worms added" << std::endl;
     }
 //    else if (key == 'x') {

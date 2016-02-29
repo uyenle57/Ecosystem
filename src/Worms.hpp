@@ -21,7 +21,7 @@ public:
     Worms(float wormPosX, float wormPosY, float wormPosZ);
     //virtual ~Worms(); //only called when eaten by Animals
     
-    void draw(), swim(), movement(), returnToScreen(), update();
+    void draw(), swim(), movement(), update();
     
     float posx, posy, posz;
     

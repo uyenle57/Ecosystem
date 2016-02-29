@@ -37,9 +37,9 @@ protected:
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void movement() = 0;
-    virtual void returnToScreen() = 0;
     
     void organism_Update(); //contains all other void functions
+    void organism_returnToScreen();
     void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
     
     bool isDead(); //call Destructor or return true/false??

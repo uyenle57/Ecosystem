@@ -28,16 +28,15 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    ofImage backgroundImg;
     
-    // Organism derived classes and functions
-    vector <Worms> worms;
-    vector <Leeches> leeches;
-    vector <Mosquitoes> mosquitoes;
-    
-    Worms * newWorm;
-    
+    // Organism derived classes and their variables + functions -------------------
+    deque <Worms> worms;
+    deque <Leeches> leeches;
+    deque <Mosquitoes> mosquitoes;
+        
     void addWorm(), addLeech(), addMosquito();
     
-    // Animals derived classes
+    // Animals derived classes and their variables + functions -------------------
     
 };

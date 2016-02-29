@@ -22,12 +22,12 @@ public:
     Leeches(float leechPosX, float leechPosY, float leechPosZ);
     //~Leeches();
     
-    void draw(), swim(), movement(), returnToScreen(), update();
+    void draw(), swim(), movement(), update();
 
 private:
     //variables to draw the fish
     float x, angle;
-    float a = ofRandom(-50,50);
+    float oscillationAmount = ofRandom(0,10);
 };
 
 #endif /* Leeches_hpp */

@@ -21,7 +21,10 @@ public:
     Mosquitoes(float MosPosX, float MosPosY, float MosPosZ);
     //~Mosquitoes();
     
-    void draw(), swim(), movement(), returnToScreen(), update();
+    void draw(), swim(), movement(), update();
+
+private:
+    float flappyWings();
     
 };
 
