@@ -23,9 +23,13 @@ public:
     //~Leeches();
     
     void draw(), swim(), movement(), update();
+    void swim(float swimToX, float swimToY);
 
 private:
     float wiggle(int m);
+    ofVec3f mPrevPos;
+    
+    float rotateAngle;
 
 };
 

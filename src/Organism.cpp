@@ -41,10 +41,10 @@ void Organism::organism_returnToScreen() {
 //    if (mPosition.x > ofGetWindowWidth()+r)    mPosition.x = -r;
 //    if (mPosition.y > ofGetWindowHeight()+r)   mPosition.y = -r;
     
-    if(mPosition.x < 0)  mPosition.x = 0;
-    if(mPosition.y < 0)  mPosition.y = 0;
-    if(mPosition.x > ofGetWindowWidth())  mPosition.x = ofGetWindowWidth();
-    if(mPosition.y > ofGetWindowHeight())  mPosition.y = ofGetWindowHeight();
+    if(mPosition.x <= 0)  mPosition.x = 0;
+    if(mPosition.y <= 0)  mPosition.y = 0;
+    if(mPosition.x >= ofGetWindowWidth())  mPosition.x = ofGetWindowWidth();
+    if(mPosition.y >= ofGetWindowHeight())  mPosition.y = ofGetWindowHeight();
 }
 
 //--------------------------------------------------------------

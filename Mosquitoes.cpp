@@ -13,7 +13,7 @@ Mosquitoes::Mosquitoes(float MosPosX, float MosPosY, float MosPosZ) : Organism(M
 }
 
 //Mosquitoes::~Mosquitoes() {
-//    
+//    cout << "A mosquito has been eaten" << endl;
 //}
 
 //--------------------------------------------------------------
@@ -21,7 +21,7 @@ void Mosquitoes::draw() {
     
     //Create the mosquito shape
     ofPushMatrix();
-    ofTranslate(mPosition.x * 0.8, mPosition.y, mPosition.z);
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     
     ofBeginShape();
     ofSetColor(168,161,151);
@@ -37,6 +37,8 @@ void Mosquitoes::draw() {
     ofSetColor(0);
     ofDrawLine(0, 0-3, 0, 0-20);
     ofEndShape();
+    
+    ofDrawBitmapString("Mosquito", 15, 0, 0);
     ofPopMatrix();
 }
 

@@ -9,24 +9,26 @@
 #include "Leeches.hpp"
 
 Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(leechPosX, leechPosY, leechPosZ) {
+    
     mPosition.set(leechPosX, leechPosY, leechPosZ);
+    mPrevPos.set(0, 0, 0);
 }
 
 //Leeches::~Leeches() {
-//    cout << "A leech has died" << endl;
+//    cout << "A leech has been eaten" << endl;
 //}
 
 //--------------------------------------------------------------
 void Leeches::draw() {
     
     ofPushMatrix();
-    ofTranslate(mPosition.x*0.4, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
-    ofScale(0.1, 0.15);  //scale down because the original leech is quite big
-    ofSetColor(0);
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
+    ofRotate(ofRadToDeg(rotateAngle)); //rotate the leech according to mouse position
+    ofScale(0.1, 0.15); //scale down because original leech is really big
     
     //Leech is made up of 2 wiggle lines
     ofBeginShape();
-    
+    ofSetColor(30,30,30);
     float x;
     int bodyLength = 2;
     
@@ -44,20 +46,36 @@ void Leeches::draw() {
         ofVertex(-x+wiggle(j), j*bodyLength);
     }
     ofEndShape();
+    
+    ofDrawBitmapString("Leech", 5, 0, 0);
     ofPopMatrix();
 }
 
 //--------------------------------------------------------------
-void Leeches::swim() {
-    float angle = mVelocity.x + ofDegToRad(ofRandom(-90,90));
-    ofRotate(angle);
+void Leeches::swim(float swimToX, float swimToY) {
     
-    mPosition.x += ofRandom(-5,5);
+    float catchUpSpeed = 0.6f;
+    
+    mPosition.x = catchUpSpeed * swimToX + (1-catchUpSpeed) * mPosition.x;
+    mPosition.y = catchUpSpeed * swimToY + (1-catchUpSpeed) * mPosition.y;
+    
+    float distanceX = mPosition.x - mPrevPos.x;
+    float distanceY = mPosition.y - mPrevPos.y;
+    
+    rotateAngle = atan2(distanceY, distanceX); //calculate angle between previous and current positions
+
+//    mPrevPos.x = mPosition.x; //swim to the current mouse position
+//    mPrevPos.y = mPosition.y;
+}
+
+//--------------------------------------------------------------
+void Leeches::swim() {
+    mPosition.y -= 0.5; //temporary movement
 }
 
 //--------------------------------------------------------------
 void Leeches::movement() {
-    
+    //may delete this function as not needed
 }
 
 //--------------------------------------------------------------
@@ -74,7 +92,8 @@ float Leeches::wiggle(int m) {
 void Leeches::update() {
     organism_Update();
     organism_returnToScreen();
-    //swim();
+    swim();
+//    swim(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
     movement();
 }
 

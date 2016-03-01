@@ -17,7 +17,9 @@ using namespace std;
 void ofApp::setup(){
     
     ofSetFrameRate(60);
-    
+    ofEnableAlphaBlending();
+    ofSetVerticalSync(true);
+
     //Load background image
     backgroundImg.load("background.jpg");
     backgroundImg.resize(ofGetWindowWidth(), ofGetWindowHeight());
@@ -25,8 +27,8 @@ void ofApp::setup(){
     //Create Organisms
     for(int i=0; i < 5; i++) {
         worms.push_back(Worms(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
-        leeches.push_back(Leeches(ofRandom(100,ofGetWindowWidth()-100)*i, ofRandom(100,ofGetWindowHeight()-100), 0));
-        mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
+        leeches.push_back(Leeches(ofRandom(100,ofGetWindowWidth()-100)*(i*0.4), ofRandom(100,ofGetWindowHeight()-100), 0));
+        mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*(i*0.8), ofRandom(50,ofGetWindowHeight()-100), 0));
     }
     
 // probably need this for adding new organisms
@@ -39,9 +41,17 @@ void ofApp::setup(){
 void ofApp::update(){
 
     // TODO: Better way to call same class function without repeating???
-    for (auto & w: worms)  {   w.update();   }
-    for (auto & l: leeches)  {   l.update();   }
-    for (auto & m: mosquitoes)  {   m.update();   }
+    for (auto & w: worms)  {
+        w.update();
+    }
+    for (auto & l: leeches)  {
+        l.update();
+        //l.swim(mouseX, mouseY); //TODO
+    }
+    for (auto & m: mosquitoes)  {
+        m.update();
+    }
+    
 //    for (auto & org1 : organism1) { organism1.update(); } //error
 }
 
@@ -51,9 +61,9 @@ void ofApp::draw(){
     ofBackground(255);
     //backgroundImg.draw(0, 0);
     
-    //for (auto & w: worms)  {   w.draw();   }
+    for (auto & w: worms)  {   w.draw();   }
     for (auto & l: leeches)  {   l.draw();   }
-    //for (auto & m: mosquitoes)  {   m.draw();   }
+    for (auto & m: mosquitoes)  {   m.draw();   }
 }
 
 //--------------------------------------------------------------

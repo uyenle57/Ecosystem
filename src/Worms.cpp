@@ -18,24 +18,25 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 }
 
 //Worms::~Worms() {
-//    cout << "A worm has died" << endl;
+//    cout << "A worm has been eaten" << endl;
 //}
 
 //--------------------------------------------------------------
 void Worms:: draw() {
-    
+
+    ofPushMatrix();
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofSetColor(255,145,6); //orange worms
-    
-    //ofTranslate(mPosition.x, mPosition.y, mPosition.z);
+    ofSetLineWidth(3);
 
     // TODO: make worm rotate in the direction of velocity
     float theta = mPosition.angleRad(mVelocity);
     //ofRotate(theta);
     //mPosition.rotate(rotateAngle, rotateAmount);
     
-    //ofDrawTriangle(0,-r*2,-r,r*2,r,r*2);
-    ofDrawTriangle(mPosition.x+10, mPosition.y, mPosition.x-10, mPosition.y+10, mPosition.x+10, mPosition.y+25); //Head
-    
+    ofDrawLine(0, 0, 0, 0, 60, 0);  //temporary shape
+    ofDrawBitmapString("Worm", 5, 0, 0);
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------

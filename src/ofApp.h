@@ -34,8 +34,8 @@ class ofApp : public ofBaseApp{
     // Organism derived classes and their variables + functions -------------------
     
     //unique_ptr objects automatically delete the object they manage (using a deleter) as soon as they themselves are destroyed, or as soon as their value changes either by an assignment operation or by an explicit call to unique_ptr::reset.
-
-    std::deque <std::unique_ptr <Organism>> organism1, organism2, organism3;
+    //std::deque <std::unique_ptr <Organism>> organism1, organism2, organism3;
+    
     std::deque <Worms> worms;
     std::deque <Leeches> leeches;
     std::deque <Mosquitoes> mosquitoes;
