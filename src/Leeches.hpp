@@ -24,10 +24,15 @@ public:
     
     void draw(), swim(), movement(), update();
     void swim(float swimToX, float swimToY);
+    
+    float offsetX;
+    float offsetY;
 
 private:
     float wiggle(int m);
     ofVec3f mPrevPos;
+    
+    float catchUpSpeed;
     
     float rotateAngle;
 

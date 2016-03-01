@@ -46,7 +46,9 @@ void ofApp::update(){
     }
     for (auto & l: leeches)  {
         l.update();
-        //l.swim(mouseX, mouseY); //TODO
+        
+        if(mouseWasMoved)
+            l.swim(mouseX+l.offsetX, mouseY+l.offsetY); //add offsetX,Y to keep leeches away from mouse
     }
     for (auto & m: mosquitoes)  {
         m.update();
@@ -100,6 +102,13 @@ void ofApp::keyReleased(int key){
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
 
+    if(!mouseWasMoved) {
+//        for (auto & l: leeches)  {
+//            l.offsetX = l.mPosition.x - mouseX;
+//            l.offsetY = l.mPosition.y - mouseY;
+//        }
+        mouseWasMoved = true;
+    }
 }
 
 //--------------------------------------------------------------

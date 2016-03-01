@@ -42,6 +42,8 @@ class ofApp : public ofBaseApp{
         
     void addWorm(), addLeech(), addMosquito();
     
+    bool mouseWasMoved=false;
+    
     // Animals derived classes and their variables + functions -------------------
     
 };

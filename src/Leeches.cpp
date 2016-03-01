@@ -12,6 +12,9 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
     
     mPosition.set(leechPosX, leechPosY, leechPosZ);
     mPrevPos.set(0, 0, 0);
+    
+    offsetX = 0;
+    offsetY = 0;
 }
 
 //Leeches::~Leeches() {
@@ -23,7 +26,7 @@ void Leeches::draw() {
     
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
-    ofRotate(ofRadToDeg(rotateAngle)); //rotate the leech according to mouse position
+    ofRotateZ(ofRadToDeg(rotateAngle)+ofRadToDeg(3*PI/2)); //rotate the leech according to mouse position
     ofScale(0.1, 0.15); //scale down because original leech is really big
     
     //Leech is made up of 2 wiggle lines
@@ -54,7 +57,7 @@ void Leeches::draw() {
 //--------------------------------------------------------------
 void Leeches::swim(float swimToX, float swimToY) {
     
-    float catchUpSpeed = 0.6f;
+    float catchUpSpeed = 0.01f;
     
     mPosition.x = catchUpSpeed * swimToX + (1-catchUpSpeed) * mPosition.x;
     mPosition.y = catchUpSpeed * swimToY + (1-catchUpSpeed) * mPosition.y;
@@ -64,13 +67,13 @@ void Leeches::swim(float swimToX, float swimToY) {
     
     rotateAngle = atan2(distanceY, distanceX); //calculate angle between previous and current positions
 
-//    mPrevPos.x = mPosition.x; //swim to the current mouse position
-//    mPrevPos.y = mPosition.y;
+    mPrevPos.x = mPosition.x; //swim to the current mouse position
+    mPrevPos.y = mPosition.y;
 }
 
 //--------------------------------------------------------------
 void Leeches::swim() {
-    mPosition.y -= 0.5; //temporary movement
+    mPosition.y += 0.5; //temporary movement
 }
 
 //--------------------------------------------------------------
