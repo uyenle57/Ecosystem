@@ -25,9 +25,8 @@ public:
     void draw(), swim(), movement(), update();
 
 private:
-    //variables to draw the fish
-    float x, angle;
-    float oscillationAmount = ofRandom(0,10);
+    float wiggle(int m);
+
 };
 
 #endif /* Leeches_hpp */

@@ -57,7 +57,6 @@ void Worms:: swim() {
     ofVec3f target = leaderPos + leaderOffset;
     
     seekTarget(target);
-    
 }
 
 //--------------------------------------------------------------

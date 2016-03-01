@@ -26,24 +26,22 @@ void Leeches::draw() {
     
     //Leech is made up of 2 wiggle lines
     ofBeginShape();
-    float speed = (mPosition.x + mPosition.y) *0.02;
-    float bodyLength = 2;
-    int scale = 50;
+    
+    float x;
+    int bodyLength = 2;
     
     //right line
     for(int i=0; i < 180; i += 20) {
         x = sin(ofDegToRad(i)) * i/2;
-        angle = speed *sin( ofDegToRad(i+oscillationAmount+ofGetFrameNum()*scale) *scale); //the wiggle movement
-        ofVertex(x-angle, i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
-        ofVertex(x-angle, i*bodyLength);
+        ofVertex(x+wiggle(i), i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
+        ofVertex(x+wiggle(i), i*bodyLength);
     }
     
     //left line
-    for (int j= 180; j > 0; j -= 20) {
+    for (int j=180; j > 0; j -= 20) {
         x = sin(ofDegToRad(j)) * j/2;
-        angle = speed *sin( ofDegToRad(j+oscillationAmount+ofGetFrameNum()*scale) *scale);
-        ofVertex(-x-angle, j*bodyLength);  //reverse the x positions to draw opposite to the first line
-        ofVertex(-x-angle, j*bodyLength);
+        ofVertex(-x+wiggle(j), j*bodyLength);  //reverse the x positions to draw opposite to the first line
+        ofVertex(-x+wiggle(j), j*bodyLength);
     }
     ofEndShape();
     ofPopMatrix();
@@ -63,10 +61,20 @@ void Leeches::movement() {
 }
 
 //--------------------------------------------------------------
+float Leeches::wiggle(int m) {
+    int amount = 20;
+    float amp = (abs(mPosition.x) + abs(mPosition.y)) * 0.04;
+    
+    float letsWiggle = amp * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * amount);
+    
+    return letsWiggle;
+}
+
+//--------------------------------------------------------------
 void Leeches::update() {
     organism_Update();
     organism_returnToScreen();
-    swim();
+    //swim();
     movement();
 }
 

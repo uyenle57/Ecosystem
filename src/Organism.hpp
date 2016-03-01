@@ -24,7 +24,7 @@ public:
     
 private:
     
-protected:
+public:
     //virtual ~Organism();
     
     ofVec3f mPosition, mVelocity, mAcceleration;
