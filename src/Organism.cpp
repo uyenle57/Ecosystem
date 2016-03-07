@@ -14,7 +14,7 @@ Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    mTheta = 0;
+    mRotateTheta = 0;
     mMaxForce = 5.0;
     mMaxSpeed = 5;
 }
@@ -36,11 +36,10 @@ void Organism:: organism_Update() {
 // Wrap borders to make objects return to screen if they go offscreen
 //--------------------------------------------------------------
 void Organism::organism_returnToScreen() {
-    
-    if(mPosition.x <= 0)  mPosition.x = 40;
-    if(mPosition.y <= 0)  mPosition.y = 40;
-    if(mPosition.x >= ofGetWindowWidth()-40)  mPosition.x = ofGetWindowWidth()-40;
-    if(mPosition.y >= ofGetWindowHeight()-40)  mPosition.y = ofGetWindowHeight()-40;
+    if(mPosition.x < -mBorder)  mPosition.x = ofGetWindowWidth() + mBorder;
+    if(mPosition.y < -mBorder)  mPosition.y = ofGetWindowHeight() + mBorder;
+    if(mPosition.x > ofGetWindowWidth()+mBorder)  mPosition.x = -mBorder;
+    if(mPosition.y > ofGetWindowHeight()+mBorder)  mPosition.y = -mBorder;
 }
 
 //--------------------------------------------------------------

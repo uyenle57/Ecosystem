@@ -25,7 +25,7 @@ void ofApp::setup(){
     backgroundImg.resize(ofGetWindowWidth(), ofGetWindowHeight());
     
     //Create Organisms
-    for(int i=0; i < 5; i++) {
+    for(int i=0; i < 10; i++) {
         worms.push_back(Worms(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
         leeches.push_back(Leeches(ofRandom(100,ofGetWindowWidth()-100)*(i*0.4), ofRandom(100,ofGetWindowHeight()-100), 0));
         mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*(i*0.8), ofRandom(50,ofGetWindowHeight()-100), 0));
@@ -46,9 +46,6 @@ void ofApp::update(){
     }
     for (auto & l: leeches)  {
         l.update();
-        
-        if(mouseWasMoved)
-            l.swim(mouseX+l.offsetX, mouseY+l.offsetY); //add offsetX,Y to keep leeches away from mouse
     }
     for (auto & m: mosquitoes)  {
         m.update();
@@ -65,7 +62,7 @@ void ofApp::draw(){
     
     for (auto & w: worms)  {   w.draw();   }
     for (auto & l: leeches)  {   l.draw();   }
-    for (auto & m: mosquitoes)  {   m.draw();   }
+    //for (auto & m: mosquitoes)  {   m.draw();   }
 }
 
 //--------------------------------------------------------------
@@ -101,14 +98,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
-    if(!mouseWasMoved) {
-//        for (auto & l: leeches)  {
-//            l.offsetX = l.mPosition.x - mouseX;
-//            l.offsetY = l.mPosition.y - mouseY;
-//        }
-        mouseWasMoved = true;
-    }
+    
 }
 
 //--------------------------------------------------------------

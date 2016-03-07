@@ -10,11 +10,7 @@
 
 
 Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX, wormPosY, wormPosZ) {
-    
     mPosition.set(wormPosX, wormPosY, wormPosZ);
-
-//    rotateAmount.set(0,0,1);
-//    rotateAngle = ofDegToRad(90);
 }
 
 //Worms::~Worms() {
@@ -23,53 +19,56 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 
 //--------------------------------------------------------------
 void Worms:: draw() {
-
+    
+    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
+    
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofSetColor(255,145,6); //orange worms
-    ofSetLineWidth(3);
-
-    // TODO: make worm rotate in the direction of velocity
-    float theta = mPosition.angleRad(mVelocity);
-    //ofRotate(theta);
-    //mPosition.rotate(rotateAngle, rotateAmount);
+    ofRotate( ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2) );
     
-    ofDrawLine(0, 0, 0, 0, 60, 0);  //temporary shape
-    ofDrawBitmapString("Worm", 5, 0, 0);
+    for(int i=0; i < 80; i += 5) {
+        if (i % 3 == 1) {
+            bodyColor.set(0,0,255);
+        } else if (i % 3 == 2) {
+            bodyColor.set(220,130,255); //purple
+        } else {
+            bodyColor.set(255,0,0);
+        }
+        ofSetColor(bodyColor);
+        ofDrawRectangle(0+wiggle(i), i,3,3);
+    }
     ofPopMatrix();
 }
 
 //--------------------------------------------------------------
-void Worms:: swim() {
+float Worms::wiggle(int m) {
+    float letsWiggle = 5 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * 10);
+    return letsWiggle;
+}
+
+//--------------------------------------------------------------
+void Worms:: swim() {   //Wander around
     float radius = 20;
     float distance = 80;
     
-    mTheta += ofRandom(-0.5, 0.5);
+    wanderAngle += ofRandom(-0.3, 0.3);
     
-    //Create an invisible "leader" for the Worm to follow
-    ofVec3f leaderPos = mVelocity;
-    leaderPos.normalize();
-    leaderPos *= distance;
-    leaderPos += mPosition;  //make it relative to Worm's position
+    ofVec3f wanderAround = mVelocity; //an invisible position that leads the Worms
+    wanderAround.normalize();
+    wanderAround *= distance;
+    wanderAround += mPosition;  //make 'wanderAround' relative to Worm's position
     
-    float h = mVelocity.angle(mPosition); //return the angle between the Worm's velocity and position
-    
-    ofVec3f leaderOffset(radius*cos(mTheta+h), radius*sin(mTheta+h));
-    ofVec3f target = leaderPos + leaderOffset;
+    ofVec3f wanderOffset(radius*(cos(wanderAngle)*0.5), radius*(sin(wanderAngle)*0.5) );
+    ofVec3f target = wanderAround + wanderOffset;
     
     seekTarget(target);
 }
 
-//--------------------------------------------------------------
-void Worms:: movement() {
-
-}
 
 //--------------------------------------------------------------
 void Worms::update() {
     organism_Update();  //from Base class Organism
     organism_returnToScreen();
     swim();
-    movement();
 }
 

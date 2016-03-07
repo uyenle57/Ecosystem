@@ -9,12 +9,10 @@
 #include "Leeches.hpp"
 
 Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(leechPosX, leechPosY, leechPosZ) {
-    
     mPosition.set(leechPosX, leechPosY, leechPosZ);
-    mPrevPos.set(0, 0, 0);
     
-    offsetX = 0;
-    offsetY = 0;
+    bodyLength = 2;
+    bodyColor.set(30,30,30);
 }
 
 //Leeches::~Leeches() {
@@ -24,16 +22,16 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
 //--------------------------------------------------------------
 void Leeches::draw() {
     
+    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
+
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
-    ofRotateZ(ofRadToDeg(rotateAngle)+ofRadToDeg(3*PI/2)); //rotate the leech according to mouse position
+    ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
     ofScale(0.1, 0.15); //scale down because original leech is really big
     
     //Leech is made up of 2 wiggle lines
     ofBeginShape();
-    ofSetColor(30,30,30);
-    float x;
-    int bodyLength = 2;
+    ofSetColor(bodyColor);
     
     //right line
     for(int i=0; i < 180; i += 20) {
@@ -49,44 +47,31 @@ void Leeches::draw() {
         ofVertex(-x+wiggle(j), j*bodyLength);
     }
     ofEndShape();
-    
-    ofDrawBitmapString("Leech", 5, 0, 0);
     ofPopMatrix();
 }
 
 //--------------------------------------------------------------
-void Leeches::swim(float swimToX, float swimToY) {
+void Leeches:: swim() {   //Wander around
+    float radius = 20;
+    float distance = 80;
     
-    float catchUpSpeed = 0.01f;
+    wanderAngle += ofRandom(-0.1, 0.1);
     
-    mPosition.x = catchUpSpeed * swimToX + (1-catchUpSpeed) * mPosition.x;
-    mPosition.y = catchUpSpeed * swimToY + (1-catchUpSpeed) * mPosition.y;
+    ofVec3f wanderAround = mVelocity; //an invisible position that leads the Worms
+    wanderAround.normalize();
+    wanderAround *= distance;
+    wanderAround += mPosition;  //make 'wanderAround' relative to Worm's position
     
-    float distanceX = mPosition.x - mPrevPos.x;
-    float distanceY = mPosition.y - mPrevPos.y;
+    ofVec3f wanderOffset(radius*(cos(wanderAngle)*0.5), radius*(sin(wanderAngle)*0.5) );
+    ofVec3f target = wanderAround + wanderOffset;
     
-    rotateAngle = atan2(distanceY, distanceX); //calculate angle between previous and current positions
-
-    mPrevPos.x = mPosition.x; //swim to the current mouse position
-    mPrevPos.y = mPosition.y;
-}
-
-//--------------------------------------------------------------
-void Leeches::swim() {
-    mPosition.y += 0.5; //temporary movement
-}
-
-//--------------------------------------------------------------
-void Leeches::movement() {
-    //may delete this function as not needed
+    seekTarget(target);
 }
 
 //--------------------------------------------------------------
 float Leeches::wiggle(int m) {
-    int amount = 20;
     float amp = (abs(mPosition.x) + abs(mPosition.y)) * 0.04;
-    
-    float letsWiggle = amp * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * amount);
+    float letsWiggle = amp * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * 20);
     
     return letsWiggle;
 }
@@ -96,7 +81,5 @@ void Leeches::update() {
     organism_Update();
     organism_returnToScreen();
     swim();
-//    swim(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
-    movement();
 }
 

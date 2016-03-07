@@ -21,14 +21,17 @@ public:
     Worms(float wormPosX, float wormPosY, float wormPosZ);
     //virtual ~Worms(); //only called when eaten by Animals
     
-    void draw(), swim(), movement(), update();
-    
+    void draw(), swim(), update();
+        
     float posx, posy, posz;
-    
-    float r = 8;
-    
-    float rotateAngle;
+    float segLength = 2;
+    float wanderAngle;
     ofVec3f rotateAmount;
+    
+    ofColor(bodyColor);
+    
+protected:
+    float wiggle(int m);
     
 private:
     

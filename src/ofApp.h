@@ -41,9 +41,7 @@ class ofApp : public ofBaseApp{
     std::deque <Mosquitoes> mosquitoes;
         
     void addWorm(), addLeech(), addMosquito();
-    
-    bool mouseWasMoved=false;
-    
+        
     // Animals derived classes and their variables + functions -------------------
     
 };

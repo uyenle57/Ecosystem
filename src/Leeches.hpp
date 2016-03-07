@@ -22,20 +22,17 @@ public:
     Leeches(float leechPosX, float leechPosY, float leechPosZ);
     //~Leeches();
     
-    void draw(), swim(), movement(), update();
+    void draw(), swim(), update();
     void swim(float swimToX, float swimToY);
     
-    float offsetX;
-    float offsetY;
+    float wanderAngle;
+    
+    ofColor(bodyColor);
 
 private:
-    float wiggle(int m);
-    ofVec3f mPrevPos;
-    
-    float catchUpSpeed;
-    
-    float rotateAngle;
-
+    float wiggle(int m);    
+    float x;
+    int bodyLength;
 };
 
 #endif /* Leeches_hpp */

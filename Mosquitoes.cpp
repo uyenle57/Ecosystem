@@ -36,9 +36,7 @@ void Mosquitoes::draw() {
     //Mouth
     ofSetColor(0);
     ofDrawLine(0, 0-3, 0, 0-20);
-    ofEndShape();
-    
-    ofDrawBitmapString("Mosquito", 15, 0, 0);
+    ofEndShape();    
     ofPopMatrix();
 }
 
@@ -47,11 +45,6 @@ void Mosquitoes::swim() {
     int amp = 10;
     mPosition.x += amp * sin(ofDegToRad(ofGetFrameNum() * ofRandom(20)));
     mPosition.y += amp * cos(ofDegToRad(ofGetFrameNum() * ofRandom(20)));
-}
-
-//--------------------------------------------------------------
-void Mosquitoes::movement() {
-    
 }
 
 //--------------------------------------------------------------
@@ -68,7 +61,6 @@ void Mosquitoes::update() {
     organism_Update();
     organism_returnToScreen();
     swim();
-    movement();
 }
 
 
