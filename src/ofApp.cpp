@@ -20,14 +20,14 @@ void ofApp::setup(){
     ofEnableAlphaBlending();
     ofSetVerticalSync(true);
 
-    //Load background image
     backgroundImg.load("background.jpg");
     backgroundImg.resize(ofGetWindowWidth(), ofGetWindowHeight());
     
+    
     //Create Organisms
     for(int i=0; i < 10; i++) {
-        worms.push_back(Worms(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0));
-        leeches.push_back(Leeches(ofRandom(100,ofGetWindowWidth()-100)*(i*0.4), ofRandom(100,ofGetWindowHeight()-100), 0));
+        worms.push_back(Worms( (ofGetWindowWidth()/2)*i, ofRandom(50,ofGetWindowHeight()-100), 0) );
+        leeches.push_back(Leeches(ofRandom(400,ofGetWindowWidth()-100)*(i*0.4), ofRandom(100,ofGetWindowHeight()-100), 0));
         mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*(i*0.8), ofRandom(50,ofGetWindowHeight()-100), 0));
     }
     
@@ -44,8 +44,7 @@ void ofApp::update(){
     for (auto & w: worms)  {
         w.update();
     }
-    for (auto & l: leeches)  {
-        l.update();
+    for (auto & l: leeches)  {  l.update();
     }
     for (auto & m: mosquitoes)  {
         m.update();
@@ -62,7 +61,7 @@ void ofApp::draw(){
     
     for (auto & w: worms)  {   w.draw();   }
     for (auto & l: leeches)  {   l.draw();   }
-    //for (auto & m: mosquitoes)  {   m.draw();   }
+    for (auto & m: mosquitoes)  {   m.draw();   }
 }
 
 //--------------------------------------------------------------

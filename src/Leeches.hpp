@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include "Organism.hpp"
 
-
 class Leeches: public Organism {
     
 public:
@@ -23,16 +22,14 @@ public:
     //~Leeches();
     
     void draw(), swim(), update();
-    void swim(float swimToX, float swimToY);
-    
-    float wanderAngle;
-    
     ofColor(bodyColor);
 
 private:
-    float wiggle(int m);    
+    float wiggle(int m);
     float x;
+    float wanderAngle;
     int bodyLength;
+    
 };
 
 #endif /* Leeches_hpp */

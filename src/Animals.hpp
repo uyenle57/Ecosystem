@@ -10,17 +10,24 @@
 #define Animals_hpp
 
 #include <stdio.h>
+#include "ofMain.h"
 
 
 class Animals {
     
-    //contains DNA, location, velocity, acceleration, behaviours (swim, jump, mate)
+    //Variables: DNA, location, velocity, acceleration, lifespan (die if out of food).
+    
+    //Behaviours: eat, reproduce, collision detection, change body colour, die
+    
     //probability of reproduction (+ reproduction rate)
-    //has lifespan (die if out of food)
     
     //derived animals: frogs, flock of small fish, big fish, snakes
     
     //Variables
     float mLifeSpan;
+    
+    ofVec3f mPosition, mVelocity, mAcceleration;
+    
+
 };
 #endif /* Animals_hpp */

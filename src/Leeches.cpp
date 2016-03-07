@@ -57,10 +57,10 @@ void Leeches:: swim() {   //Wander around
     
     wanderAngle += ofRandom(-0.1, 0.1);
     
-    ofVec3f wanderAround = mVelocity; //an invisible position that leads the Worms
+    ofVec3f wanderAround = mVelocity;
     wanderAround.normalize();
     wanderAround *= distance;
-    wanderAround += mPosition;  //make 'wanderAround' relative to Worm's position
+    wanderAround += mPosition;
     
     ofVec3f wanderOffset(radius*(cos(wanderAngle)*0.5), radius*(sin(wanderAngle)*0.5) );
     ofVec3f target = wanderAround + wanderOffset;
@@ -78,7 +78,7 @@ float Leeches::wiggle(int m) {
 
 //--------------------------------------------------------------
 void Leeches::update() {
-    organism_Update();
+    organism_swimUpdate();
     organism_returnToScreen();
     swim();
 }

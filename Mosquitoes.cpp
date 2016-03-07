@@ -58,7 +58,6 @@ float Mosquitoes::flappyWings() {
 
 //--------------------------------------------------------------
 void Mosquitoes::update() {
-    organism_Update();
     organism_returnToScreen();
     swim();
 }

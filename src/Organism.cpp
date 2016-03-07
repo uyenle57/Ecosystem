@@ -24,7 +24,7 @@ Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
 //}
 
 //--------------------------------------------------------------
-void Organism:: organism_Update() {
+void Organism:: organism_swimUpdate() {
     mVelocity += mAcceleration;
     mVelocity.limit(mMaxSpeed);
     

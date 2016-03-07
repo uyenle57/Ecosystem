@@ -20,11 +20,9 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 //--------------------------------------------------------------
 void Worms:: draw() {
     
-    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
-    
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate( ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2) );
+    rotate();
     
     for(int i=0; i < 80; i += 5) {
         if (i % 3 == 1) {
@@ -64,10 +62,15 @@ void Worms:: swim() {   //Wander around
     seekTarget(target);
 }
 
+void Worms::rotate() {
+    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
+    ofRotate( ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2) );
+}
+
 
 //--------------------------------------------------------------
 void Worms::update() {
-    organism_Update();  //from Base class Organism
+    organism_swimUpdate();  //from Base class Organism
     organism_returnToScreen();
     swim();
 }

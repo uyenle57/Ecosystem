@@ -39,8 +39,9 @@ public:
     //Pure virtual functions - must be overriden in derived classes
     virtual void draw() = 0;
     virtual void swim() = 0;
+    virtual void update() = 0;
     
-    void organism_Update(); //contains all other void functions
+    void organism_swimUpdate(); //contains all other void functions
     void organism_returnToScreen();
     void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
     

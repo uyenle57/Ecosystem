@@ -22,7 +22,7 @@ public:
     //virtual ~Worms(); //only called when eaten by Animals
     
     void draw(), swim(), update();
-        
+    
     float posx, posy, posz;
     float segLength = 2;
     float wanderAngle;
@@ -32,6 +32,7 @@ public:
     
 protected:
     float wiggle(int m);
+    void rotate();
     
 private:
     
