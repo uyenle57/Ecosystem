@@ -22,6 +22,7 @@ public:
     //~Mosquitoes();
     
     void draw(), swim(), update();
+    virtual void keyPressed(int key);
     
 private:
     float flappyWings();

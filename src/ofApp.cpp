@@ -25,69 +25,48 @@ void ofApp::setup(){
     
     
     //Create Organisms
-    for(int i=0; i < 10; i++) {
-        worms.push_back(Worms( (ofGetWindowWidth()/2)*i, ofRandom(50,ofGetWindowHeight()-100), 0) );
-        leeches.push_back(Leeches(ofRandom(400,ofGetWindowWidth()-100)*(i*0.4), ofRandom(100,ofGetWindowHeight()-100), 0));
-        mosquitoes.push_back(Mosquitoes(ofGetWindowWidth()/2*(i*0.8), ofRandom(50,ofGetWindowHeight()-100), 0));
+    for(int i=0; i < numOrganisms; i++) {
+        worms = new Worms((ofGetWindowWidth()/2)*i, //x
+                           ofRandom(ofGetWindowHeight()-100), //y
+                           0); //z
+        leeches = new Leeches(ofRandom(ofGetWindowWidth())*(i*0.4),
+                              ofRandom(ofGetWindowHeight()),
+                              0);
+        mosquitoes = new Mosquitoes(ofGetWindowWidth()/2*(i*0.8),
+                                    ofRandom(50,ofGetWindowHeight()-100), 0);
+        
+        organism.push_back(worms);
+        organism.push_back(leeches);
+        organism.push_back(mosquitoes);
     }
-    
-// probably need this for adding new organisms
-//    for(int i=0; i < 5; i++) {
-//        organism1.push_back(unique_ptr<Organism>(new Worms(ofGetWindowWidth()/2*i, ofRandom(50,ofGetWindowHeight()-100), 0)));
-//    }
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
-    // TODO: Better way to call same class function without repeating???
-    for (auto & w: worms)  {
-        w.update();
-    }
-    for (auto & l: leeches)  {  l.update();
-    }
-    for (auto & m: mosquitoes)  {
-        m.update();
-    }
     
-//    for (auto & org1 : organism1) { organism1.update(); } //error
+    for (auto & organism : organism) {
+        organism->update();
+    }
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
     
     ofBackground(255);
     //backgroundImg.draw(0, 0);
     
-    for (auto & w: worms)  {   w.draw();   }
-    for (auto & l: leeches)  {   l.draw();   }
-    for (auto & m: mosquitoes)  {   m.draw();   }
-}
-
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-    
-    // TODO: fix add new organisms
-    if (key == 'w'){
-        std::cout << "new worms added" << std::endl;
-    }
-//    else if (key == 'x') {
-//        delete newWorm;
-//        cout << "worm deleted" << endl;
-//    }
-    if (key == 'l') {
-        //
-        std::cout << "new leeches added" << std::endl;
-    }
-    if (key == 'm'){
-        //
-        std::cout << "new mosquitoes added" << std::endl;
+    for (auto & organism : organism) {
+        organism->draw();
     }
 }
 
 //--------------------------------------------------------------
-void ofApp::addWorm() {
-    
+void ofApp::keyPressed(int key) {
+
+    //add new Organism if user presses keys w,l,m
+    for (auto & organism : organism) {
+        organism->keyPressed(key);
+    }
 }
 
 //--------------------------------------------------------------

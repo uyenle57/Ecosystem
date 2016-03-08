@@ -22,6 +22,8 @@ public:
     //virtual ~Worms(); //only called when eaten by Animals
     
     void draw(), swim(), update();
+    void addWorm(Organism *o);
+    virtual void keyPressed(int key);
     
     float posx, posy, posz;
     float segLength = 2;
@@ -32,7 +34,6 @@ public:
     
 protected:
     float wiggle(int m);
-    void rotate();
     
 private:
     

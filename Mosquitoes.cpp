@@ -16,38 +16,35 @@ Mosquitoes::Mosquitoes(float MosPosX, float MosPosY, float MosPosZ) : Organism(M
 //    cout << "A mosquito has been eaten" << endl;
 //}
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Mosquitoes::draw() {
     
     //Create the mosquito shape
     ofPushMatrix();
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    
-    ofBeginShape();
+    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
     ofSetColor(168,161,151);
     ofDrawCircle(0,0,0,4);       //Head
     ofDrawEllipse(0, 16, 7, 30); //Body
     
     // 2 flapping wings
     ofSetColor(33,33,33,50);
-    ofDrawEllipse(-13, 8 + flappyWings(), 25, 7);
-    ofDrawEllipse(13, 8 + flappyWings(), 25, 7);
+    ofDrawEllipse(-13, 8 + Mosquitoes::flappyWings(), 25, 7);
+    ofDrawEllipse(13, 8 + Mosquitoes::flappyWings(), 25, 7);
     
     //Mouth
     ofSetColor(0);
     ofDrawLine(0, 0-3, 0, 0-20);
-    ofEndShape();    
     ofPopMatrix();
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Mosquitoes::swim() {
     int amp = 10;
     mPosition.x += amp * sin(ofDegToRad(ofGetFrameNum() * ofRandom(20)));
     mPosition.y += amp * cos(ofDegToRad(ofGetFrameNum() * ofRandom(20)));
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 float Mosquitoes::flappyWings() {
     int amp = 5;
     int speed = 50;
@@ -56,11 +53,17 @@ float Mosquitoes::flappyWings() {
     return letsGetFlappy;
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Mosquitoes::update() {
-    organism_returnToScreen();
-    swim();
+    Organism::returnToScreen();
+    Mosquitoes::swim();
 }
 
+//------------------------------------------------------------------------------------
+void Mosquitoes::keyPressed(int key) {
+    if(key == 'm') {
+        std::cout<< "new Mosquito added" << std::endl;
+    }
+}
 
 

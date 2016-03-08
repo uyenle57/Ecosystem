@@ -40,12 +40,13 @@ public:
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void update() = 0;
+    virtual void keyPressed(int key) = 0;
     
-    void organism_swimUpdate(); //contains all other void functions
-    void organism_returnToScreen();
+    void swimUpdate(); //contains all other void functions
+    void returnToScreen();
     void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
     
-    bool isDead(); //call Destructor or return true/false??
+    bool isDead; //call Destructor or return true/false??
     
 };
 

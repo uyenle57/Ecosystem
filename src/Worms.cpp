@@ -17,12 +17,14 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 //    cout << "A worm has been eaten" << endl;
 //}
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Worms:: draw() {
     
+    Organism::mRotateTheta = atan2(mVelocity.y, mVelocity.x);
+
     ofPushMatrix();
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    rotate();
+    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
+    ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
     
     for(int i=0; i < 80; i += 5) {
         if (i % 3 == 1) {
@@ -33,19 +35,19 @@ void Worms:: draw() {
             bodyColor.set(255,0,0);
         }
         ofSetColor(bodyColor);
-        ofDrawRectangle(0+wiggle(i), i,3,3);
+        ofDrawRectangle(0 + Worms::wiggle(i), i,3,3);
     }
     ofPopMatrix();
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 float Worms::wiggle(int m) {
     float letsWiggle = 5 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * 10);
     return letsWiggle;
 }
 
-//--------------------------------------------------------------
-void Worms:: swim() {   //Wander around
+//------------------------------------------------------------------------------------
+void Worms::swim() {   //Wander around
     float radius = 20;
     float distance = 80;
     
@@ -62,16 +64,22 @@ void Worms:: swim() {   //Wander around
     seekTarget(target);
 }
 
-void Worms::rotate() {
-    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
-    ofRotate( ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2) );
-}
-
-
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Worms::update() {
-    organism_swimUpdate();  //from Base class Organism
-    organism_returnToScreen();
-    swim();
+    Organism::swimUpdate();
+    Organism::returnToScreen();
+    Worms::swim();
 }
 
+//------------------------------------------------------------------------------------
+void Worms::keyPressed(int key) {
+    if(key == 'w') {
+        std::cout<< "new Worm added" << std::endl;
+        //Worms::addWorm();
+    }
+}
+
+//------------------------------------------------------------------------------------
+//void Worms::addWorm(Organism *o) {
+//    organism.push_back(o);
+//}

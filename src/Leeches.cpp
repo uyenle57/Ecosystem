@@ -19,13 +19,14 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
 //    cout << "A leech has been eaten" << endl;
 //}
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Leeches::draw() {
     
-    mRotateTheta = atan2(mVelocity.y, mVelocity.x); //Make the Worms rotate according to velocity
+    Organism::mRotateTheta = atan2(mVelocity.y, mVelocity.x);
 
     ofPushMatrix();
-    ofTranslate(mPosition.x, mPosition.y, mPosition.z); //*0.4 to decrease spacing between each Leech
+    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
+    //*0.4 to decrease spacing between each Leech
     ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
     ofScale(0.1, 0.15); //scale down because original leech is really big
     
@@ -36,26 +37,26 @@ void Leeches::draw() {
     //right line
     for(int i=0; i < 180; i += 20) {
         x = sin(ofDegToRad(i)) * i/2;
-        ofVertex(x+wiggle(i), i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
-        ofVertex(x+wiggle(i), i*bodyLength);
+        ofVertex(x + Leeches::wiggle(i), i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
+        ofVertex(x + Leeches::wiggle(i), i*bodyLength);
     }
     
     //left line
     for (int j=180; j > 0; j -= 20) {
         x = sin(ofDegToRad(j)) * j/2;
-        ofVertex(-x+wiggle(j), j*bodyLength);  //reverse the x positions to draw opposite to the first line
-        ofVertex(-x+wiggle(j), j*bodyLength);
+        ofVertex(-x + Leeches::wiggle(j), j*bodyLength);  //reverse the x positions to draw opposite to the first line
+        ofVertex(-x + Leeches::wiggle(j), j*bodyLength);
     }
     ofEndShape();
     ofPopMatrix();
 }
 
-//--------------------------------------------------------------
-void Leeches:: swim() {   //Wander around
+//------------------------------------------------------------------------------------
+void Leeches:: swim() {   //Leeches move the same as Worms
     float radius = 20;
     float distance = 80;
     
-    wanderAngle += ofRandom(-0.1, 0.1);
+    wanderAngle += ofRandom(-0.1, 0.1); //except that their WanderAngle range is smaller
     
     ofVec3f wanderAround = mVelocity;
     wanderAround.normalize();
@@ -68,7 +69,7 @@ void Leeches:: swim() {   //Wander around
     seekTarget(target);
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 float Leeches::wiggle(int m) {
     float amp = (abs(mPosition.x) + abs(mPosition.y)) * 0.04;
     float letsWiggle = amp * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2)) * 20);
@@ -76,10 +77,17 @@ float Leeches::wiggle(int m) {
     return letsWiggle;
 }
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------
 void Leeches::update() {
-    organism_swimUpdate();
-    organism_returnToScreen();
-    swim();
+    Organism::swimUpdate();
+    Organism::returnToScreen();
+    Leeches::swim();
+}
+
+//------------------------------------------------------------------------------------
+void Leeches::keyPressed(int key) {
+    if(key == 'l') {
+        std::cout<< "new Leech added" << std::endl;
+    }
 }
 
