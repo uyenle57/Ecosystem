@@ -21,7 +21,7 @@ void Mosquitoes::draw() {
     
     //Create the mosquito shape
     ofPushMatrix();
-    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofSetColor(168,161,151);
     ofDrawCircle(0,0,0,4);       //Head
     ofDrawEllipse(0, 16, 7, 30); //Body

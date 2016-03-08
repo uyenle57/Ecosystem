@@ -15,7 +15,8 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
-
+    
+        void exit();
 		void keyPressed(int key);
 		void keyReleased(int key);
 		void mouseMoved(int x, int y );
@@ -37,7 +38,7 @@ class ofApp : public ofBaseApp{
     
     std::vector<Organism *> organism;
 
-    int numOrganisms = 10;
+    int numOrganisms = 3;
     
     Worms *worms;
     Leeches *leeches;

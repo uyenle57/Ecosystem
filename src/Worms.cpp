@@ -23,7 +23,7 @@ void Worms:: draw() {
     Organism::mRotateTheta = atan2(mVelocity.y, mVelocity.x);
 
     ofPushMatrix();
-    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
     
     for(int i=0; i < 80; i += 5) {

@@ -25,8 +25,7 @@ void Leeches::draw() {
     Organism::mRotateTheta = atan2(mVelocity.y, mVelocity.x);
 
     ofPushMatrix();
-    ofTranslate(Organism::mPosition.x, Organism::mPosition.y, Organism::mPosition.z);
-    //*0.4 to decrease spacing between each Leech
+    ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
     ofScale(0.1, 0.15); //scale down because original leech is really big
     

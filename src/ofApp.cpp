@@ -26,14 +26,9 @@ void ofApp::setup(){
     
     //Create Organisms
     for(int i=0; i < numOrganisms; i++) {
-        worms = new Worms((ofGetWindowWidth()/2)*i, //x
-                           ofRandom(ofGetWindowHeight()-100), //y
-                           0); //z
-        leeches = new Leeches(ofRandom(ofGetWindowWidth())*(i*0.4),
-                              ofRandom(ofGetWindowHeight()),
-                              0);
-        mosquitoes = new Mosquitoes(ofGetWindowWidth()/2*(i*0.8),
-                                    ofRandom(50,ofGetWindowHeight()-100), 0);
+        worms = new Worms(ofGetWindowWidth()/2, ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+        leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+        mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
         
         organism.push_back(worms);
         organism.push_back(leeches);
@@ -42,8 +37,7 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-    
+void ofApp::update() {
     for (auto & organism : organism) {
         organism->update();
     }
@@ -62,11 +56,48 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
+    
+    //TO DO
+    //simplify code
+    //limit number of organisms that user can add before program lags
+    
     //add new Organism if user presses keys w,l,m
-    for (auto & organism : organism) {
-        organism->keyPressed(key);
+//    for (auto & organism : organism) {
+//        organism->keyPressed(key);
+//    }
+    
+    if (key == 'w') {
+        cout << "new worm" << endl;
+        for(int i=0; i < 1; i++) {
+            worms = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            organism.push_back(worms);
+        }
     }
+    
+    if (key == 'l') {
+        cout << "new leech" << endl;
+        for(int i=0; i < 1; i++) {
+            leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            organism.push_back(leeches);
+        }
+    }
+    
+    if (key == 'm') {
+        cout << "new mosquito" << endl;
+        for(int i=0; i < 1; i++) {
+            mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            organism.push_back(mosquitoes);
+        }
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::exit() {
+    //delete dynamically allocated pointers upon exiting the program to free up space
+    delete worms;
+    delete leeches;
+    delete mosquitoes;
+    std::cout << "exited" << std::endl;
 }
 
 //--------------------------------------------------------------
