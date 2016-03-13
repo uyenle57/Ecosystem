@@ -55,7 +55,7 @@ void ofApp::update() {
     for( auto & smallfish : smallFish) {
         smallfish.update();
         smallfish.addAttraction(smallfish);
-        smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
+        //smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
     }
 }
 
@@ -122,8 +122,8 @@ void ofApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-    
+void ofApp::mouseMoved(int x, int y ) {
+
 }
 
 //--------------------------------------------------------------

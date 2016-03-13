@@ -34,12 +34,13 @@ public:
     bool bIsDead;
     
     float mLifeSpan; //die if out of food
-    float mPosx, mPosy, mPosz; //position variables
-    
+    float mPosx, mPosy, mPosz;
+    float mBorder = 2;
+
     // Behaviours (Pure virtual functions)
     virtual void draw() = 0;
     virtual void update() = 0;
-//    virtual void swim() = 0;
+    virtual void swim() = 0;
 //    virtual void mate() = 0;
 //    virtual void eat() = 0;
 //    virtual void changeColor() = 0;

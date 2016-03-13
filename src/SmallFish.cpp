@@ -33,16 +33,24 @@ void SmallFish::draw() {
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofSetColor(bodyColor);
     
-    ofDrawCircle(0, 0, 0, 5);
+    ofDrawCircle(0,0, 5);
     
     ofPopMatrix();
 }
 
 //------------------------------------------------------------------------------------
 void SmallFish::update() {
+    //SmallFish::swim();
     SmallFish::updateForce();
+    Animals::returnToScreen();
 }
 
+//------------------------------------------------------------------------------------
+void SmallFish::swim() {
+//    SmallFish::addAttraction();
+//    SmallFish::addAlignment();
+//    SmallFish::addRepulsion();
+}
 
 // FLOCKING BEHAVIOUR
 //------------------------------------------------------------------------------------
@@ -57,22 +65,25 @@ void SmallFish::updateForce() {
 
 //------------------------------------------------------------------------------------
 void SmallFish::addAttraction(SmallFish &neighbor) {
-    //An empty vector to accumulate all locations
-    ofVec3f currentPos;
-    currentPos.set(neighbor.mPosition.x, neighbor.mPosition.y, neighbor.mPosition.z);
     
-    //Calculate the distance between the current fish and neighour fishes
-    ofVec3f difference = mPosition - currentPos;
+    ofVec3f sum(0,0,0);
+    float strength = 0.03;
+    
+    ofVec3f difference = neighbor.mPosition - mPosition; //Calculate the distance between the current fish and neighour fishes
     float dist = difference.length(); //length() returns magnitude of vector
+    ofVec3f diffNormalise = difference;
+    diffNormalise.normalize();
     
-    //Check that the current fish is close to neighbor fishes
-    if (dist > 0 && dist < mDistance) {
-        currentPos += neighbor.mPosition;
+    if (dist > 0 && dist < mDistance) {    //Check that the current fish is close to neighbor fishes
+        sum += diffNormalise;
         mCount++;
     }
+    
     if (mCount > 0) {
-        currentPos = currentPos / mCount;
-        seekTarget(currentPos); //if so, steer towards neighbors
+        mPosition.x += 0.5;
+        sum /= float(mCount);
+        seekTarget(sum);
+        //mAcceleration -= (sum.normalize() * strength);
     }
 }
 
@@ -88,19 +99,18 @@ void SmallFish::addRepulsion(SmallFish &neighbor, float radius, float scale) {
 
 //------------------------------------------------------------------------------------
 void SmallFish::moveAwayFromMouse(float mousex, float mousey, float radius, float scale) {
-    
     ofVec2f posOfForce;
     posOfForce.set(mousex, mousey);
     
     ofVec2f diff = mPosition - posOfForce;
     float length = diff.length();
     
-    if (radius > 0){
+    if (radius > 0) {
         if (length > radius){
             bIsClose = false;
         }
     }
-    if (bIsClose == true){
+    if (bIsClose == true) {
         float pct = 1 - (length / radius);  // stronger on the inside
         diff.normalize();
         mAcceleration.x = mAcceleration.x - diff.x * scale * pct;
@@ -125,13 +135,13 @@ void SmallFish::applyDamping() {
 
 //------------------------------------------------------------------------------------
 void SmallFish::seekTarget(ofVec3f target) {
-    ofVec3f mDesired = target - mPosition;  //A vector pointing from the location to the target
+    ofVec3f mDesired = target - mPosition;
     
-    mDesired.normalize();  // Normalize and scale to maximum speed
+    mDesired.normalize();
     mDesired * mMaxSpeed;
     
     ofVec3f mSteer = mDesired - mVelocity;
-    mSteer.limit(mMaxForce);  //Limit to maximum steering force
+    mSteer.limit(mMaxForce);
     
     applyForce(mSteer);
 }

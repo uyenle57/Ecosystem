@@ -66,9 +66,9 @@ void Worms::swim() {   //Wander around
 
 //------------------------------------------------------------------------------------
 void Worms::update() {
+    Worms::swim();
     Organism::swimUpdate();
     Organism::returnToScreen();
-    Worms::swim();
 }
 
 //------------------------------------------------------------------------------------
