@@ -13,18 +13,16 @@
 #include <stdio.h>
 #include "ofMain.h"
 
-
 //contains DNA, location, velocity, acceleration, behaviours (swim, jump, mate)
 //no lifespan
 
 class Organism {
     
-public:
-    Organism(float x, float y, float z);
-    
 private:
     
 public:
+    Organism(float x, float y, float z);
+    
     //virtual ~Organism();
     
     ofVec3f mPosition, mVelocity, mAcceleration;
@@ -36,17 +34,19 @@ public:
     
     ofColor bodyColor;
     
-    //Pure virtual functions - must be overriden in derived classes
+    bool bIsDead;
+    
+    //Pure virtual functions
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void update() = 0;
-    virtual void keyPressed(int key) = 0;
+    //void keyPressed(int key, Worms *w, Leeches *l, Mosquitoes *m);
     
     void swimUpdate(); //contains all other void functions
     void returnToScreen();
-    void applyForce(ofVec3f force), seekTarget(ofVec3f target), resetForce();
-    
-    bool isDead; //call Destructor or return true/false??
+    void applyForce(ofVec3f force);
+    void seekTarget(ofVec3f target);
+    void resetForce();
     
 };
 

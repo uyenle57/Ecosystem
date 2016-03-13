@@ -74,8 +74,8 @@ void Worms::update() {
 //------------------------------------------------------------------------------------
 void Worms::keyPressed(int key) {
     if(key == 'w') {
-        std::cout<< "new Worm added" << std::endl;
-        //Worms::addWorm();
+        std::cout << "new Worm added" << std::endl;
+        
     }
 }
 

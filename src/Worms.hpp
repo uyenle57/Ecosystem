@@ -25,17 +25,15 @@ public:
     void addWorm(Organism *o);
     virtual void keyPressed(int key);
     
-    float posx, posy, posz;
     float segLength = 2;
     float wanderAngle;
     ofVec3f rotateAmount;
-    
-    ofColor(bodyColor);
     
 protected:
     float wiggle(int m);
     
 private:
+    ofColor(bodyColor);
     
 };
 

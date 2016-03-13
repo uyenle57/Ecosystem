@@ -7,7 +7,9 @@
 #include "Mosquitoes.hpp"
 
 #include "Animals.hpp"
-
+#include "Frogs.hpp"
+#include "BigFish.hpp"
+#include "SmallFish.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -32,18 +34,31 @@ class ofApp : public ofBaseApp{
     
     ofImage backgroundImg;
     
-    // Organism derived classes ----------------------------------------------------
+    // ORGANISM OBJECTS ----------------------------------------------------
     //std::vector <std::unique_ptr <Organism>> organism;
     //unique_ptr objects automatically delete the object (using a deleter) as soon as they themselves are destroyed, or as soon as their value changes either by an assignment operation or by an explicit call to unique_ptr::reset.
     
     std::vector<Organism *> organism;
-
+    
     int numOrganisms = 3;
     
     Worms *worms;
     Leeches *leeches;
     Mosquitoes *mosquitoes;
     
-    // Animals derived classes ----------------------------------------------------
     
+    // ANIMAL OBJECTS ----------------------------------------------------
+    std::vector<Animals *> animals;
+    
+    int numAnimals = 50;
+    
+    Frogs *frogs;
+    BigFish *bigFish;
+    vector <SmallFish> smallFish;
+    //SmallFish *smallFish;
 };
+
+
+
+
+

@@ -23,14 +23,15 @@ public:
     
     void draw(), swim(), update();
     virtual void keyPressed(int key);
-    
-    ofColor(bodyColor);
+
 
 private:
     float wiggle(int m);
     float x;
     float wanderAngle;
     int bodyLength;
+    
+    ofColor(bodyColor);
     
 };
 

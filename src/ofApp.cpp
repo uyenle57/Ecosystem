@@ -11,6 +11,9 @@ using namespace std;
 #include "Mosquitoes.hpp"
 
 #include "Animals.hpp"
+#include "Frogs.hpp"
+#include "BigFish.hpp"
+#include "SmallFish.hpp"
 
 
 //--------------------------------------------------------------
@@ -26,13 +29,21 @@ void ofApp::setup(){
     
     //Create Organisms
     for(int i=0; i < numOrganisms; i++) {
-        worms = new Worms(ofGetWindowWidth()/2, ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-        leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-        mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+        worms = new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), ofRandom(-150,150));
+        leeches = new Leeches(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-150,150));
+        mosquitoes = new Mosquitoes(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-150,150));
         
         organism.push_back(worms);
         organism.push_back(leeches);
         organism.push_back(mosquitoes);
+    }
+    
+    //Create Animals
+    for (int i=0; i < numAnimals; i++) {
+        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0));
+
+//        smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
+//        animals.push_back(smallFish);
     }
 }
 
@@ -41,16 +52,23 @@ void ofApp::update() {
     for (auto & organism : organism) {
         organism->update();
     }
+    for( auto & smallfish : smallFish) {
+        smallfish.update();
+        smallfish.addAttraction(smallfish);
+        smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    
     ofBackground(255);
     //backgroundImg.draw(0, 0);
     
     for (auto & organism : organism) {
         organism->draw();
+    }
+    for (auto & smallfish : smallFish) {
+        smallfish.draw();
     }
 }
 
@@ -58,32 +76,30 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
     
     //TO DO
-    //simplify code
-    //limit number of organisms that user can add before program lags
+    //simplify code ??
+    //limit number of organisms that user can add before program lags (50)
     
     //add new Organism if user presses keys w,l,m
 //    for (auto & organism : organism) {
-//        organism->keyPressed(key);
+//        organism->keyPressed(key, &worms, &leeches, *mosquitoes);
 //    }
     
     if (key == 'w') {
-        cout << "new worm" << endl;
+        cout << "new worm added" <<  endl;
         for(int i=0; i < 1; i++) {
             worms = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(worms);
         }
     }
-    
     if (key == 'l') {
-        cout << "new leech" << endl;
+        cout << "new leech added" << endl;
         for(int i=0; i < 1; i++) {
             leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(leeches);
         }
     }
-    
     if (key == 'm') {
-        cout << "new mosquito" << endl;
+        cout << "new mosquito added" << endl;
         for(int i=0; i < 1; i++) {
             mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(mosquitoes);
@@ -97,7 +113,7 @@ void ofApp::exit() {
     delete worms;
     delete leeches;
     delete mosquitoes;
-    std::cout << "exited" << std::endl;
+    std::cout << "exited." << std::endl;
 }
 
 //--------------------------------------------------------------

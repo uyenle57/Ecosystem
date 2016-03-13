@@ -6,6 +6,12 @@
 //
 //  Base class Animals
 
+//Behaviours: eat, reproduce, collision detection, change body colour, die
+
+//probability of reproduction (+ reproduction rate)
+
+//derived animals: frogs, flock of small fish, big fish
+
 #ifndef Animals_hpp
 #define Animals_hpp
 
@@ -14,20 +20,31 @@
 
 
 class Animals {
+
+public:
+    Animals(float x, float y, float z);
     
-    //Variables: DNA, location, velocity, acceleration, lifespan (die if out of food).
-    
-    //Behaviours: eat, reproduce, collision detection, change body colour, die
-    
-    //probability of reproduction (+ reproduction rate)
-    
-    //derived animals: frogs, flock of small fish, big fish, snakes
-    
-    //Variables
-    float mLifeSpan;
-    
+    //virtual ~Animals();
+
+    //Variables: DNA
     ofVec3f mPosition, mVelocity, mAcceleration;
     
-
+    ofColor bodyColor;
+    
+    bool bIsDead;
+    
+    float mLifeSpan; //die if out of food
+    float mPosx, mPosy, mPosz; //position variables
+    
+    // Behaviours (Pure virtual functions)
+    virtual void draw() = 0;
+    virtual void update() = 0;
+//    virtual void swim() = 0;
+//    virtual void mate() = 0;
+//    virtual void eat() = 0;
+//    virtual void changeColor() = 0;
+    
+    void returnToScreen();
+    
 };
 #endif /* Animals_hpp */
