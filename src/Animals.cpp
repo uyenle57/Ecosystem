@@ -8,11 +8,18 @@
 
 #include "Animals.hpp"
 
+
+DNA::DNA() {
+    //something...
+}
+
 Animals::Animals(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
     mPosition.set(0, 0, 0);
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
-
+    
+    //Initialise a population of 100 DNA objects
+//    dna.push_back(100);
 }
 
 void Animals::returnToScreen() {

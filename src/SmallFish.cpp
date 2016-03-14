@@ -12,7 +12,7 @@
 SmallFish::SmallFish(float fishPosX, float fishPosY, float fishPosZ) : Animals(fishPosX, fishPosY, fishPosZ) {
     
     mPosition.set(fishPosX, fishPosY, fishPosZ);
-    bodyColor.set(0,255,0);
+    bodyColor.set(0,0,255);
     
     mDamping = 0.01f;
     mMaxForce = 5.0;

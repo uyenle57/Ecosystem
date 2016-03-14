@@ -12,12 +12,20 @@
 #include <stdio.h>
 #include "Animals.hpp"
 
-class Frogs {
+class Frogs : public Animals {
 
 public:
+    Frogs(float frogPosX, float frogPosY, float frogPosZ);
+    
+    virtual ~Frogs();
+    
+    void draw(), update(), swim(), mate(), eat(), changeColor();
+    
+    //ofColor(bodyColor);
+
 protected:
 private:
-    
+    float flappyLegs();
 };
 
 

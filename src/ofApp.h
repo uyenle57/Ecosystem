@@ -40,7 +40,7 @@ class ofApp : public ofBaseApp{
     
     std::vector<Organism *> organism;
     
-    int numOrganisms = 3;
+    int numOrganisms = 5;
     
     Worms *worms;
     Leeches *leeches;
@@ -50,7 +50,8 @@ class ofApp : public ofBaseApp{
     // ANIMAL OBJECTS ----------------------------------------------------
     std::vector<Animals *> animals;
     
-    int numAnimals = 50;
+    int numAnimals = 5;
+    int numSmallFish = 50;
     
     Frogs *frogs;
     BigFish *bigFish;

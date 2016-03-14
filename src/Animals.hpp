@@ -19,6 +19,17 @@
 #include "ofMain.h"
 
 
+//The population of each Animal is based on their genetic information (DNA)
+//which defines how the animal looks or behaves
+//with reference from Nature of Code's Chapter 9
+class DNA {
+    //genotype (behaviour: weight of force, number of rotation, etc)
+    float genes[3];
+    //phenotype (color)
+    
+    DNA();
+};
+
 class Animals {
 
 public:
@@ -26,7 +37,9 @@ public:
     
     //virtual ~Animals();
 
-    //Variables: DNA
+    std::vector<DNA>dna;
+    
+    //Variables
     ofVec3f mPosition, mVelocity, mAcceleration;
     
     ofColor bodyColor;

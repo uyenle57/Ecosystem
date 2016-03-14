@@ -40,10 +40,16 @@ void ofApp::setup(){
     
     //Create Animals
     for (int i=0; i < numAnimals; i++) {
-        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0));
-
-//        smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
-//        animals.push_back(smallFish);
+        frogs = new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
+        //bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
+        
+        animals.push_back(frogs);
+        //animals.push_back(bigFish);
+    }
+    for (int i=0; i < numSmallFish; i++) {
+        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100)));
+        //smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
+        //animals.push_back(smallFish);
     }
 }
 
@@ -57,6 +63,10 @@ void ofApp::update() {
         smallfish.addAttraction(smallfish);
         //smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
     }
+    
+//    for (auto & animals: animals) {
+//        animals->update();
+//    }
 }
 
 //--------------------------------------------------------------
@@ -64,12 +74,16 @@ void ofApp::draw() {
     ofBackground(255);
     //backgroundImg.draw(0, 0);
     
-    for (auto & organism : organism) {
-        organism->draw();
+//    for (auto & organism : organism) {
+//        organism->draw();
+//    }
+    for (auto & animals: animals) {
+        animals->draw();
     }
-    for (auto & smallfish : smallFish) {
-        smallfish.draw();
-    }
+//    for (auto & smallfish : smallFish) {
+//        smallfish.draw();
+//    }
+
 }
 
 //--------------------------------------------------------------
