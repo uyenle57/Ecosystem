@@ -17,12 +17,9 @@ class SmallFish : public Animals {
 
 public:
     SmallFish(float fishPosX, float fishPosY, float fishPosZ);
-    
     virtual ~SmallFish();
     
-    void draw(), update(), swim(), mate(), eat(), changeColor();
-    
-    ofColor(bodyColor);
+    void draw(), update(), swim();
     
     //Flocking
     //based on 3 rules: cohesion, alignment and seperation
@@ -32,16 +29,17 @@ public:
     
     void moveAwayFromMouse(float mousex, float mousey, float radius, float scale);
 
-    void applyForce(ofVec3f force);
     void updateForce();
-    void resetForce();
     void applyDamping();
-    void seekTarget(ofVec3f target);
     
-    float mDamping, mMaxForce, mMaxSpeed, mDistance;
+    float mDamping, mDistance;
     int mCount;
     
     bool bIsClose;
+    
+private:
+    ofColor(healthyColor);
+    
 };
 
 

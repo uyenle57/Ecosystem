@@ -22,8 +22,6 @@ public:
     //~Leeches();
     
     void draw(), swim(), update();
-    virtual void keyPressed(int key);
-
 
 private:
     float wiggle(int m);

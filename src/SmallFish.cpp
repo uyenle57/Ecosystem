@@ -12,15 +12,18 @@
 SmallFish::SmallFish(float fishPosX, float fishPosY, float fishPosZ) : Animals(fishPosX, fishPosY, fishPosZ) {
     
     mPosition.set(fishPosX, fishPosY, fishPosZ);
-    bodyColor.set(0,0,255);
     
     mDamping = 0.01f;
-    mMaxForce = 5.0;
-    mMaxSpeed = 5;
     mDistance = 50;
     mCount = 0;
     
-    bIsClose = true;
+    mMaxForce = ofMap(dna.genes[0], 0, 1, 0, 10.0);
+    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 0, 10.0);
+    mSize = ofMap(dna.genes[0], 0, 1, 50, 50);
+        
+    healthyColor.set(4,153,0); //green
+    hungryColor.set(255,190,10);  //orange
+    starvingColor.set(255,0,0);  //red
 }
 
 SmallFish::~SmallFish() {
@@ -31,7 +34,7 @@ SmallFish::~SmallFish() {
 void SmallFish::draw() {
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofSetColor(bodyColor);
+    ofSetColor(Animals::healthyColor);
     
     ofDrawCircle(0,0, 5);
     
@@ -41,28 +44,15 @@ void SmallFish::draw() {
 //------------------------------------------------------------------------------------
 void SmallFish::update() {
     //SmallFish::swim();
-    SmallFish::updateForce();
     Animals::returnToScreen();
 }
 
 //------------------------------------------------------------------------------------
 void SmallFish::swim() {
-//    SmallFish::addAttraction();
-//    SmallFish::addAlignment();
-//    SmallFish::addRepulsion();
+    
 }
 
 // FLOCKING BEHAVIOUR
-//------------------------------------------------------------------------------------
-void SmallFish::updateForce() {
-    mVelocity += mAcceleration;
-    mVelocity.limit(mMaxSpeed);
-    
-    mPosition += mVelocity;
-    
-    resetForce();
-}
-
 //------------------------------------------------------------------------------------
 void SmallFish::addAttraction(SmallFish &neighbor) {
     
@@ -119,31 +109,8 @@ void SmallFish::moveAwayFromMouse(float mousex, float mousey, float radius, floa
 }
 
 //------------------------------------------------------------------------------------
-void SmallFish::resetForce() {
-    mAcceleration.set(0, 0);
-}
-
-//------------------------------------------------------------------------------------
-void SmallFish::applyForce(ofVec3f force) {
-    mAcceleration += force;
-}
-
-//------------------------------------------------------------------------------------
 void SmallFish::applyDamping() {
     
-}
-
-//------------------------------------------------------------------------------------
-void SmallFish::seekTarget(ofVec3f target) {
-    ofVec3f mDesired = target - mPosition;
-    
-    mDesired.normalize();
-    mDesired * mMaxSpeed;
-    
-    ofVec3f mSteer = mDesired - mVelocity;
-    mSteer.limit(mMaxForce);
-    
-    applyForce(mSteer);
 }
 
 //------------------------------------------------------------------------------------

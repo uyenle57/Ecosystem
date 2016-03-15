@@ -83,10 +83,3 @@ void Leeches::update() {
     Leeches::swim();
 }
 
-//------------------------------------------------------------------------------------
-void Leeches::keyPressed(int key) {
-    if(key == 'l') {
-        std::cout<< "new Leech added" << std::endl;
-    }
-}
-

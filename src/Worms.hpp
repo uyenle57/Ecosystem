@@ -23,9 +23,7 @@ public:
     
     void draw(), swim(), update();
     void addWorm(Organism *o);
-    virtual void keyPressed(int key);
     
-    float segLength = 2;
     float wanderAngle;
     ofVec3f rotateAmount;
     

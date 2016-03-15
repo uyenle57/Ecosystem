@@ -40,7 +40,6 @@ public:
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void update() = 0;
-    //void keyPressed(int key, Worms *w, Leeches *l, Mosquitoes *m);
     
     void swimUpdate(); //contains all other void functions
     void returnToScreen();

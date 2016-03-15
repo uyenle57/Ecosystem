@@ -64,28 +64,3 @@ void Organism::seekTarget(ofVec3f target) {
     applyForce(mSteer);
 }
 
-//--------------------------------------------------------------
-//void Organism::keyPressed(int key, Worms *w, Leeches *l, Mosquitoes *m) {
-//    
-//    if (key == 'w') {
-//        cout << "new worm added" << endl;
-//        for(int i=0; i < 1; i++) {
-//            w = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-//            m = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-//        }
-//    }
-//    if (key == 'l') {
-//        cout << "new leech added" << endl;
-//        for(int i=0; i < 1; i++) {
-//            l = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-//        }
-//    }
-//    if (key == 'm') {
-//        cout << "new leech added" << endl;
-//        for(int i=0; i < 1; i++) {
-//            m = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
-//        }
-//    }
-//}
-
-

@@ -106,14 +106,14 @@
 		39FEDA411C95D2EF00AA5462 /* Animals */ = {
 			isa = PBXGroup;
 			children = (
-				39A36CF11C808D9F006BF465 /* Animals.cpp */,
 				39A36CF21C808D9F006BF465 /* Animals.hpp */,
-				39FEDA361C95D26100AA5462 /* Frogs.cpp */,
+				39A36CF11C808D9F006BF465 /* Animals.cpp */,
 				39FEDA371C95D26100AA5462 /* Frogs.hpp */,
-				39FEDA391C95D28B00AA5462 /* BigFish.cpp */,
+				39FEDA361C95D26100AA5462 /* Frogs.cpp */,
 				39FEDA3A1C95D28B00AA5462 /* BigFish.hpp */,
-				39FEDA3C1C95D29200AA5462 /* SmallFish.cpp */,
+				39FEDA391C95D28B00AA5462 /* BigFish.cpp */,
 				39FEDA3D1C95D29200AA5462 /* SmallFish.hpp */,
+				39FEDA3C1C95D29200AA5462 /* SmallFish.cpp */,
 			);
 			name = Animals;
 			sourceTree = "<group>";

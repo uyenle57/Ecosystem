@@ -5,12 +5,14 @@
 //  Created by Uyen Le on 26/02/2016.
 //
 //  Base class Animals
+//  Derived animals: frogs, flock of small fish, big fish
 
-//Behaviours: eat, reproduce, collision detection, change body colour, die
+//  Animals eat Organisms and reproduce. Longer they survive the more likely they'll reproduce.
+//  They don't bump into each other (collision detection).
+//  Change colour if healthy/hungry/starving.
+//  Die if run out of food.
+//  If all Animals die, Organisms will take over the Pond.
 
-//probability of reproduction (+ reproduction rate)
-
-//derived animals: frogs, flock of small fish, big fish
 
 #ifndef Animals_hpp
 #define Animals_hpp
@@ -23,42 +25,57 @@
 //which defines how the animal looks or behaves
 //with reference from Nature of Code's Chapter 9
 class DNA {
-    //genotype (behaviour: weight of force, number of rotation, etc)
-    float genes[3];
-    //phenotype (color)
-    
+//DNA determines:
+//Genotype: speed, weight of force (bigger => slower)
+//          longer they survive => higher chance of reproduction
+//Phenotype: bodysize, eyesize
+
+public:
     DNA();
+    DNA(const DNA &dna);    //Use copy constructor for reproduction
+
+    std::vector <float> genes;
+
+    void mutate(float prob);
 };
 
+
+// ANIMALS ---------------------------------------------------------------
 class Animals {
 
 public:
     Animals(float x, float y, float z);
-    
     //virtual ~Animals();
-
-    std::vector<DNA>dna;
     
     //Variables
     ofVec3f mPosition, mVelocity, mAcceleration;
+    ofColor healthyColor, hungryColor, starvingColor;
     
-    ofColor bodyColor;
+    //Variables
+    float mLifespan;    //life timer
+    //determine how long it takes for the Animal to start changing color
+                         //if it hasn't eaten anything
+    float mMaxForce, mMaxSpeed, mSize;
+    float mRotateTheta, wanderAngle;
     
-    bool bIsDead;
-    
-    float mLifeSpan; //die if out of food
     float mPosx, mPosy, mPosz;
     float mBorder = 2;
 
-    // Behaviours (Pure virtual functions)
+    // Behaviours
     virtual void draw() = 0;
     virtual void update() = 0;
-    virtual void swim() = 0;
-//    virtual void mate() = 0;
-//    virtual void eat() = 0;
-//    virtual void changeColor() = 0;
+    virtual void swim() = 0;  //derived classes any override if needed
     
+protected:
+    //These will be inherited by all Animals
+    DNA dna;
+    void reproduce(), eat(), changeColor();
+    void applyForce(ofVec3f force);
+    void seekTarget(ofVec3f target);
+    void resetForce();
     void returnToScreen();
+    
+    bool bIsDead();
     
 };
 #endif /* Animals_hpp */

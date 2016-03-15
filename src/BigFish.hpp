@@ -12,8 +12,17 @@
 #include <stdio.h>
 #include "Animals.hpp"
 
-class BigFish {
+class BigFish : public Animals {
     
+public:
+    BigFish(float bigFishX, float bigFishY, float bigFishZ);
+    ~BigFish();
+    
+    void draw(), update();
+
+private:
+    ofColor(healthyColor);
+
 };
 
 

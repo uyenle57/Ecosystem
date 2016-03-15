@@ -70,16 +70,3 @@ void Worms::update() {
     Organism::swimUpdate();
     Organism::returnToScreen();
 }
-
-//------------------------------------------------------------------------------------
-void Worms::keyPressed(int key) {
-    if(key == 'w') {
-        std::cout << "new Worm added" << std::endl;
-        
-    }
-}
-
-//------------------------------------------------------------------------------------
-//void Worms::addWorm(Organism *o) {
-//    organism.push_back(o);
-//}

@@ -59,11 +59,3 @@ void Mosquitoes::update() {
     Mosquitoes::swim();
 }
 
-//------------------------------------------------------------------------------------
-void Mosquitoes::keyPressed(int key) {
-    if(key == 'm') {
-        std::cout<< "new Mosquito added" << std::endl;
-    }
-}
-
-

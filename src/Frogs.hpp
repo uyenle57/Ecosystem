@@ -16,16 +16,18 @@ class Frogs : public Animals {
 
 public:
     Frogs(float frogPosX, float frogPosY, float frogPosZ);
-    
     virtual ~Frogs();
     
-    void draw(), update(), swim(), mate(), eat(), changeColor();
+    void draw(), update(), swim();
     
-    //ofColor(bodyColor);
-
-protected:
 private:
     float flappyLegs();
+    ofColor(healthyColor);
+    
+    //TO DO - MAKE FROGS MOVE THROUGHOUT THE SCREEN !!
+    //For movement
+    float xoff, yoff;
+    ofVec3f newVel;
 };
 
 

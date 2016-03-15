@@ -64,9 +64,9 @@ void ofApp::update() {
         //smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
     }
     
-//    for (auto & animals: animals) {
-//        animals->update();
-//    }
+    for (auto & animals: animals) {
+        animals->update();
+    }
 }
 
 //--------------------------------------------------------------
@@ -74,9 +74,9 @@ void ofApp::draw() {
     ofBackground(255);
     //backgroundImg.draw(0, 0);
     
-//    for (auto & organism : organism) {
-//        organism->draw();
-//    }
+    for (auto & organism : organism) {
+        organism->draw();
+    }
     for (auto & animals: animals) {
         animals->draw();
     }
@@ -89,41 +89,31 @@ void ofApp::draw() {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     
-    //TO DO
-    //simplify code ??
-    //limit number of organisms that user can add before program lags (50)
+    //TO DO: limit number of organisms that user can add before program lags (50)
     
-    //add new Organism if user presses keys w,l,m
-//    for (auto & organism : organism) {
-//        organism->keyPressed(key, &worms, &leeches, *mosquitoes);
-//    }
-    
-    if (key == 'w') {
+    if (key == 'w')
         cout << "new worm added" <<  endl;
         for(int i=0; i < 1; i++) {
             worms = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(worms);
         }
-    }
-    if (key == 'l') {
+    if (key == 'l')
         cout << "new leech added" << endl;
         for(int i=0; i < 1; i++) {
             leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(leeches);
         }
-    }
-    if (key == 'm') {
+    if (key == 'm')
         cout << "new mosquito added" << endl;
         for(int i=0; i < 1; i++) {
             mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
             organism.push_back(mosquitoes);
         }
-    }
 }
 
 //--------------------------------------------------------------
 void ofApp::exit() {
-    //delete dynamically allocated pointers upon exiting the program to free up space
+    //delete dynamically allocated pointers upon exiting the program
     delete worms;
     delete leeches;
     delete mosquitoes;
