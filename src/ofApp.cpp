@@ -41,10 +41,10 @@ void ofApp::setup(){
     //Create Animals
     for (int i=0; i < numAnimals; i++) {
         frogs = new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
-        //bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
+        bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
         
         animals.push_back(frogs);
-        //animals.push_back(bigFish);
+        animals.push_back(bigFish);
     }
     for (int i=0; i < numSmallFish; i++) {
         smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100)));
@@ -90,7 +90,6 @@ void ofApp::draw() {
 void ofApp::keyPressed(int key) {
     
     //TO DO: limit number of organisms that user can add before program lags (50)
-    
     if (key == 'w')
         cout << "new worm added" <<  endl;
         for(int i=0; i < 1; i++) {

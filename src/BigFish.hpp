@@ -16,13 +16,17 @@ class BigFish : public Animals {
     
 public:
     BigFish(float bigFishX, float bigFishY, float bigFishZ);
-    ~BigFish();
+    virtual ~BigFish();
     
-    void draw(), update();
+    void draw(), update(), swim();
 
 private:
+    float wiggle(int m);
     ofColor(healthyColor);
-
+    
+    //For movement
+    float xoff, yoff;
+    ofVec3f newVel;
 };
 
 

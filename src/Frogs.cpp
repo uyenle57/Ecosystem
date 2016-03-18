@@ -22,7 +22,6 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ) : Animals(frogPosX,
     
     xoff = ofRandom(1000);
     yoff = ofRandom(1000);
-    
 }
 
 Frogs::~Frogs() {
@@ -31,7 +30,6 @@ Frogs::~Frogs() {
 
 //------------------------------------------------------------------------------------
 void Frogs::draw() {
-    
     mRotateTheta = atan2(mVelocity.y, mVelocity.x);
     
     ofPushMatrix();
@@ -44,20 +42,14 @@ void Frogs::draw() {
     ofDrawCircle(0, 0, mSize);
 
     //Legs (thighs + feet)
-    ofBeginShape();   //left thigh
-    ofCurveVertex(-20, 50);
-    ofCurveVertex(-45, 20);
-    ofCurveVertex(-70, 15);
-    ofCurveVertex(-30, 45);
-    ofCurveVertex(0, 0);
+    ofBeginShape();  //left thigh
+    ofCurveVertex(-20, 50); ofCurveVertex(-45, 20); ofCurveVertex(-70, 15);
+    ofCurveVertex(-30, 45); ofCurveVertex(0, 0);
     ofEndShape();
     
-    ofBeginShape();   //right thigh
-    ofCurveVertex(20, 50);
-    ofCurveVertex(45, 20);
-    ofCurveVertex(70, 15);
-    ofCurveVertex(30, 45);
-    ofCurveVertex(0, 0);
+    ofBeginShape();  //right thigh
+    ofCurveVertex(20, 50); ofCurveVertex(45, 20); ofCurveVertex(70, 15);
+    ofCurveVertex(30, 45); ofCurveVertex(0, 0);
     ofEndShape();
     
     ofDrawTriangle(-30, 40, -50, 60, -40, 70); //left foot
@@ -83,7 +75,7 @@ void Frogs::update() {
 
 //------------------------------------------------------------------------------------
 void Frogs::swim() {
-    // Simple movement created with Perlin Noise
+    // Simple movement with Perlin Noise
     float dirx = ofMap(ofNoise(xoff), 0,1, -mMaxSpeed,mMaxSpeed);
     float diry = ofMap(ofNoise(yoff), 0,1, -mMaxSpeed,mMaxSpeed);
     newVel.set(dirx, diry);

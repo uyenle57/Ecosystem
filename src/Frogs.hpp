@@ -21,7 +21,6 @@ public:
     void draw(), update(), swim();
     
 private:
-    float flappyLegs();
     ofColor(healthyColor);
     
     //For movement
