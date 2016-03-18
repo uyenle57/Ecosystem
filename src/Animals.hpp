@@ -47,11 +47,9 @@ public:
     Animals(float x, float y, float z);
     //virtual ~Animals();
     
-    //Variables
     ofVec3f mPosition, mVelocity, mAcceleration;
     ofColor healthyColor, hungryColor, starvingColor;
     
-    //Variables
     float mLifespan;    //life timer
     //determine how long it takes for the Animal to start changing color
                          //if it hasn't eaten anything
@@ -61,13 +59,12 @@ public:
     float mPosx, mPosy, mPosz;
     float mBorder = 2;
 
-    // Behaviours
+    //Functions
     virtual void draw() = 0;
     virtual void update() = 0;
-    virtual void swim() = 0;  //derived classes any override if needed
+    virtual void swim() = 0;  //derived classes can override if needed
     
 protected:
-    //These will be inherited by all Animals
     DNA dna;
     void reproduce(), eat(), changeColor();
     void applyForce(ofVec3f force);

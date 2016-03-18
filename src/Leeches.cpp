@@ -55,7 +55,7 @@ void Leeches:: swim() {   //Leeches move the same as Worms
     float radius = 20;
     float distance = 80;
     
-    wanderAngle += ofRandom(-0.1, 0.1); //except that their WanderAngle range is smaller
+    wanderAngle += ofRandom(-0.1, 0.1); //except that their wanderAngle range is smaller
     
     ofVec3f wanderAround = mVelocity;
     wanderAround.normalize();

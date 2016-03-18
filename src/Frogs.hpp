@@ -24,7 +24,6 @@ private:
     float flappyLegs();
     ofColor(healthyColor);
     
-    //TO DO - MAKE FROGS MOVE THROUGHOUT THE SCREEN !!
     //For movement
     float xoff, yoff;
     ofVec3f newVel;

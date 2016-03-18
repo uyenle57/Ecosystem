@@ -17,9 +17,10 @@ DNA::DNA() {
         genes[i] = ofRandom(1); //random floating value between 0 and 1
     }
 }
+
 //Copy the DNA
 DNA::DNA(const DNA &dna) {
-    std::vector<float> newgenes;
+    vector<float> newgenes;
     newgenes = dna.genes;
 }
 
@@ -89,7 +90,7 @@ void Animals::seekTarget(ofVec3f target) {
 void Animals::swim() {
     float radius = 20;
     float distance = 80;
-    wanderAngle += ofRandom(-0.1, 0.1);
+    wanderAngle += ofRandom(-0.05, 0.05);
     
     ofVec3f wanderAround = mVelocity;
     wanderAround.normalize();

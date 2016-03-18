@@ -16,11 +16,13 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ) : Animals(frogPosX,
     starvingColor.set(255,0,0);  //red
     
     //Weight of force, movement speed and body size are determined by DNA
-    mMaxForce = ofMap(dna.genes[0], 0, 1, 0, 0.3);
-    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 5, 0);
-    mSize = ofMap(dna.genes[0], 0, 1, 50, 50);
+    mMaxForce = ofMap(dna.genes[0], 0, 1, 0.01, 0.03);
+    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 5, 10);
+    mSize = ofMap(dna.genes[0], 0, 1, 50, 50); //size is always 50
     
-    xoff = yoff = ofRandom(500);
+    xoff = ofRandom(1000);
+    yoff = ofRandom(1000);
+    
 }
 
 Frogs::~Frogs() {
@@ -30,23 +32,23 @@ Frogs::~Frogs() {
 //------------------------------------------------------------------------------------
 void Frogs::draw() {
     
-    Animals::mRotateTheta = atan2(newVel.y, newVel.x);
-
+    mRotateTheta = atan2(mVelocity.y, mVelocity.x);
+    
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    //ofRotate(ofRadToDeg(mRotateTheta));
+    ofRotate(ofRadToDeg(mRotateTheta));
     
-    //Create the frog shape
+    //The frog shape
     //Body
     ofSetColor(healthyColor); //ofSetColor(0, greenBodyCol, 0, mLifeSpan);
     ofDrawCircle(0, 0, mSize);
 
     //Legs (thighs + feet)
     ofBeginShape();   //left thigh
-    ofCurveVertex(-20 + flappyLegs(), 50);
-    ofCurveVertex(-45 + flappyLegs(), 20);
-    ofCurveVertex(-70 + flappyLegs(), 15);
-    ofCurveVertex(-30 + flappyLegs(), 45);
+    ofCurveVertex(-20, 50);
+    ofCurveVertex(-45, 20);
+    ofCurveVertex(-70, 15);
+    ofCurveVertex(-30, 45);
     ofCurveVertex(0, 0);
     ofEndShape();
     
@@ -72,6 +74,8 @@ void Frogs::draw() {
 //------------------------------------------------------------------------------------
 void Frogs::update() {
     Frogs::swim();
+    Animals::swim();
+    Animals::update();
     Animals::returnToScreen();
     
     mLifespan -= 0.2;  //Decrease health as long as the Frogs are still alive
@@ -80,24 +84,14 @@ void Frogs::update() {
 //------------------------------------------------------------------------------------
 void Frogs::swim() {
     // Simple movement created with Perlin Noise
-    float dirx = ofMap(ofSignedNoise(xoff), 0,1, -mMaxSpeed,mMaxSpeed);
-    float diry = ofMap(ofSignedNoise(yoff), 0,1, -mMaxSpeed,mMaxSpeed);
-    
-    //ofVec3f newVel(dirx, diry);
+    float dirx = ofMap(ofNoise(xoff), 0,1, -mMaxSpeed,mMaxSpeed);
+    float diry = ofMap(ofNoise(yoff), 0,1, -mMaxSpeed,mMaxSpeed);
     newVel.set(dirx, diry);
     
-    xoff += ofRandom(mMaxForce);
-    yoff += ofRandom(mMaxForce);
+    xoff += mMaxForce;
+    yoff += mMaxForce;
     
     mPosition += newVel;
-}
-
-//------------------------------------------------------------------------------------
-float Frogs::flappyLegs() {
-    int amp = 5;
-    float letsGetFlappy = amp * sin(ofGetElapsedTimef()* mMaxSpeed);
-    
-    return letsGetFlappy;
 }
 
 //------------------------------------------------------------------------------------
