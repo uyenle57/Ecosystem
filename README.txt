@@ -1,40 +1,19 @@
 
-======================================================
-C++ Term 2 Mini Project : Ecosystem (Work in Progress)
-======================================================
-Tues 29 Feb
-by Uyen Le (tle004@gold.ac.uk)
+C++ Term 2 Mini Project: Ecosystem
+by Uyen Le
 
-Git repo: https://github.com/uyenle57/cppUyen2 
-
-
-** Description -------------------------------------------
 This is a visual simulation of the Ecosystem.
+
+- Add new Organisms to feed the Animals (keypress)
+- If no new Organisms are added, Animals will die and eventually Organisms will takeover the Ecosystem.
+
 Organisms are: worms, leeches, mosquitoes.
-Animals are: frogs, squids, flock of small fish, big fish.
+Animals are: frogs, big fish, flock of small fish.
 
-
-** How It Works ------------------------------------------
-All organisms and animals eat and swim.
-Organisms don't mate and eat. Only die when eaten (Destructor call).
-
-Animals don't eat each other, only eat Organisms. Die when run out of organisms to eat (call Destructor).
- 
-Organisms' Destructor is called when it is eaten (and free memory for new organisms to be added by User).
-Animals' sign of hunger and death shown through change of colour:
+Organisms are the food source for Animals. They don't eat, mate or die.
+Animals don't eat each other, only eat Organisms to survive. Die when run out of food.
+Animals show signs of hunger by changing their body colour:
  - Hungry = green
  - Dying = red
  - Dead = fade away
- 
-
-** Gameplay ----------------------------------------------
-- Add new Organisms to feed the Animals (keypress)
-- If not, all Animals will die and Organisms will takeover the ecosystem.
-
-
-** TODO --------------------------------------------------
-- Improve movement for Worms and Leeches
-- Collision detection
-- User adds new Organisms with keypress
-- Create Animal derived classes
 
