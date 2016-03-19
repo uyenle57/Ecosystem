@@ -68,6 +68,7 @@ protected:
     void reproduce(), eat(), changeColor();
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);
+    ofVec3f seekFish(ofVec3f targetFish); //for SmallFish
     void resetForce();
     void returnToScreen();
     

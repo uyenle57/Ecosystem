@@ -34,13 +34,14 @@ class ofApp : public ofBaseApp{
     
     ofImage backgroundImg;
     
+    
     // ORGANISM OBJECTS ----------------------------------------------------
     //std::vector <std::unique_ptr <Organism>> organism;
     //unique_ptr objects automatically delete the object (using a deleter) as soon as they themselves are destroyed, or as soon as their value changes either by an assignment operation or by an explicit call to unique_ptr::reset.
     
     std::vector<Organism *> organism;
     
-    int numOrganisms = 5;
+    int numOrganisms = 4;
     
     Worms *worms;
     Leeches *leeches;
@@ -50,13 +51,13 @@ class ofApp : public ofBaseApp{
     // ANIMAL OBJECTS ----------------------------------------------------
     std::vector<Animals *> animals;
     
-    int numAnimals = 4;
-    int numSmallFish = 50;
+    int numAnimals = 2;
+    int numSmallFish = 15;
     
     Frogs *frogs;
     BigFish *bigFish;
-    vector <SmallFish> smallFish;
     //SmallFish *smallFish;
+    vector <SmallFish> smallFish;
 };
 
 

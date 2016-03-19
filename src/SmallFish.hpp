@@ -16,30 +16,30 @@
 class SmallFish : public Animals {
 
 public:
-    SmallFish(float fishPosX, float fishPosY, float fishPosZ);
+    SmallFish(float smallFishX, float smallFishY, float smallFishZ);
     virtual ~SmallFish();
     
     void draw(), update(), swim();
-    
-    //Flocking
-    //based on 3 rules: cohesion, alignment and seperation
-    void addAttraction(SmallFish &neighbor);
-    void addAlignment(SmallFish &neighbor, float radius, float scale);
-    void addRepulsion(SmallFish &neighbor, float radius, float scale);
-    
-    void moveAwayFromMouse(float mousex, float mousey, float radius, float scale);
+    void update(SmallFish &neighbor);
+    void swim(SmallFish &neighbor);
 
+    //Flocking (cohesion, alignment and seperation)
+    ofVec3f Attraction(SmallFish &neighbor);
+    ofVec3f Alignment(SmallFish &neighbor);
+    ofVec3f Repulsion(SmallFish &neighbor);
+    
     void updateForce();
     void applyDamping();
     
-    float mDamping, mDistance;
+    float mDamping, mDistance, mStrength;
     int mCount;
+    ofVec3f sum;
     
     bool bIsClose;
     
 private:
     ofColor(healthyColor);
-    
+    float wiggle(int m);
 };
 
 

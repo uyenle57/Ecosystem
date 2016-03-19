@@ -53,7 +53,15 @@ void Animals::returnToScreen() {
     if(mPosition.y > ofGetHeight()+mBorder)  mPosition.y = -mBorder;
 }
 
-//------------------------------------------------------------------------
+//--------------------------------------------------------------
+void Animals::applyForce(ofVec3f force) {
+    mAcceleration += force; //force accumulation
+}
+//--------------------------------------------------------------
+void Animals::resetForce() {
+    mAcceleration.set(0,0,0);   //reset acceleration to 0
+}
+//--------------------------------------------------------------
 void Animals::update() {
     mVelocity += mAcceleration;
     mVelocity.limit(mMaxSpeed);
@@ -61,16 +69,6 @@ void Animals::update() {
     mPosition += mVelocity;
     
     resetForce();
-}
-
-//--------------------------------------------------------------
-void Animals::applyForce(ofVec3f force) {
-    mAcceleration += force; //force accumulation
-}
-
-//--------------------------------------------------------------
-void Animals::resetForce() {
-    mAcceleration.set(0,0,0);   //reset acceleration to 0
 }
 
 //--------------------------------------------------------------
@@ -84,6 +82,18 @@ void Animals::seekTarget(ofVec3f target) {
     mSteer.limit(mMaxForce);  //Limit to maximum steering force
     
     applyForce(mSteer);
+}
+
+//--------------------------------------------------------------
+ofVec3f Animals::seekFish(ofVec3f targetFish) {
+    ofVec3f mDesired = targetFish - mPosition;  //A vector pointing from the location to the target
+    
+    mDesired.normalize();  // Normalize and scale to maximum speed
+    mDesired * mMaxSpeed;
+    ofVec3f mSteer = mDesired - mVelocity;
+    mSteer.limit(mMaxForce);  //Limit to maximum steering force
+    
+    return mSteer;
 }
 
 //------------------------------------------------------------------------

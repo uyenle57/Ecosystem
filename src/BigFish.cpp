@@ -95,6 +95,6 @@ void BigFish::swim() {
 
 //------------------------------------------------------------------------------------
 float BigFish::wiggle(int m) {
-    float letsWiggle = 15 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2))*20);
+    float letsWiggle = 20 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2))*20);
     return letsWiggle;
 }

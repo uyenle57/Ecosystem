@@ -20,13 +20,7 @@ using namespace std;
 void ofApp::setup(){
     
     ofSetFrameRate(60);
-    ofEnableAlphaBlending();
-    ofSetVerticalSync(true);
 
-    backgroundImg.load("background.jpg");
-    backgroundImg.resize(ofGetWindowWidth(), ofGetWindowHeight());
-    
-    
     //Create Organisms
     for(int i=0; i < numOrganisms; i++) {
         worms = new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), 0);
@@ -46,10 +40,9 @@ void ofApp::setup(){
         animals.push_back(frogs);
         animals.push_back(bigFish);
     }
+    //Create small fish seperately because there needs to be much more small fishes for flocking
     for (int i=0; i < numSmallFish; i++) {
-        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100)));
-        //smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
-        //animals.push_back(smallFish);
+        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0));
     }
 }
 
@@ -58,32 +51,31 @@ void ofApp::update() {
     for (auto & organism : organism) {
         organism->update();
     }
-    for( auto & smallfish : smallFish) {
-        smallfish.update();
-        smallfish.addAttraction(smallfish);
-        //smallfish.moveAwayFromMouse(mouseX, mouseY, 40, 0.5);
-    }
-    
-    for (auto & animals: animals) {
+    for (auto & animals : animals) {
         animals->update();
+    }
+    for (auto & smallfish : smallFish) {
+        smallfish.update(smallfish);
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    ofBackground(255);
-    //backgroundImg.draw(0, 0);
+    
+    //Background gradient
+    ofColor colorOne(255);
+    ofColor colorTwo(155, 220, 247);
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
     
     for (auto & organism : organism) {
         organism->draw();
     }
-    for (auto & animals: animals) {
+    for (auto & sf : smallFish) {
+        sf.draw();
+    }
+    for (auto & animals : animals) {
         animals->draw();
     }
-//    for (auto & smallfish : smallFish) {
-//        smallfish.draw();
-//    }
-
 }
 
 //--------------------------------------------------------------
@@ -110,10 +102,9 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::exit() {
     //delete dynamically allocated pointers upon exiting the program
-    delete worms;
-    delete leeches;
-    delete mosquitoes;
-    std::cout << "exited." << std::endl;
+    delete worms, leeches, mosquitoes;
+    delete frogs, bigFish, smallFish;
+    std::cout << "exited program." << std::endl;
 }
 
 //--------------------------------------------------------------
