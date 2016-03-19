@@ -20,11 +20,11 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 //------------------------------------------------------------------------------------
 void Worms:: draw() {
     
-    Organism::mRotateTheta = atan2(mVelocity.y, mVelocity.x);
+    mRotateTheta = atan2(mVelocity.y, mVelocity.x);
 
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
+    ofRotate(ofRadToDeg(mRotateTheta+3*PI/2));
     
     for(int i=0; i < 80; i += 5) {
         if (i % 3 == 1) {

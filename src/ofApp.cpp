@@ -29,9 +29,9 @@ void ofApp::setup(){
     
     //Create Organisms
     for(int i=0; i < numOrganisms; i++) {
-        worms = new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), ofRandom(-150,150));
-        leeches = new Leeches(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-150,150));
-        mosquitoes = new Mosquitoes(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-150,150));
+        worms = new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), 0);
+        leeches = new Leeches(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
+        mosquitoes = new Mosquitoes(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
         
         organism.push_back(worms);
         organism.push_back(leeches);
@@ -40,8 +40,8 @@ void ofApp::setup(){
     
     //Create Animals
     for (int i=0; i < numAnimals; i++) {
-        frogs = new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
-        bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), ofRandom(-100,100));
+        frogs = new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
+        bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0);
         
         animals.push_back(frogs);
         animals.push_back(bigFish);
@@ -91,21 +91,18 @@ void ofApp::keyPressed(int key) {
     
     //TO DO: limit number of organisms that user can add before program lags (50)
     if (key == 'w')
-        cout << "new worm added" <<  endl;
         for(int i=0; i < 1; i++) {
-            worms = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            worms = new Worms(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0);
             organism.push_back(worms);
         }
     if (key == 'l')
-        cout << "new leech added" << endl;
         for(int i=0; i < 1; i++) {
-            leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            leeches = new Leeches(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0);
             organism.push_back(leeches);
         }
     if (key == 'm')
-        cout << "new mosquito added" << endl;
         for(int i=0; i < 1; i++) {
-            mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), ofRandom(-150,150));
+            mosquitoes = new Mosquitoes(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()), 0);
             organism.push_back(mosquitoes);
         }
 }

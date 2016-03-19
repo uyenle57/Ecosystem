@@ -26,7 +26,6 @@ private:
     
     //For movement
     float xoff, yoff;
-    ofVec3f newVel;
 };
 
 

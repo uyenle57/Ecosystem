@@ -51,8 +51,7 @@ public:
     ofColor healthyColor, hungryColor, starvingColor;
     
     float mLifespan;    //life timer
-    //determine how long it takes for the Animal to start changing color
-                         //if it hasn't eaten anything
+    //determine how long it takes for the Animal to start changing color, if it hasn't eaten anything
     float mMaxForce, mMaxSpeed, mSize;
     float mRotateTheta, wanderAngle;
     

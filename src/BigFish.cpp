@@ -15,9 +15,12 @@ BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ) : Animals(bigFi
     hungryColor.set(255,190,10);  //orange
     starvingColor.set(255,0,0);  //red
     
-    mMaxForce = ofMap(dna.genes[0], 0, 1, 0.01, 0.03);
-    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 1, 10);
+    mMaxForce = ofMap(dna.genes[0], 0, 1, 0.005, 0.005);
+    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 10, 15);
     mSize = ofMap(dna.genes[0], 0, 1, 5,5);
+    
+    xoff = ofRandom(1000);
+    yoff = ofRandom(1000);
 }
 
 BigFish::~BigFish() {
@@ -30,7 +33,7 @@ void BigFish::draw() {
     
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(ofRadToDeg(mRotateTheta));
+    ofRotate(ofRadToDeg(mRotateTheta+3*PI/2));
     ofScale(0.1, 0.15);
     ofSetColor(healthyColor);
 
@@ -73,8 +76,6 @@ void BigFish::draw() {
 //------------------------------------------------------------------------------------
 void BigFish::update() {
     BigFish::swim();
-    Animals::swim();
-    Animals::update();
     Animals::returnToScreen();
     
     mLifespan -= 0.2;
@@ -82,15 +83,14 @@ void BigFish::update() {
 
 //------------------------------------------------------------------------------------
 void BigFish::swim() {
-//    // Simple movement with Perlin Noise
-//    float dirx = ofMap(ofNoise(xoff), 0,1, -mMaxSpeed,mMaxSpeed);
-//    float diry = ofMap(ofNoise(yoff), 0,1, -mMaxSpeed,mMaxSpeed);
-//    newVel.set(dirx, diry);
-//    
-//    xoff += mMaxForce;
-//    yoff += mMaxForce;
-//    
-//    mPosition += newVel;
+    float vx = ofMap(ofNoise(xoff), 0,1, -mMaxSpeed,mMaxSpeed);
+    float vy = ofMap(ofNoise(yoff), 0,1, -mMaxSpeed,mMaxSpeed);
+    mVelocity.set(vx,vy);
+    
+    xoff += mMaxForce;
+    yoff += mMaxForce;
+    
+    mPosition += mVelocity;
 }
 
 //------------------------------------------------------------------------------------

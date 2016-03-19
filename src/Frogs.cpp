@@ -18,7 +18,7 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ) : Animals(frogPosX,
     //Weight of force, movement speed and body size are determined by DNA
     mMaxForce = ofMap(dna.genes[0], 0, 1, 0.01, 0.03);
     mMaxSpeed = ofMap(dna.genes[0], 0, 1, 5, 10);
-    mSize = ofMap(dna.genes[0], 0, 1, 50, 50); //size is always 50
+    mSize = ofMap(dna.genes[0], 0, 1, 50, 50);
     
     xoff = ofRandom(1000);
     yoff = ofRandom(1000);

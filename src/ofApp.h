@@ -50,7 +50,7 @@ class ofApp : public ofBaseApp{
     // ANIMAL OBJECTS ----------------------------------------------------
     std::vector<Animals *> animals;
     
-    int numAnimals = 5;
+    int numAnimals = 4;
     int numSmallFish = 50;
     
     Frogs *frogs;
