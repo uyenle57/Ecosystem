@@ -33,7 +33,7 @@ void BigFish::draw() {
     
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(ofRadToDeg(mRotateTheta+3*PI/2));
+    ofRotate(ofRadToDeg(mRotateTheta + 3*PI/2));
     ofScale(0.1, 0.15);
     ofSetColor(healthyColor);
 
@@ -95,6 +95,6 @@ void BigFish::swim() {
 
 //------------------------------------------------------------------------------------
 float BigFish::wiggle(int m) {
-    float letsWiggle = 20 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/2))*20);
+    float letsWiggle = 20 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/1.5))*20);
     return letsWiggle;
 }

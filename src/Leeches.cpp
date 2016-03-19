@@ -26,7 +26,7 @@ void Leeches::draw() {
 
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(ofRadToDeg(mRotateTheta)+ofRadToDeg(3*PI/2));
+    ofRotate(ofRadToDeg(mRotateTheta + 3*PI/2));
     ofScale(0.1, 0.15); //scale down because original leech is really big
     
     //Leech is made up of 2 wiggle lines

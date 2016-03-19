@@ -17,8 +17,8 @@ SmallFish::SmallFish(float smallFishX, float smallFishY, float smallFishZ) : Ani
     mDistance = 50;
     mCount = 0;
     
-    mMaxForce = ofMap(dna.genes[0], 0, 1, 10, 20);
-    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 10, 20);
+    mMaxForce = ofMap(dna.genes[0], 0, 1, 0.05, 0.05);
+    mMaxSpeed = ofMap(dna.genes[0], 0, 1, 3, 3);
     mSize = ofMap(dna.genes[0], 0, 1, 5,5);
         
     healthyColor.set(137, 212, 211);
@@ -36,8 +36,8 @@ void SmallFish::draw() {
     
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
-    ofRotate(ofRadToDeg(mRotateTheta+3*PI/2));
-    ofScale(0.06, 0.06);
+    ofRotate(ofRadToDeg(mRotateTheta + 3*PI/2));
+    ofScale(0.07, 0.07);
     ofSetColor(healthyColor);
     
     //Body is created with 2 lines (same as Leeches)
@@ -88,17 +88,17 @@ void SmallFish::update(SmallFish &neighbor) {
 // FLOCKING BEHAVIOUR
 //------------------------------------------------------------------------------------
 ofVec3f SmallFish::Attraction(SmallFish &neighbor) {
-    float dist = mPosition.distance(neighbor.mPosition); //Calculate the distance between the current and neighour fishes
-    
-    if (dist > 0 && dist < mDistance) {  //Check that the current fish is close to neighbor fishes
-        sum += neighbor.mPosition;
-        mCount++;
-    }
-    if (mCount > 0) {
-        sum /= mCount;
-        return seekFish(sum); //steer towards neighbor fish
-    }
-    else return ofVec3f(0,0,0);
+//    float dist = mPosition.distance(neighbor.mPosition); //Calculate the distance between the current and neighour fishes
+//    
+//    if (dist > 0 && dist < mDistance) {  //Check that the current fish is close to neighbor fishes
+//        sum += neighbor.mPosition;
+//        mCount++;
+//    }
+//    if (mCount > 0) {
+//        sum /= mCount;
+//        return seekFish(sum); //steer towards neighbor fish
+//    }
+//    else return ofVec3f(0,0,0);
 }
 
 //------------------------------------------------------------------------------------
@@ -125,7 +125,7 @@ ofVec3f SmallFish::Alignment(SmallFish &neighbor) {
 
 //------------------------------------------------------------------------------------
 ofVec3f SmallFish::Repulsion(SmallFish &neighbor) {
-    float sepAmount = 10.0f;
+    float sepAmount = 25.0f;
     ofVec3f steer(0,0,0);
     
     //Check if every fish is too close to neighbor fish
@@ -133,7 +133,6 @@ ofVec3f SmallFish::Repulsion(SmallFish &neighbor) {
     
     if (dist > 0 && dist < sepAmount) {
         ofVec3f diff = mPosition - neighbor.mPosition;
-        float dist = diff.length(); //compute magnitude of that difference
         diff.normalize();
         diff /= dist; //Weight by distance
         steer += diff;
@@ -141,7 +140,7 @@ ofVec3f SmallFish::Repulsion(SmallFish &neighbor) {
     }
     //Average
     if (mCount > 0) {
-        steer /= float(mCount);
+        steer /= (float(mCount));
     }
     //As long as the vector is greater than 0
     if (steer.length() > 0) {
@@ -166,8 +165,8 @@ void SmallFish::swim(SmallFish &neighbor) { //Flocking
     repulse * 1.0;
     //Add these forces to acceleration
     applyForce(attract);
-    applyForce(align);
-    applyForce(repulse);
+    //applyForce(align);
+    //applyForce(repulse);
 }
 
 //------------------------------------------------------------------------------------
