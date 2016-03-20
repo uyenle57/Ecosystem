@@ -15,6 +15,9 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     mAcceleration.set(0, 0, 0);
     
     mLifespan = 200; //All animals have equal life span value
+    
+    hungryColor.set(255,190,10);  //orange
+    starvingColor.set(255,0,0);  //red
 }
 
 Animals::~Animals() {
@@ -90,26 +93,38 @@ void Animals::swim() {
 }
 
 // HOW TO EAT
-//------------------------------------------------------------------------
-void Animals::eat(vector <Organism*> organism, float size) {
-    
-    for (auto & organism : organism) {
-        ofVec3f foodlocation = organism->getPos();
-        float dist = mPosition.distance(foodlocation);
-        
-        if (dist < size/2)  //Check if the Animal is close to any organism
-            mLifespan += 100; //if so, increase our health
-            organism->~Organism(); //and delete that organism
-    }
-}
+//void Animals::eat() {
+//    
+//}
 
 // HOW TO REPRODUCE
 //------------------------------------------------------------------------
 
-// HOW TO DIE
+// HOW TO SHOW HEALTH STATUS THROUGH CHANGING BODY COLOUR
 //------------------------------------------------------------------------
+ofColor Animals::healthStatus() {
+   
+    ofColor bodyColor;
+    float alpha = 100;
+    
+    if (mLifespan > 100 && mLifespan <= 200) {
+        //healthy color
+        //depends on each animal's unique color
+    }
+    else if (mLifespan > 50 && mLifespan <= 100) {
+        bodyColor = hungryColor;  //turns orange
+    }
+    else if (mLifespan > 0 && mLifespan <= 50) {
+      bodyColor = starvingColor; //turns red
+    }
+    else if (mLifespan <= 0.0) {
+        //call destructor
+    }
+    
+    return bodyColor;
+}
 
-
+// HOW TO DIE
 //------------------------------------------------------------------------
 bool Animals::bIsDead() {
     if (mLifespan < 0.0) return true;

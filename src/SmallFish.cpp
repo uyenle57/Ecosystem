@@ -22,8 +22,6 @@ SmallFish::SmallFish(float smallFishX, float smallFishY, float smallFishZ, DNA &
     mSize = ofMap(dna.genes[0], 0, 1, 5,5);
         
     healthyColor.set(137, 212, 211);
-    hungryColor.set(255,190,10); //orange
-    starvingColor.set(255,0,0);  //red
 }
 
 SmallFish::~SmallFish() {

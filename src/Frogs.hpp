@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Animals.hpp"
 
+
 class Frogs : public Animals {
 
 public:
@@ -19,7 +20,7 @@ public:
     
     ~Frogs();
     
-    void draw(), update(), swim();
+    void draw(), update(), swim(); //eat();
     
 private:
     ofColor(healthyColor);

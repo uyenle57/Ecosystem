@@ -46,11 +46,14 @@ public:
     virtual void update() = 0;
     virtual void swim() = 0;  //derived classes can override if needed
     
+    //void eat();
+    
 protected:
     DNA *dna;
     //Animal *reproduce;
-    void eat(vector <Organism*> organism, float size);
-    void changeColor();
+    
+    ofColor healthStatus();
+    
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);
     ofVec3f seekFish(ofVec3f targetFish); //for SmallFish

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Animals.hpp"
 
+
 class BigFish : public Animals {
     
 public:
@@ -19,7 +20,7 @@ public:
     
     ~BigFish();
     
-    void draw(), update(), swim();
+    void draw(), update(), swim(); //eat();
 
 private:
     float wiggle(int m);

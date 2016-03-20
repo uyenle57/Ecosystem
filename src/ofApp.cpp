@@ -2,6 +2,7 @@
 #include <math.h>
 using std::vector;
 using namespace std;
+
 #include "ofApp.h"
 #include "ofMain.h"
 
@@ -104,8 +105,10 @@ void ofApp::exit() {
     for (auto & organism: organism) {
         organism->~Organism();
     }
-    delete frogs, bigFish;  //smallFish;
-    std::cout << "Game closed." << std::endl;
+    for (auto & animals : animals) {
+        animals->~Animals();  //smallFish;
+    }
+    std::cout << "========= GAME CLOSED ==========" << std::endl;
 }
 
 //--------------------------------------------------------------

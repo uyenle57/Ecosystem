@@ -12,8 +12,6 @@ BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna) : Ani
     mPosition.set(bigFishX, bigFishY, bigFishZ);
     
     healthyColor.set(20,40,160); //dark blue
-    hungryColor.set(255,190,10);  //orange
-    starvingColor.set(255,0,0);  //red
     
     mMaxForce = ofMap(dna.genes[0], 0, 1, 0.005, 0.005);
     mMaxSpeed = ofMap(dna.genes[0], 0, 1, 10, 15);
@@ -76,6 +74,7 @@ void BigFish::draw() {
 //------------------------------------------------------------------------------------
 void BigFish::update() {
     BigFish::swim();
+    //BigFish::eat();
     Animals::returnToScreen();
     
     mLifespan -= 0.2;
@@ -98,3 +97,16 @@ float BigFish::wiggle(int m) {
     float letsWiggle = 20 * sin(ofDegToRad(float(m)+(ofGetFrameNum()/1.5))*20);
     return letsWiggle;
 }
+
+//void BigFish::eat() {
+//    for (auto & organism : organism) {
+//        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
+//        float dist = mPosition.distance(foodlocation);
+//        
+//        if (dist < mSize/2) { //Check if the Animal is close to any organism
+//            mLifespan += 100; //if so, increase our health
+//            cout << mLifespan << endl;
+//            BigFish::~BigFish();
+//        }
+//    }
+//}

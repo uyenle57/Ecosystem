@@ -12,8 +12,6 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna) : Animals
     mPosition.set(frogPosX, frogPosY, frogPosZ);
     
     healthyColor.set(4,153,0); //green
-    hungryColor.set(255,190,10);  //orange
-    starvingColor.set(255,0,0);  //red
     
     //Weight of force, movement speed and body size are determined by DNA
     mMaxForce = ofMap(dna.genes[0], 0, 1, 0.01, 0.03);
@@ -66,6 +64,7 @@ void Frogs::draw() {
 //------------------------------------------------------------------------------------
 void Frogs::update() {
     Frogs::swim();
+    //Frogs::eat();
     Animals::swim();
     Animals::update();
     Animals::returnToScreen();
@@ -86,3 +85,15 @@ void Frogs::swim() {
     mPosition += newVel;
 }
 
+//void Frogs::eat() {
+//    for (auto & organism : organism) {
+//        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
+//        float dist = mPosition.distance(foodlocation);
+//        
+//        if (dist < mSize/2) { //Check if the Animal is close to any organism
+//            mLifespan += 100; //if so, increase our health
+//            cout << mLifespan << endl;
+//            Frogs::~Frogs();
+//        }
+//    }
+//}
