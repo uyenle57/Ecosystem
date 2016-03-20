@@ -15,8 +15,9 @@
 class Frogs : public Animals {
 
 public:
-    Frogs(float frogPosX, float frogPosY, float frogPosZ);
-    virtual ~Frogs();
+    Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna);
+    
+    ~Frogs();
     
     void draw(), update(), swim();
     

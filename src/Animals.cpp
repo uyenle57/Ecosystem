@@ -9,42 +9,19 @@
 #include "Animals.hpp"
 
 
-DNA::DNA() {
-    for(int i=0; i < 1; i++) {
-        genes.push_back(i);
-    }
-    for(int i=0; i < genes.size(); i++) {  //Make a random DNA
-        genes[i] = ofRandom(1); //random floating value between 0 and 1
-    }
-}
-
-//Copy the DNA
-DNA::DNA(const DNA &dna) {
-    vector<float> newgenes;
-    newgenes = dna.genes;
-}
-
-void DNA::mutate(float prob) {
-    for (int i=0; i < genes.size(); i++) {
-        if (ofRandom(1) < prob) //Mutation based on probability
-            genes[i] = ofRandom(1); //pick a new random character
-    }
-}
-
-// ANIMALS ----------------------------------------------------------------
-Animals::Animals(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
+Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz(z), dna(&dna) {
     mPosition.set(0, 0, 0);
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    mLifespan = 100;
-    
-    //DNA determines:
-    //Genotype: speed, weight of force (bigger => slower)
-    //          longer they survive => higher chance of reproduction
-    //Phenotype: bodysize, eyesize
+    mLifespan = 200; //All animals have equal life span value
 }
 
+Animals::~Animals() {
+    
+}
+
+// HOW TO MOVE
 //------------------------------------------------------------------------
 void Animals::returnToScreen() {
     if(mPosition.x < -mBorder)  mPosition.x = ofGetWidth() + mBorder;
@@ -70,7 +47,6 @@ void Animals::update() {
     
     resetForce();
 }
-
 //--------------------------------------------------------------
 void Animals::seekTarget(ofVec3f target) {
     ofVec3f mDesired = target - mPosition;  //A vector pointing from the location to the target
@@ -112,6 +88,27 @@ void Animals::swim() {
     
     seekTarget(target);
 }
+
+// HOW TO EAT
+//------------------------------------------------------------------------
+void Animals::eat(vector <Organism*> organism, float size) {
+    
+    for (auto & organism : organism) {
+        ofVec3f foodlocation = organism->getPos();
+        float dist = mPosition.distance(foodlocation);
+        
+        if (dist < size/2)  //Check if the Animal is close to any organism
+            mLifespan += 100; //if so, increase our health
+            organism->~Organism(); //and delete that organism
+    }
+}
+
+// HOW TO REPRODUCE
+//------------------------------------------------------------------------
+
+// HOW TO DIE
+//------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------
 bool Animals::bIsDead() {

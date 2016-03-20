@@ -19,7 +19,8 @@ class Worms: public Organism {
     
 public:
     Worms(float wormPosX, float wormPosY, float wormPosZ);
-    //virtual ~Worms(); //only called when eaten by Animals
+    
+    ~Worms();
     
     void draw(), swim(), update();
     void addWorm(Organism *o);

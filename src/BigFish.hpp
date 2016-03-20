@@ -15,8 +15,9 @@
 class BigFish : public Animals {
     
 public:
-    BigFish(float bigFishX, float bigFishY, float bigFishZ);
-    virtual ~BigFish();
+    BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna);
+    
+    ~BigFish();
     
     void draw(), update(), swim();
 

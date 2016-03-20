@@ -19,7 +19,8 @@ class Mosquitoes : public Organism{
     
 public:
     Mosquitoes(float MosPosX, float MosPosY, float MosPosZ);
-    //~Mosquitoes();
+
+    ~Mosquitoes();
     
     void draw(), swim(), update();
     

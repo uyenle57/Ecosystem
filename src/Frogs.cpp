@@ -8,7 +8,7 @@
 
 #include "Frogs.hpp"
 
-Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ) : Animals(frogPosX, frogPosY, frogPosZ) {
+Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna) : Animals(frogPosX, frogPosY, frogPosZ, dna) {
     mPosition.set(frogPosX, frogPosY, frogPosZ);
     
     healthyColor.set(4,153,0); //green
@@ -25,7 +25,7 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ) : Animals(frogPosX,
 }
 
 Frogs::~Frogs() {
-    
+    cout << "Frog killed" << endl;
 }
 
 //------------------------------------------------------------------------------------
@@ -86,7 +86,3 @@ void Frogs::swim() {
     mPosition += newVel;
 }
 
-//------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------

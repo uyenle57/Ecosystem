@@ -8,7 +8,7 @@
 
 #include "BigFish.hpp"
 
-BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ) : Animals(bigFishX, bigFishY, bigFishZ) {
+BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna) : Animals(bigFishX, bigFishY, bigFishZ, dna) {
     mPosition.set(bigFishX, bigFishY, bigFishZ);
     
     healthyColor.set(20,40,160); //dark blue
@@ -24,7 +24,7 @@ BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ) : Animals(bigFi
 }
 
 BigFish::~BigFish() {
-    
+    cout << "Big fish killed" << endl;
 }
 
 //------------------------------------------------------------------------------------

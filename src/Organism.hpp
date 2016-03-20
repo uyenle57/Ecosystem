@@ -23,9 +23,10 @@ private:
 public:
     Organism(float x, float y, float z);
     
-    //virtual ~Organism();
+    virtual ~Organism();
     
     ofVec3f mPosition, mVelocity, mAcceleration;
+    ofVec3f getPos();   //for eating mechanism in Animals.cpp
     
     //Variables
     float mMaxForce, mMaxSpeed, mRotateTheta;
@@ -41,7 +42,7 @@ public:
     virtual void swim() = 0;
     virtual void update() = 0;
     
-    void swimUpdate(); //contains all other void functions
+    void swimUpdate();
     void returnToScreen();
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);

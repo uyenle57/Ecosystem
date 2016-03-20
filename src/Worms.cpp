@@ -13,9 +13,9 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
     mPosition.set(wormPosX, wormPosY, wormPosZ);
 }
 
-//Worms::~Worms() {
-//    cout << "A worm has been eaten" << endl;
-//}
+Worms::~Worms() {
+    cout << "A worm has been eaten" << endl;
+}
 
 //------------------------------------------------------------------------------------
 void Worms:: draw() {
@@ -35,7 +35,7 @@ void Worms:: draw() {
             bodyColor.set(255,0,0);
         }
         ofSetColor(bodyColor);
-        ofDrawRectangle(0 + Worms::wiggle(i), i,3,3);
+        ofDrawRectangle(0 + wiggle(i), i,3,3);
     }
     ofPopMatrix();
 }

@@ -15,9 +15,9 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
     bodyColor.set(30,30,30);
 }
 
-//Leeches::~Leeches() {
-//    cout << "A leech has been eaten" << endl;
-//}
+Leeches::~Leeches() {
+    cout << "A leech has been eaten" << endl;
+}
 
 //------------------------------------------------------------------------------------
 void Leeches::draw() {

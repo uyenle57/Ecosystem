@@ -6,6 +6,7 @@
 #include "Leeches.hpp"
 #include "Mosquitoes.hpp"
 
+#include "DNA.hpp"
 #include "Animals.hpp"
 #include "Frogs.hpp"
 #include "BigFish.hpp"
@@ -34,11 +35,10 @@ class ofApp : public ofBaseApp{
     
     ofImage backgroundImg;
     
+    // DNA
+    DNA dna;
     
-    // ORGANISM OBJECTS ----------------------------------------------------
-    //std::vector <std::unique_ptr <Organism>> organism;
-    //unique_ptr objects automatically delete the object (using a deleter) as soon as they themselves are destroyed, or as soon as their value changes either by an assignment operation or by an explicit call to unique_ptr::reset.
-    
+    // ORGANISMS ----------------------------------------------------
     std::vector<Organism *> organism;
     
     int numOrganisms = 4;
@@ -48,7 +48,7 @@ class ofApp : public ofBaseApp{
     Mosquitoes *mosquitoes;
     
     
-    // ANIMAL OBJECTS ----------------------------------------------------
+    // ANIMALS ----------------------------------------------------
     std::vector<Animals *> animals;
     
     int numAnimals = 2;
@@ -56,8 +56,8 @@ class ofApp : public ofBaseApp{
     
     Frogs *frogs;
     BigFish *bigFish;
-    //SmallFish *smallFish;
-    vector <SmallFish> smallFish;
+    vector <SmallFish> smallFish;  //SmallFish *smallFish;
+
 };
 
 

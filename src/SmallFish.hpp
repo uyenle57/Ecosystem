@@ -16,8 +16,9 @@
 class SmallFish : public Animals {
 
 public:
-    SmallFish(float smallFishX, float smallFishY, float smallFishZ);
-    virtual ~SmallFish();
+    SmallFish(float smallFishX, float smallFishY, float smallFishZ, DNA &dna);
+    
+    ~SmallFish();
     
     void draw(), update(), swim();
     void update(SmallFish &neighbor);

@@ -18,9 +18,13 @@ Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
     mMaxSpeed = 5;
 }
 
-//Organism::~Organism() {
-//
-//}
+Organism::~Organism() {
+
+}
+
+ofVec3f Organism::getPos() {
+    return mPosition;
+}
 
 //--------------------------------------------------------------
 void Organism::swimUpdate() {

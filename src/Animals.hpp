@@ -19,33 +19,16 @@
 
 #include <stdio.h>
 #include "ofMain.h"
+#include "DNA.hpp"
+#include "Organism.hpp"
 
 
-//The population of each Animal is based on their genetic information (DNA)
-//which defines how the animal looks or behaves
-//with reference from Nature of Code's Chapter 9
-class DNA {
-//DNA determines:
-//Genotype: speed, weight of force (bigger => slower)
-//          longer they survive => higher chance of reproduction
-//Phenotype: bodysize, eyesize
-
-public:
-    DNA();
-    DNA(const DNA &dna);    //Use copy constructor for reproduction
-
-    std::vector <float> genes;
-
-    void mutate(float prob);
-};
-
-
-// ANIMALS ---------------------------------------------------------------
 class Animals {
 
 public:
-    Animals(float x, float y, float z);
-    //virtual ~Animals();
+    Animals(float x, float y, float z, DNA &dna);
+    
+    virtual ~Animals();
     
     ofVec3f mPosition, mVelocity, mAcceleration;
     ofColor healthyColor, hungryColor, starvingColor;
@@ -64,8 +47,10 @@ public:
     virtual void swim() = 0;  //derived classes can override if needed
     
 protected:
-    DNA dna;
-    void reproduce(), eat(), changeColor();
+    DNA *dna;
+    //Animal *reproduce;
+    void eat(vector <Organism*> organism, float size);
+    void changeColor();
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);
     ofVec3f seekFish(ofVec3f targetFish); //for SmallFish

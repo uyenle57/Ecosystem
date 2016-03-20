@@ -9,7 +9,7 @@
 #include "SmallFish.hpp"
 
 
-SmallFish::SmallFish(float smallFishX, float smallFishY, float smallFishZ) : Animals(smallFishX, smallFishY, smallFishZ) {
+SmallFish::SmallFish(float smallFishX, float smallFishY, float smallFishZ, DNA &dna) : Animals(smallFishX, smallFishY, smallFishZ, dna) {
     mPosition.set(smallFishX, smallFishY, smallFishZ);
     sum.set(0,0,0);
     
@@ -27,7 +27,7 @@ SmallFish::SmallFish(float smallFishX, float smallFishY, float smallFishZ) : Ani
 }
 
 SmallFish::~SmallFish() {
-    
+    cout << "Small fish killed" << endl;
 }
 
 //------------------------------------------------------------------------------------

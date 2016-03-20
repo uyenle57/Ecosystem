@@ -12,9 +12,9 @@ Mosquitoes::Mosquitoes(float MosPosX, float MosPosY, float MosPosZ) : Organism(M
     mPosition.set(MosPosX, MosPosY, MosPosZ);
 }
 
-//Mosquitoes::~Mosquitoes() {
-//    cout << "A mosquito has been eaten" << endl;
-//}
+Mosquitoes::~Mosquitoes() {
+    cout << "A mosquito has been eaten" << endl;
+}
 
 //------------------------------------------------------------------------------------
 void Mosquitoes::draw() {
