@@ -34,18 +34,17 @@ class ofApp : public ofBaseApp{
     
     
     
-    // DNA
     DNA dna;
     
     // ORGANISMS ----------------------------------------------------
-    std::vector<Organism *> organism;
+    std::vector<unique_ptr<Organism>> organism;
     
     int numOrganisms = 4;
-    
-    Worms *worms;
-    Leeches *leeches;
-    Mosquitoes *mosquitoes;
-    
+    //shared_ptr<Foo> FooPtr;
+    shared_ptr<Worms> worms;
+    shared_ptr<Leeches> leeches;
+    shared_ptr<Mosquitoes> mosquitoes;
+
     
     // ANIMALS ----------------------------------------------------
     std::vector<Animals *> animals;

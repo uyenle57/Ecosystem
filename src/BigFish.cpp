@@ -77,7 +77,8 @@ void BigFish::update() {
     BigFish::eat();
     Animals::returnToScreen();
     
-    mLifespan -= 0.2;
+    mLifespan -= 0.5;
+    cout << mLifespan << endl;
 }
 
 //------------------------------------------------------------------------------------
