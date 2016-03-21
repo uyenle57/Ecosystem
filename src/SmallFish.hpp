@@ -20,7 +20,7 @@ public:
     
     ~SmallFish();
     
-    void draw(), update(), swim();
+    void draw(), update(), swim(), eat();
     void update(SmallFish &neighbor);
     void swim(SmallFish &neighbor);
 

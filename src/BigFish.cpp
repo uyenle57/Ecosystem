@@ -74,7 +74,7 @@ void BigFish::draw() {
 //------------------------------------------------------------------------------------
 void BigFish::update() {
     BigFish::swim();
-    //BigFish::eat();
+    BigFish::eat();
     Animals::returnToScreen();
     
     mLifespan -= 0.2;
@@ -98,15 +98,7 @@ float BigFish::wiggle(int m) {
     return letsWiggle;
 }
 
-//void BigFish::eat() {
-//    for (auto & organism : organism) {
-//        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
-//        float dist = mPosition.distance(foodlocation);
-//        
-//        if (dist < mSize/2) { //Check if the Animal is close to any organism
-//            mLifespan += 100; //if so, increase our health
-//            cout << mLifespan << endl;
-//            BigFish::~BigFish();
-//        }
-//    }
-//}
+//------------------------------------------------------------------------------------
+void BigFish::eat() {
+    
+}

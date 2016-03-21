@@ -26,7 +26,7 @@ public:
     virtual ~Organism();
     
     ofVec3f mPosition, mVelocity, mAcceleration;
-    ofVec3f getPos();   //for eating mechanism in Animals.cpp
+    ofVec3f getPos();   //for collision detection (eating mechanism in Animals.cpp)
     
     //Variables
     float mMaxForce, mMaxSpeed, mRotateTheta;

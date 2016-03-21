@@ -18,10 +18,15 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     
     hungryColor.set(255,190,10);  //orange
     starvingColor.set(255,0,0);  //red
+
 }
 
 Animals::~Animals() {
     
+}
+
+void Animals::operator=(const Animals &A) {
+    mPosition = A.mPosition;    //return the position
 }
 
 // HOW TO MOVE
@@ -93,16 +98,13 @@ void Animals::swim() {
 }
 
 // HOW TO EAT
-//void Animals::eat() {
-//    
-//}
 
 // HOW TO REPRODUCE
 //------------------------------------------------------------------------
 
-// HOW TO SHOW HEALTH STATUS THROUGH CHANGING BODY COLOUR
+// HOW TO CHANGE BODY COLOUR TO SHOW HEALTH STATUS
 //------------------------------------------------------------------------
-ofColor Animals::healthStatus() {
+ofColor Animals::changeColour() {
    
     ofColor bodyColor;
     float alpha = 100;

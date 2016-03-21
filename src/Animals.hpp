@@ -20,7 +20,9 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "DNA.hpp"
+
 #include "Organism.hpp"
+
 
 
 class Animals {
@@ -30,11 +32,14 @@ public:
     
     virtual ~Animals();
     
+    void operator=(const Animals &A);
+    
+    
     ofVec3f mPosition, mVelocity, mAcceleration;
+    
     ofColor healthyColor, hungryColor, starvingColor;
     
-    float mLifespan;    //life timer
-    //determine how long it takes for the Animal to start changing color, if it hasn't eaten anything
+    float mLifespan;    //life timer - determines how long it takes for the Animal change color if it's hungry
     float mMaxForce, mMaxSpeed, mSize;
     float mRotateTheta, wanderAngle;
     
@@ -44,15 +49,16 @@ public:
     //Functions
     virtual void draw() = 0;
     virtual void update() = 0;
-    virtual void swim() = 0;  //derived classes can override if needed
-    
-    //void eat();
+    virtual void swim() = 0;
+    virtual void eat() = 0;
     
 protected:
+    
     DNA *dna;
     //Animal *reproduce;
+    //vector <Organism *> organism;
     
-    ofColor healthStatus();
+    ofColor changeColour();
     
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);

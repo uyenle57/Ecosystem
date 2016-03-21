@@ -20,7 +20,7 @@ public:
     
     ~Frogs();
     
-    void draw(), update(), swim(); //eat();
+    void draw(), update(), swim(), eat();
     
 private:
     ofColor(healthyColor);

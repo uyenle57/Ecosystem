@@ -41,10 +41,13 @@ void ofApp::setup(){
         animals.push_back(frogs);
         animals.push_back(bigFish);
     }
+    
     //Create small fish seperately because there needs to be much more small fishes for flocking
-//    for (int i=0; i < numSmallFish; i++) {
-//        smallFish.push_back(SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna));
-//    }
+    for (int i=0; i < numSmallFish; i++) {        
+        smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna);
+        animals.push_back(smallFish);
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -52,11 +55,26 @@ void ofApp::update() {
     for (auto & organism : organism) {
         organism->update();
     }
-//    for (auto & smallfish : smallFish) {
-//        smallfish.update(smallfish);
-//    }
     for (auto & animals : animals) {
         animals->update();
+    }
+    
+    // HOW TO EAT ------------------------------------------
+    // TO DO: move this to Animals class ??
+    for (auto & organism : organism) {
+        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
+        
+        for(auto & animals : animals) {
+            float dist = animals->mPosition.distance(foodlocation);
+            
+            if (dist < 50/2) {              //Check if the Animal is close to any organism
+                if (animals->mLifespan <= 200) {
+                    animals->mLifespan += 5;  //if so, increase lifespan
+                    cout << animals->mLifespan << endl;
+                }
+                organism->~Organism();      //and kill that organism
+            }
+        }
     }
 }
 
@@ -71,9 +89,6 @@ void ofApp::draw() {
     for (auto & organism : organism) {
         organism->draw();
     }
-//    for (auto & sf : smallFish) {
-//        sf.draw();
-//    }
     for (auto & animals : animals) {
         animals->draw();
     }
@@ -102,11 +117,13 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::exit() {
+    
+    //Delete all objects upon exiting the program
     for (auto & organism: organism) {
         organism->~Organism();
     }
     for (auto & animals : animals) {
-        animals->~Animals();  //smallFish;
+        animals->~Animals();
     }
     std::cout << "========= GAME CLOSED ==========" << std::endl;
 }

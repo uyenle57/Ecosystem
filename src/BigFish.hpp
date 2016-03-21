@@ -20,7 +20,7 @@ public:
     
     ~BigFish();
     
-    void draw(), update(), swim(); //eat();
+    void draw(), update(), swim(), eat();
 
 private:
     float wiggle(int m);

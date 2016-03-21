@@ -64,7 +64,7 @@ void Frogs::draw() {
 //------------------------------------------------------------------------------------
 void Frogs::update() {
     Frogs::swim();
-    //Frogs::eat();
+    Frogs::eat();
     Animals::swim();
     Animals::update();
     Animals::returnToScreen();
@@ -85,15 +85,8 @@ void Frogs::swim() {
     mPosition += newVel;
 }
 
-//void Frogs::eat() {
-//    for (auto & organism : organism) {
-//        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
-//        float dist = mPosition.distance(foodlocation);
-//        
-//        if (dist < mSize/2) { //Check if the Animal is close to any organism
-//            mLifespan += 100; //if so, increase our health
-//            cout << mLifespan << endl;
-//            Frogs::~Frogs();
-//        }
-//    }
-//}
+//------------------------------------------------------------------------------------
+void Frogs::eat() {
+
+}
+
