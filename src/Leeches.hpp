@@ -23,7 +23,8 @@ public:
     ~Leeches();
     
     void draw(), swim(), update();
-
+    ofVec3f getPos();
+    
 private:
     float wiggle(int m);
     float x;

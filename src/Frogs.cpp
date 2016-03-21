@@ -9,9 +9,10 @@
 #include "Frogs.hpp"
 
 Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna) : Animals(frogPosX, frogPosY, frogPosZ, dna) {
+    
     mPosition.set(frogPosX, frogPosY, frogPosZ);
     
-    healthyColor.set(4,153,0); //green
+    bodyColor.set(4,153,0); //green
     
     //Weight of force, movement speed and body size are determined by DNA
     mMaxForce = ofMap(dna.genes[0], 0, 1, 0.01, 0.03);
@@ -36,7 +37,7 @@ void Frogs::draw() {
     
     //The frog shape
     //Body
-    ofSetColor(healthyColor); //ofSetColor(0, greenBodyCol, 0, mLifeSpan);
+    ofSetColor(changeColour(bodyColor));
     ofDrawCircle(0, 0, mSize);
 
     //Legs (thighs + feet)
@@ -67,9 +68,8 @@ void Frogs::update() {
     Frogs::eat();
     Animals::swim();
     Animals::update();
+    Animals::decreaseHealth();
     Animals::returnToScreen();
-    
-    mLifespan -= 0.2;  //Decrease health as long as the Frogs are still alive
 }
 
 //------------------------------------------------------------------------------------

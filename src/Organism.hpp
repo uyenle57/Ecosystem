@@ -24,9 +24,8 @@ public:
     Organism(float x, float y, float z);
     
     virtual ~Organism();
-    
+        
     ofVec3f mPosition, mVelocity, mAcceleration;
-    ofVec3f getPos();   //for collision detection (eating mechanism in Animals.cpp)
     
     //Variables
     float mMaxForce, mMaxSpeed, mRotateTheta;
@@ -41,6 +40,8 @@ public:
     virtual void draw() = 0;
     virtual void swim() = 0;
     virtual void update() = 0;
+
+    virtual ofVec3f getPos() = 0;
     
     void swimUpdate();
     void returnToScreen();

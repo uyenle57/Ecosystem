@@ -23,7 +23,7 @@ public:
     void draw(), update(), swim(), eat();
     
 private:
-    ofColor(healthyColor);
+    ofColor(bodyColor);
     
     //For movement
     float xoff, yoff;

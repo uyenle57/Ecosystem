@@ -23,6 +23,7 @@ public:
     ~Mosquitoes();
     
     void draw(), swim(), update();
+    ofVec3f getPos();
     
 private:
     float flappyWings();

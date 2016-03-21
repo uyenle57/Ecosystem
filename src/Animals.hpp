@@ -21,9 +21,6 @@
 #include "ofMain.h"
 #include "DNA.hpp"
 
-#include "Organism.hpp"
-
-
 
 class Animals {
 
@@ -39,12 +36,12 @@ public:
     
     ofColor healthyColor, hungryColor, starvingColor;
     
-    float mLifespan;    //life timer - determines how long it takes for the Animal change color if it's hungry
+    float mHealth;
     float mMaxForce, mMaxSpeed, mSize;
     float mRotateTheta, wanderAngle;
     
     float mPosx, mPosy, mPosz;
-    float mBorder = 2;
+    float screenBorder = 2;
 
     //Functions
     virtual void draw() = 0;
@@ -56,15 +53,16 @@ protected:
     
     DNA *dna;
     //Animal *reproduce;
-    //vector <Organism *> organism;
     
-    ofColor changeColour();
+    ofColor changeColour(ofColor healthyCol);
     
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);
     ofVec3f seekFish(ofVec3f targetFish); //for SmallFish
     void resetForce();
     void returnToScreen();
+    
+    void decreaseHealth();
     
     bool bIsDead();
     

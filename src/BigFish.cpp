@@ -9,9 +9,11 @@
 #include "BigFish.hpp"
 
 BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna) : Animals(bigFishX, bigFishY, bigFishZ, dna) {
+    
     mPosition.set(bigFishX, bigFishY, bigFishZ);
     
-    healthyColor.set(20,40,160); //dark blue
+    bodyColor.set(20,40,160); //dark blue
+    tailColor.set(135,7,83);
     
     mMaxForce = ofMap(dna.genes[0], 0, 1, 0.005, 0.005);
     mMaxSpeed = ofMap(dna.genes[0], 0, 1, 10, 15);
@@ -33,7 +35,8 @@ void BigFish::draw() {
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofRotate(ofRadToDeg(mRotateTheta + 3*PI/2));
     ofScale(0.1, 0.15);
-    ofSetColor(healthyColor);
+    
+    ofSetColor(changeColour(bodyColor));
 
     //Body is created with 2 lines (same as Leeches)
     ofBeginShape();
@@ -51,7 +54,7 @@ void BigFish::draw() {
     ofEndShape();
     
     //Tail
-    ofSetColor(255,180,6);
+    ofSetColor(tailColor);
     ofBeginShape(); //left
     ofScale(9,7);
     ofCurveVertex(-0, 20); ofCurveVertex(0, 0); ofCurveVertex(-30, -5);
@@ -75,10 +78,8 @@ void BigFish::draw() {
 void BigFish::update() {
     BigFish::swim();
     BigFish::eat();
+    Animals::decreaseHealth();
     Animals::returnToScreen();
-    
-    mLifespan -= 0.5;
-    cout << mLifespan << endl;
 }
 
 //------------------------------------------------------------------------------------

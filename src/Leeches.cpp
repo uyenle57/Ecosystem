@@ -16,7 +16,7 @@ Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(le
 }
 
 Leeches::~Leeches() {
-    cout << "A leech has been eaten" << endl;
+    //cout << "Leech eaten" << endl;
 }
 
 //------------------------------------------------------------------------------------
@@ -83,3 +83,6 @@ void Leeches::update() {
     Leeches::swim();
 }
 
+ofVec3f Leeches::getPos() {
+    return Leeches::mPosition;
+}

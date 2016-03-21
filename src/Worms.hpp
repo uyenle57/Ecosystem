@@ -23,6 +23,8 @@ public:
     ~Worms();
     
     void draw(), swim(), update();
+    ofVec3f getPos();
+    
     void addWorm(Organism *o);
     
     float wanderAngle;

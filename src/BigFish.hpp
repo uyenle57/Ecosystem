@@ -24,7 +24,9 @@ public:
 
 private:
     float wiggle(int m);
-    ofColor(healthyColor);
+    
+    ofColor(bodyColor);
+    ofColor(tailColor);
     
     //For movement
     float xoff, yoff;

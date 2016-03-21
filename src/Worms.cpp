@@ -14,7 +14,7 @@ Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX,
 }
 
 Worms::~Worms() {
-    cout << "A worm has been eaten" << endl;
+    //cout << "Worm eaten" << endl;
 }
 
 //------------------------------------------------------------------------------------
@@ -69,4 +69,8 @@ void Worms::update() {
     Worms::swim();
     Organism::swimUpdate();
     Organism::returnToScreen();
+}
+
+ofVec3f Worms::getPos() {
+    return Worms::mPosition;
 }

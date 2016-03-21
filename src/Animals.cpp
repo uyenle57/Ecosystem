@@ -10,11 +10,12 @@
 
 
 Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz(z), dna(&dna) {
+    
     mPosition.set(0, 0, 0);
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    mLifespan = 200; //All animals have equal life span value
+    mHealth = 100; //Starting health of 100%
     
     hungryColor.set(255,190,10);  //orange
     starvingColor.set(255,0,0);  //red
@@ -22,29 +23,29 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
 }
 
 Animals::~Animals() {
-    
+    cout << "Animals killed" << endl;
 }
 
 void Animals::operator=(const Animals &A) {
     mPosition = A.mPosition;    //return the position
 }
 
-// HOW TO MOVE
-//------------------------------------------------------------------------
+//--------------------------------------------------------------
 void Animals::returnToScreen() {
-    if(mPosition.x < -mBorder)  mPosition.x = ofGetWidth() + mBorder;
-    if(mPosition.y < -mBorder)  mPosition.y = ofGetHeight() + mBorder;
-    if(mPosition.x > ofGetWidth()+mBorder)  mPosition.x = -mBorder;
-    if(mPosition.y > ofGetHeight()+mBorder)  mPosition.y = -mBorder;
+    if(mPosition.x < -screenBorder)  mPosition.x = ofGetWidth() + screenBorder;
+    if(mPosition.y < -screenBorder)  mPosition.y = ofGetHeight() + screenBorder;
+    if(mPosition.x > ofGetWidth()+screenBorder)  mPosition.x = -screenBorder;
+    if(mPosition.y > ofGetHeight()+screenBorder)  mPosition.y = -screenBorder;
 }
 
+// HOW TO MOVE
 //--------------------------------------------------------------
 void Animals::applyForce(ofVec3f force) {
-    mAcceleration += force; //force accumulation
+    mAcceleration += force;     //force accumulation
 }
 //--------------------------------------------------------------
 void Animals::resetForce() {
-    mAcceleration.set(0,0,0);   //reset acceleration to 0
+    mAcceleration.set(0,0,0);   //reset acceleration
 }
 //--------------------------------------------------------------
 void Animals::update() {
@@ -69,7 +70,7 @@ void Animals::seekTarget(ofVec3f target) {
 }
 
 //--------------------------------------------------------------
-ofVec3f Animals::seekFish(ofVec3f targetFish) {
+ofVec3f Animals::seekFish (ofVec3f targetFish) {
     ofVec3f mDesired = targetFish - mPosition;  //A vector pointing from the location to the target
     
     mDesired.normalize();  // Normalize and scale to maximum speed
@@ -97,38 +98,42 @@ void Animals::swim() {
     seekTarget(target);
 }
 
-// HOW TO EAT
-
 // HOW TO REPRODUCE
 //------------------------------------------------------------------------
 
 // HOW TO CHANGE BODY COLOUR TO SHOW HEALTH STATUS
 //------------------------------------------------------------------------
-ofColor Animals::changeColour() {
+ofColor Animals::changeColour(ofColor healthyCol) {
    
     ofColor bodyColor;
-    float alpha = 100;
     
-    if (mLifespan > 100 && mLifespan <= 200) {
-        //healthy color
-        //depends on each animal's unique color
+    if (mHealth > 50 && mHealth <= 100) {   //Healthy: 50-100%
+        bodyColor = healthyCol;
     }
-    else if (mLifespan > 50 && mLifespan <= 100) {
+    else if (mHealth > 25 && mHealth <= 50) {   //Hungry: 25-50%
         bodyColor = hungryColor;  //turns orange
     }
-    else if (mLifespan > 0 && mLifespan <= 50) {
-      bodyColor = starvingColor; //turns red
+    else if (mHealth > 0 && mHealth <= 25) {    //Starving: 0-20%
+        bodyColor = starvingColor; //turns red
     }
-    else if (mLifespan <= 0.0) {
+    else if (mHealth <= 0) {
         //call destructor
+        bodyColor.set(0);
     }
     
     return bodyColor;
 }
 
+// DECREASE HEALTH
+//------------------------------------------------------------------------
+void Animals::decreaseHealth() {
+    mHealth -= 0.05;
+    //cout << mHealth << endl;
+}
+
 // HOW TO DIE
 //------------------------------------------------------------------------
 bool Animals::bIsDead() {
-    if (mLifespan < 0.0) return true;
+    if (mHealth < 0.0) return true;
     else return false;
 }

@@ -18,13 +18,13 @@ DNA::DNA() {
     }
 }
 
-//Copy the DNA
 //------------------------------------------------------------------------
 DNA::DNA(const DNA &dna) {
     
     vector<float> newgenes;
     newgenes = dna.genes;
     
+    //Copy the DNA
     for (int i=0; i < dna.genes.size(); i++) {
         newgenes[i] = dna.genes[i];
     }

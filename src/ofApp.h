@@ -10,7 +10,6 @@
 #include "Animals.hpp"
 #include "Frogs.hpp"
 #include "BigFish.hpp"
-#include "SmallFish.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -36,25 +35,22 @@ class ofApp : public ofBaseApp{
     
     DNA dna;
     
-    // ORGANISMS ----------------------------------------------------
-    std::vector<unique_ptr<Organism>> organism;
+    // ORGANISMS
+    std::vector< unique_ptr<Organism>> organism;
     
     int numOrganisms = 4;
-    //shared_ptr<Foo> FooPtr;
+    
     shared_ptr<Worms> worms;
     shared_ptr<Leeches> leeches;
     shared_ptr<Mosquitoes> mosquitoes;
-
     
-    // ANIMALS ----------------------------------------------------
-    std::vector<Animals *> animals;
+    // ANIMALS
+    std::vector<unique_ptr<Animals>> animals;
     
-    int numAnimals = 1; //2;
-    int numSmallFish = 15;
+    int numAnimals = 3;
     
-    Frogs *frogs;
-    BigFish *bigFish;
-    SmallFish *smallFish;  
+    shared_ptr<Frogs> frogs;
+    shared_ptr<BigFish> bigFish;
 
 };
 

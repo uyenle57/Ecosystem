@@ -13,7 +13,7 @@ Mosquitoes::Mosquitoes(float MosPosX, float MosPosY, float MosPosZ) : Organism(M
 }
 
 Mosquitoes::~Mosquitoes() {
-    cout << "A mosquito has been eaten" << endl;
+    //cout << "Mosquito eaten" << endl;
 }
 
 //------------------------------------------------------------------------------------
@@ -59,3 +59,6 @@ void Mosquitoes::update() {
     Mosquitoes::swim();
 }
 
+ofVec3f Mosquitoes::getPos() {
+    return Mosquitoes::mPosition;
+}

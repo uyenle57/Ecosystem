@@ -14,7 +14,6 @@ using namespace std;
 #include "Animals.hpp"
 #include "Frogs.hpp"
 #include "BigFish.hpp"
-#include "SmallFish.hpp"
 
 
 //--------------------------------------------------------------
@@ -23,32 +22,17 @@ void ofApp::setup(){
     ofSetFrameRate(60);
 
     //Create Organisms
-    
-    for(int i=0; i< numOrganisms; i++){
-        shared_ptr<Worms> worms;
-        
+    for(int i=0; i< numOrganisms; i++) {
         organism.push_back(unique_ptr<Organism>(new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
         organism.push_back(unique_ptr<Organism>(new Leeches(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
         organism.push_back(unique_ptr<Organism>(new Mosquitoes(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
-
     }
 
-    
     //Create Animals
     for (int i=0; i < numAnimals; i++) {
-        frogs = new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna);
-        //bigFish = new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna);
-        
-        animals.push_back(frogs);
-        //animals.push_back(bigFish);
+        animals.push_back(unique_ptr<Animals>(new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna)));
+        animals.push_back(unique_ptr<Animals>(new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna)));
     }
-    
-    //Create small fish seperately because there needs to be much more small fishes for flocking
-    for (int i=0; i < numSmallFish; i++) {        
-        //smallFish = new SmallFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna);
-        //animals.push_back(smallFish);
-    }
-    
 }
 
 //--------------------------------------------------------------
@@ -76,58 +60,58 @@ void ofApp::update() {
         animals->update();
     }
     
-    // HOW TO EAT ------------------------------------------
-    // TO DO: move this to Animals class ??
+    // HOW TO EAT
     
     //declare nex vector for indices
-    for (auto & organism : organism) {
-        ofVec3f foodlocation = organism->getPos();  //Organisms are food sources
+    vector<unique_ptr<Organism>>::iterator iter;
+    vector<int> indexes;
+    
+    for(int i=0; i < organism.size(); i++) {
+        ofVec3f foodlocation = organism[i]->getPos(); //Organisms are food sources
         
+        indexes.push_back(i);   //vector<index> pushback(i)
         
-        
-        for(auto & animals : animals) {
-            float dist = animals->mPosition.distance(foodlocation);
+        for(int j=0; j < animals.size(); j++) {
+            float dist = animals[j]->mPosition.distance(foodlocation);
             
-            if (dist < 50/2) {              //Check if the Animal is close to any organism
-                if (animals->mLifespan <= 200) {
-                    animals->mLifespan += 5;  //if so, increase lifespan
-                    //cout << animals->mLifespan << endl;
-                    
-                    //vector<index> pushback(i)
-                    
+            //If Animal is touching any food
+            if (dist < 50) {
+                if (animals[j]->mHealth <= 100) { //increase health
+                    animals[j]->mHealth += 5;
+                    cout << animals[j]->mHealth << endl;
                 }
+                //Delete organism at its index position
+                for(int i=0; i < organism.size(); i++) {
+                    organism.erase(organism.begin());   //+indexes[i]
+                }
+//                for(iter=organism.begin(); iter != organism.end(); iter++) {
+//                    organism.erase(iter);
+//                }
             }
         }
     }
-//    for(int i=0; i<12; i++){
-//        organism.erase(organism.begin()+indexes[i]);
-//   }
-
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     
-    //TO DO: limit number of organisms that user can add before program lags (50)
+    // ADDING NEW ORGANISM WITH KEYPRESS
     if (key == 'w')
         for(int i=0; i < 1; i++) {
-            organism.push_back(unique_ptr<Organism>(new Worms(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
+            organism.push_back(unique_ptr<Organism>(new Worms(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0)));
         }
     if (key == 'l')
         for(int i=0; i < 1; i++) {
-            organism.push_back(unique_ptr<Organism>(new Leeches(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
-            
+            organism.push_back(unique_ptr<Organism>(new Leeches(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0)));
         }
     if (key == 'm')
         for(int i=0; i < 1; i++) {
-            organism.push_back(unique_ptr<Organism>(new Mosquitoes(ofGetWidth()/2, ofRandom(ofGetHeight()), 0)));
-            
+            organism.push_back(unique_ptr<Organism>(new Mosquitoes(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0)));
         }
 }
 
 //--------------------------------------------------------------
 void ofApp::exit() {
-
     std::cout << "========= GAME CLOSED ==========" << std::endl;
 }
 
@@ -148,8 +132,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
-
+    
 }
 
 //--------------------------------------------------------------

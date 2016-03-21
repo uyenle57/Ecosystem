@@ -19,11 +19,7 @@ Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
 }
 
 Organism::~Organism() {
-
-}
-
-ofVec3f Organism::getPos() {
-    return mPosition;
+    cout << "Organisms killed" << endl;
 }
 
 //--------------------------------------------------------------
