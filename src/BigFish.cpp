@@ -21,6 +21,8 @@ BigFish::BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna) : Ani
     
     xoff = ofRandom(1000);
     yoff = ofRandom(1000);
+    
+     species = "Fish";
 }
 
 BigFish::~BigFish() {

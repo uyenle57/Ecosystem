@@ -14,7 +14,7 @@
 #include "babyFish.hpp"
 
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
 
 	public:
 		void setup();
@@ -41,7 +41,7 @@ class ofApp : public ofBaseApp{
     // ORGANISMS
     std::vector< unique_ptr<Organism>> organism;
     
-    int numOrganisms = 4;
+    int numOrganisms = 3;
     
     shared_ptr<Worms> worms;
     shared_ptr<Leeches> leeches;
@@ -50,7 +50,7 @@ class ofApp : public ofBaseApp{
     // ANIMALS
     std::vector<unique_ptr<Animals>> animals;
     
-    int numAnimals = 1; //3;
+    int numAnimals = 2;
     
     shared_ptr<Frogs> frogs;
     shared_ptr<BigFish> bigFish;

@@ -42,34 +42,22 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::eat() {
     
-    // TO DO: FIX DELETING ORGANISMS
-    
-    //declare nex vector for indices
-    vector<unique_ptr<Organism>>::iterator iter;
-    vector<int> indexes;
-    
     for(int i=0; i < organism.size(); i++) {
         ofVec3f foodlocation = organism[i]->getPos(); //Organisms are food sources
         
-        indexes.push_back(i);   //vector<index> pushback(i)
-        
         for(int j=0; j < animals.size(); j++) {
-            float dist = animals[j]->mPosition.distance(foodlocation);
             
             //If Animal is touching any food
-            if (dist < 50) {
-                if (animals[j]->mHealth <= 200) { //increase health
-                    animals[j]->mHealth += 5;
-                    cout << animals[j]->mHealth << endl;
-                }
-                //Delete organism at its index position
-                for(int i=0; i < organism.size(); i++) {
-                    organism.erase(organism.begin());   //+indexes[i]
-                }
-                // for(iter=organism.begin(); iter != organism.end(); iter++) {
-                //      organism.erase(iter);
-                // }
-            }
+//            float dist = animals[j]->mPosition.distance(foodlocation);
+//            float sumRadii = organism[i]->mSize + animals[j]->mSize;
+//            
+//            if (dist < sumRadii) {
+//                if (animals[j]->mHealth >= 0 && animals[j]->mHealth <= 200) { //increase health within boundaries of 0-200
+//                    animals[j]->mHealth += 5;
+//                }
+//                //Delete organism at its index position
+//                organism.erase(organism.begin()+i);
+//            }
         }
     }
 }
@@ -88,19 +76,32 @@ void ofApp::reproduce() {
                 //create childDNA which is a copy of parent DNA
                 DNA childDNA = parentDNA.crossover(parentDNA);
                 childDNA.mutate(animals[i]->mutateRate);
-
-                //check that animals of the same species are close to each other
-                ofVec3f parentFrogPos = animals[i]->getPos();
-                ofVec3f parentFishPos;
-
-                // TO DO
-                // create a new child at its parents' positions
-//                for(int j=0; j < 1; j++) {
-//                    ofVec3f babyAnimalPos = animals[i]->getPos();
-//
-//                    animals.push_back(unique_ptr<Animals>(new babyFrog(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
-//                    animals.push_back(unique_ptr<Animals>(new babyFish(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
-//                }
+                
+                for (int j=0; j < animals.size(); j++) {
+                    
+                    //check that animals of the same species are close to each other
+                    float dist = animals[i]->mPosition.distance(animals[j]->mPosition);
+                    float sumRadii = animals[i]->mSize + animals[j]->mSize;
+                    
+                    if (dist < sumRadii) {
+                        
+                    ofVec3f babyAnimalPos = animals[i]->getPos();
+                    
+                    //Give birth to baby Frogs at the location of parent Frogs with a very low chance of reproduction
+                    if (ofRandom(1) < animals[i]->birthRate) {
+                        if (animals[i]->species == "Frog" && animals[j]->species == "Frog") {
+                         animals.push_back(unique_ptr<Animals>(new babyFrog(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+                        }
+                    }
+                    
+                    //do the same for Fish reproduction
+                    if (ofRandom(1) < animals[i]->birthRate) {
+                        if (animals[i]->species == "Fish" && animals[j]->species == "Fish") {
+                        animals.push_back(unique_ptr<Animals>(new babyFish(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+                        }
+                    }
+                    }
+                }
             }
         }
     }
@@ -147,10 +148,10 @@ void ofApp::update() {
     ofApp::die();
 }
 
+// ADDING NEW ORGANISM WITH KEYPRESS
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     
-    // ADDING NEW ORGANISM WITH KEYPRESS
     if (key == 'w')
         for(int i=0; i < 1; i++) {
             organism.push_back(unique_ptr<Organism>(new Worms(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0)));

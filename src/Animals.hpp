@@ -52,13 +52,15 @@ public:
     virtual ofVec3f getPos() = 0;
     
     bool isHealthy(), isHungry(), isStarving(), isDead();
+    
+    string species;
 
 protected:
     
     DNA *dna;
     DNA parentGene;
 
-    //Animals *reproduce(Animals &partner, float prob);
+    Animals *reproduce(Animals &partner, float prob);
     
     ofColor changeColour(ofColor healthyCol);
     

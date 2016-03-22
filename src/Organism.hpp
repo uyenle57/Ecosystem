@@ -30,6 +30,7 @@ public:
     //Variables
     float mMaxForce, mMaxSpeed, mRotateTheta;
     float mPosx, mPosy, mPosz; //position variables
+    float mSize;
     float mBorder = 2;
     
     ofColor bodyColor;

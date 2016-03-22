@@ -14,7 +14,6 @@
 		39A36CF31C808D9F006BF465 /* Animals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39A36CF11C808D9F006BF465 /* Animals.cpp */; settings = {ASSET_TAGS = (); }; };
 		39A36CF61C809327006BF465 /* Mosquitoes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39A36CF41C809327006BF465 /* Mosquitoes.cpp */; settings = {ASSET_TAGS = (); }; };
 		39C704EE1C9F40560098955C /* DNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39C704EC1C9F40560098955C /* DNA.cpp */; settings = {ASSET_TAGS = (); }; };
-		39C704F41C9F54CC0098955C /* Pond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39C704F21C9F54CC0098955C /* Pond.cpp */; settings = {ASSET_TAGS = (); }; };
 		39E8D7B31C73ADB00057F7BF /* Organism.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39E8D7B11C73ADB00057F7BF /* Organism.cpp */; settings = {ASSET_TAGS = (); }; };
 		39FEDA381C95D26100AA5462 /* Frogs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39FEDA361C95D26100AA5462 /* Frogs.cpp */; settings = {ASSET_TAGS = (); }; };
 		39FEDA3B1C95D28B00AA5462 /* BigFish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39FEDA391C95D28B00AA5462 /* BigFish.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -67,8 +66,6 @@
 		39A36CF51C809327006BF465 /* Mosquitoes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Mosquitoes.hpp; path = ../Mosquitoes.hpp; sourceTree = "<group>"; };
 		39C704EC1C9F40560098955C /* DNA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DNA.cpp; sourceTree = "<group>"; };
 		39C704ED1C9F40560098955C /* DNA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DNA.hpp; sourceTree = "<group>"; };
-		39C704F21C9F54CC0098955C /* Pond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pond.cpp; path = ../Pond.cpp; sourceTree = "<group>"; };
-		39C704F31C9F54CC0098955C /* Pond.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Pond.hpp; path = ../Pond.hpp; sourceTree = "<group>"; };
 		39E8D7B11C73ADB00057F7BF /* Organism.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Organism.cpp; sourceTree = "<group>"; };
 		39E8D7B21C73ADB00057F7BF /* Organism.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Organism.hpp; sourceTree = "<group>"; };
 		39FEDA361C95D26100AA5462 /* Frogs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frogs.cpp; sourceTree = "<group>"; };
@@ -172,8 +169,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				39C704F31C9F54CC0098955C /* Pond.hpp */,
-				39C704F21C9F54CC0098955C /* Pond.cpp */,
 				39FEDA401C95D2E000AA5462 /* Organisms */,
 				39FEDA411C95D2EF00AA5462 /* Animals */,
 			);
@@ -283,7 +278,6 @@
 				39A36CF31C808D9F006BF465 /* Animals.cpp in Sources */,
 				39FEDA381C95D26100AA5462 /* Frogs.cpp in Sources */,
 				3961605B1CA0C08100E1EAA5 /* babyFrog.cpp in Sources */,
-				39C704F41C9F54CC0098955C /* Pond.cpp in Sources */,
 				390D35451C7A2A73001541F0 /* Worms.cpp in Sources */,
 				39A36CF61C809327006BF465 /* Mosquitoes.cpp in Sources */,
 				390D35481C7A2A80001541F0 /* Leeches.cpp in Sources */,

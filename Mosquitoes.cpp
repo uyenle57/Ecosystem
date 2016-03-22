@@ -9,7 +9,10 @@
 #include "Mosquitoes.hpp"
 
 Mosquitoes::Mosquitoes(float MosPosX, float MosPosY, float MosPosZ) : Organism(MosPosX, MosPosY, MosPosZ) {
+    
     mPosition.set(MosPosX, MosPosY, MosPosZ);
+    
+    mSize = 4;
 }
 
 Mosquitoes::~Mosquitoes() {
@@ -23,7 +26,7 @@ void Mosquitoes::draw() {
     ofPushMatrix();
     ofTranslate(mPosition.x, mPosition.y, mPosition.z);
     ofSetColor(168,161,151);
-    ofDrawCircle(0,0,0,4);       //Head
+    ofDrawCircle(0,0,0,mSize);       //Head
     ofDrawEllipse(0, 16, 7, 30); //Body
     
     // 2 flapping wings

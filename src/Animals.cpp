@@ -15,7 +15,7 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    birthRate = ofMap(dna.genes[0],0,1,0.01,0.2);
+    birthRate = ofMap(dna.genes[0],0,1,0.01,0.01);
     mutateRate = ofMap(dna.genes[1],0,1,0.15,0.10);
     
     mHealth = 200;
@@ -156,6 +156,5 @@ ofColor Animals::changeColour(ofColor healthyCol) {
 //------------------------------------------------------------------------
 void Animals::decreaseHealth() {
     mHealth -= 0.05;
-    cout << mHealth << endl;
 }
 

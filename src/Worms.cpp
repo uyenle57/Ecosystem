@@ -10,7 +10,10 @@
 
 
 Worms::Worms(float wormPosX, float wormPosY, float wormPosZ): Organism(wormPosX, wormPosY, wormPosZ) {
+    
     mPosition.set(wormPosX, wormPosY, wormPosZ);
+    
+    mSize = 3;
 }
 
 Worms::~Worms() {
@@ -35,7 +38,7 @@ void Worms:: draw() {
             bodyColor.set(255,0,0);
         }
         ofSetColor(bodyColor);
-        ofDrawRectangle(0 + wiggle(i), i,3,3);
+        ofDrawRectangle(0 + wiggle(i), i, mSize,mSize);
     }
     ofPopMatrix();
 }

@@ -21,6 +21,8 @@ Frogs::Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna) : Animals
     
     xoff = ofRandom(1000);
     yoff = ofRandom(1000);
+    
+    species = "Frog";
 }
 
 Frogs::~Frogs() {

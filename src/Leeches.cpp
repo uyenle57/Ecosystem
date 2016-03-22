@@ -11,7 +11,7 @@
 Leeches::Leeches(float leechPosX, float leechPosY, float leechPosZ): Organism(leechPosX, leechPosY, leechPosZ) {
     mPosition.set(leechPosX, leechPosY, leechPosZ);
     
-    bodyLength = 2;
+    mSize = 2;
     bodyColor.set(30,30,30);
 }
 
@@ -36,15 +36,15 @@ void Leeches::draw() {
     //right line
     for(int i=0; i < 180; i += 20) {
         x = sin(ofDegToRad(i)) * i/2;
-        ofVertex(x + Leeches::wiggle(i), i*bodyLength);  //pass in the angle variable to the x position so that it wiggles
-        ofVertex(x + Leeches::wiggle(i), i*bodyLength);
+        ofVertex(x + Leeches::wiggle(i), i*mSize);  //pass in the angle variable to the x position so that it wiggles
+        ofVertex(x + Leeches::wiggle(i), i*mSize);
     }
     
     //left line
     for (int j=180; j > 0; j -= 20) {
         x = sin(ofDegToRad(j)) * j/2;
-        ofVertex(-x + Leeches::wiggle(j), j*bodyLength);  //reverse the x positions to draw opposite to the first line
-        ofVertex(-x + Leeches::wiggle(j), j*bodyLength);
+        ofVertex(-x + Leeches::wiggle(j), j*mSize);  //reverse the x positions to draw opposite to the first line
+        ofVertex(-x + Leeches::wiggle(j), j*mSize);
     }
     ofEndShape();
     ofPopMatrix();

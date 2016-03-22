@@ -29,7 +29,6 @@ private:
     float wiggle(int m);
     float x;
     float wanderAngle;
-    int bodyLength;
     
     ofColor(bodyColor);
     
