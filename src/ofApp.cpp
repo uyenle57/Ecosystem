@@ -48,16 +48,16 @@ void ofApp::eat() {
         for(int j=0; j < animals.size(); j++) {
             
             //If Animal is touching any food
-//            float dist = animals[j]->mPosition.distance(foodlocation);
-//            float sumRadii = organism[i]->mSize + animals[j]->mSize;
-//            
-//            if (dist < sumRadii) {
-//                if (animals[j]->mHealth >= 0 && animals[j]->mHealth <= 200) { //increase health within boundaries of 0-200
-//                    animals[j]->mHealth += 5;
-//                }
-//                //Delete organism at its index position
-//                organism.erase(organism.begin()+i);
-//            }
+            float dist = animals[j]->mPosition.distance(foodlocation);
+            float sumRadii = organism[i]->mSize + animals[j]->mSize;
+            
+            if (dist < sumRadii) {
+                if (animals[j]->mHealth >= 0 && animals[j]->mHealth <= 200) { //increase health within boundaries of 0-200
+                    animals[j]->mHealth += 5;
+                }
+                //Delete organism at its index position
+                organism.erase(organism.begin()+i);
+            }
         }
     }
 }
@@ -67,42 +67,32 @@ void ofApp::eat() {
 void ofApp::reproduce() {
 
     for (int i=0; i < animals.size(); i++) {
-    
         if (ofRandom(1) < animals[i]->birthRate) { //small chance of reproduction
-        
-            //Only reproduce if the Animal is healthy
-            if (animals[i]->mHealth >= 130 && animals[i]->mHealth <= 200) {
-        
-                //create childDNA which is a copy of parent DNA
-                DNA childDNA = parentDNA.crossover(parentDNA);
-                childDNA.mutate(animals[i]->mutateRate);
+
+        if (animals[i]->mHealth >= 130 && animals[i]->mHealth <= 200) {  //Only reproduce if the Animal is healthy
+
+            DNA childDNA = parentDNA.crossover(parentDNA);
+            childDNA.mutate(animals[i]->mutateRate);
                 
-                for (int j=0; j < animals.size(); j++) {
+            for (int j=0; j < animals.size(); j++) {
+
+                ofVec3f babyAnimalPos = animals[i]->getPos();
+                
+                //Check if two animals of the same species are close to each other, then reproduce baby Frogs at that location
+                if (ofRandom(1) < 0.01) {   //very low chance of reproduction
+                if (animals[i]->species == "Frog" && animals[j]->species == "Frog") {
+                    animals.push_back(unique_ptr<Animals>(new babyFrog(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+                }
+                }
                     
-                    //check that animals of the same species are close to each other
-                    float dist = animals[i]->mPosition.distance(animals[j]->mPosition);
-                    float sumRadii = animals[i]->mSize + animals[j]->mSize;
-                    
-                    if (dist < sumRadii) {
-                        
-                    ofVec3f babyAnimalPos = animals[i]->getPos();
-                    
-                    //Give birth to baby Frogs at the location of parent Frogs with a very low chance of reproduction
-                    if (ofRandom(1) < animals[i]->birthRate) {
-                        if (animals[i]->species == "Frog" && animals[j]->species == "Frog") {
-                         animals.push_back(unique_ptr<Animals>(new babyFrog(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
-                        }
-                    }
-                    
-                    //do the same for Fish reproduction
-                    if (ofRandom(1) < animals[i]->birthRate) {
-                        if (animals[i]->species == "Fish" && animals[j]->species == "Fish") {
-                        animals.push_back(unique_ptr<Animals>(new babyFish(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
-                        }
-                    }
-                    }
+                //do the same for Fish reproduction
+                if (ofRandom(1) < 0.01) {
+                if (animals[i]->species == "Fish" && animals[j]->species == "Fish") {
+                    animals.push_back(unique_ptr<Animals>(new babyFish(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+                }
                 }
             }
+        }
         }
     }
 }
