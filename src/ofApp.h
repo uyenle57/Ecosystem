@@ -9,7 +9,10 @@
 #include "DNA.hpp"
 #include "Animals.hpp"
 #include "Frogs.hpp"
+#include "babyFrog.hpp"
 #include "BigFish.hpp"
+#include "babyFish.hpp"
+
 
 class ofApp : public ofBaseApp{
 
@@ -49,8 +52,14 @@ class ofApp : public ofBaseApp{
     
     int numAnimals = 3;
     
-    shared_ptr<Frogs> frogs;
-    shared_ptr<BigFish> bigFish;
+    shared_ptr<Frogs> frogs; //babyFrogs;
+    shared_ptr<BigFish> bigFish; //babyFish;
+    
+    vector <babyFrog> babyFrogs;
+    vector <babyFish> babyFishes;
+    
+    void eat();
+    void reproduce();
 
 };
 

@@ -18,11 +18,11 @@ class Frogs : public Animals {
 public:
     Frogs(float frogPosX, float frogPosY, float frogPosZ, DNA &dna);
     
-    ~Frogs();
+    virtual ~Frogs();
     
     void draw(), update(), swim(), eat();
     
-private:
+protected:
     ofColor(bodyColor);
     
     //For movement

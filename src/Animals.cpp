@@ -15,7 +15,7 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    mHealth = 100; //Starting health of 100%
+    mHealth = 200; //Starting health of 200%
     
     hungryColor.set(255,190,10);  //orange
     starvingColor.set(255,0,0);  //red
@@ -29,6 +29,18 @@ Animals::~Animals() {
 void Animals::operator=(const Animals &A) {
     mPosition = A.mPosition;    //return the position
 }
+
+//--------------------------------------------------------------
+//Animals *Animals::reproduce() {
+//    
+//    if (mHealth >= 130 && mHealth <= 200) {
+//        if (ofRandom(1) < 0.05) { //small chance of reproduction
+//            DNA *childDNA = dna; //create childDNA which is a copy of parent DNA
+//            childDNA->mutate(0.01);
+//            
+//        }
+//    }
+//}
 
 //--------------------------------------------------------------
 void Animals::returnToScreen() {
@@ -107,16 +119,17 @@ ofColor Animals::changeColour(ofColor healthyCol) {
    
     ofColor bodyColor;
     
-    if (mHealth > 50 && mHealth <= 100) {   //Healthy: 50-100%
+    if (mHealth > 130 && mHealth <= 200) {   //Healthy: 130-200
         bodyColor = healthyCol;
     }
-    else if (mHealth > 25 && mHealth <= 50) {   //Hungry: 25-50%
+    else if (mHealth > 70 && mHealth <= 130) {   //Hungry: 70-130
         bodyColor = hungryColor;  //turns orange
     }
-    else if (mHealth > 0 && mHealth <= 25) {    //Starving: 0-20%
+    else if (mHealth > 0 && mHealth <= 70) {    //Starving: 0-70
         bodyColor = starvingColor; //turns red
     }
-    else if (mHealth <= 0) {
+    else if (mHealth <= 0) {    //Die
+        // TO DO
         //call destructor
         bodyColor.set(0);
     }
@@ -124,11 +137,10 @@ ofColor Animals::changeColour(ofColor healthyCol) {
     return bodyColor;
 }
 
-// DECREASE HEALTH
+// DECREASE HEALTH as long as the Animal's alive but doesn't have any food to eat
 //------------------------------------------------------------------------
 void Animals::decreaseHealth() {
     mHealth -= 0.05;
-    //cout << mHealth << endl;
 }
 
 // HOW TO DIE

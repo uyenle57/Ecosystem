@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		390D35451C7A2A73001541F0 /* Worms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 390D35431C7A2A73001541F0 /* Worms.cpp */; settings = {ASSET_TAGS = (); }; };
 		390D35481C7A2A80001541F0 /* Leeches.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 390D35461C7A2A80001541F0 /* Leeches.cpp */; settings = {ASSET_TAGS = (); }; };
+		3961605B1CA0C08100E1EAA5 /* babyFrog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 396160591CA0C08100E1EAA5 /* babyFrog.cpp */; settings = {ASSET_TAGS = (); }; };
+		3961605E1CA0C08E00E1EAA5 /* babyFish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3961605C1CA0C08E00E1EAA5 /* babyFish.cpp */; settings = {ASSET_TAGS = (); }; };
 		39A36CF31C808D9F006BF465 /* Animals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39A36CF11C808D9F006BF465 /* Animals.cpp */; settings = {ASSET_TAGS = (); }; };
 		39A36CF61C809327006BF465 /* Mosquitoes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39A36CF41C809327006BF465 /* Mosquitoes.cpp */; settings = {ASSET_TAGS = (); }; };
 		39C704EE1C9F40560098955C /* DNA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 39C704EC1C9F40560098955C /* DNA.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -55,6 +57,10 @@
 		390D35441C7A2A73001541F0 /* Worms.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Worms.hpp; sourceTree = "<group>"; };
 		390D35461C7A2A80001541F0 /* Leeches.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Leeches.cpp; sourceTree = "<group>"; };
 		390D35471C7A2A80001541F0 /* Leeches.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Leeches.hpp; sourceTree = "<group>"; };
+		396160591CA0C08100E1EAA5 /* babyFrog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = babyFrog.cpp; sourceTree = "<group>"; };
+		3961605A1CA0C08100E1EAA5 /* babyFrog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = babyFrog.hpp; sourceTree = "<group>"; };
+		3961605C1CA0C08E00E1EAA5 /* babyFish.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = babyFish.cpp; sourceTree = "<group>"; };
+		3961605D1CA0C08E00E1EAA5 /* babyFish.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = babyFish.hpp; sourceTree = "<group>"; };
 		39A36CF11C808D9F006BF465 /* Animals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animals.cpp; sourceTree = "<group>"; };
 		39A36CF21C808D9F006BF465 /* Animals.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animals.hpp; sourceTree = "<group>"; };
 		39A36CF41C809327006BF465 /* Mosquitoes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mosquitoes.cpp; path = ../Mosquitoes.cpp; sourceTree = "<group>"; };
@@ -115,8 +121,12 @@
 				39A36CF11C808D9F006BF465 /* Animals.cpp */,
 				39FEDA371C95D26100AA5462 /* Frogs.hpp */,
 				39FEDA361C95D26100AA5462 /* Frogs.cpp */,
+				3961605A1CA0C08100E1EAA5 /* babyFrog.hpp */,
+				396160591CA0C08100E1EAA5 /* babyFrog.cpp */,
 				39FEDA3A1C95D28B00AA5462 /* BigFish.hpp */,
 				39FEDA391C95D28B00AA5462 /* BigFish.cpp */,
+				3961605D1CA0C08E00E1EAA5 /* babyFish.hpp */,
+				3961605C1CA0C08E00E1EAA5 /* babyFish.cpp */,
 			);
 			name = Animals;
 			sourceTree = "<group>";
@@ -267,10 +277,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				39FEDA3B1C95D28B00AA5462 /* BigFish.cpp in Sources */,
+				3961605E1CA0C08E00E1EAA5 /* babyFish.cpp in Sources */,
 				39E8D7B31C73ADB00057F7BF /* Organism.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				39A36CF31C808D9F006BF465 /* Animals.cpp in Sources */,
 				39FEDA381C95D26100AA5462 /* Frogs.cpp in Sources */,
+				3961605B1CA0C08100E1EAA5 /* babyFrog.cpp in Sources */,
 				39C704F41C9F54CC0098955C /* Pond.cpp in Sources */,
 				390D35451C7A2A73001541F0 /* Worms.cpp in Sources */,
 				39A36CF61C809327006BF465 /* Mosquitoes.cpp in Sources */,

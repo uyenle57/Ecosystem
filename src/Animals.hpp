@@ -52,7 +52,8 @@ public:
 protected:
     
     DNA *dna;
-    //Animal *reproduce;
+    
+    Animals *reproduce();
     
     ofColor changeColour(ofColor healthyCol);
     

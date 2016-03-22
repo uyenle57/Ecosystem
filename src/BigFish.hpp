@@ -18,11 +18,11 @@ class BigFish : public Animals {
 public:
     BigFish(float bigFishX, float bigFishY, float bigFishZ, DNA &dna);
     
-    ~BigFish();
+    virtual ~BigFish();
     
     void draw(), update(), swim(), eat();
 
-private:
+protected:
     float wiggle(int m);
     
     ofColor(bodyColor);
