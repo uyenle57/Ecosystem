@@ -15,7 +15,10 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    mHealth = 200; //Starting health of 200%
+    birthRate = ofMap(dna.genes[0],0,1,0.4,0.2);
+    mutateRate = ofMap(dna.genes[1],0,1,0.15,0.10);
+    
+    mHealth = 200;
     
     hungryColor.set(255,190,10);  //orange
     starvingColor.set(255,0,0);  //red
@@ -29,18 +32,6 @@ Animals::~Animals() {
 void Animals::operator=(const Animals &A) {
     mPosition = A.mPosition;    //return the position
 }
-
-//--------------------------------------------------------------
-//Animals *Animals::reproduce() {
-//    
-//    if (mHealth >= 130 && mHealth <= 200) {
-//        if (ofRandom(1) < 0.05) { //small chance of reproduction
-//            DNA *childDNA = dna; //create childDNA which is a copy of parent DNA
-//            childDNA->mutate(0.01);
-//            
-//        }
-//    }
-//}
 
 //--------------------------------------------------------------
 void Animals::returnToScreen() {
@@ -112,6 +103,17 @@ void Animals::swim() {
 
 // HOW TO REPRODUCE
 //------------------------------------------------------------------------
+//Animals *Animals::reproduce(Animals &partner, float prob) {
+//    
+//    if(ofRandom(1) <= prob) {
+//        DNA childGene = parentGene.crossover(partner.parentGene);
+//        childGene.mutate(mutateRate);
+//        
+//        Animals *babyAnimal = new Animals(mPosition.x, mPosition.y, mPosition.z, childGene);
+//        
+//        return babyAnimal;
+//    }
+//}
 
 // HOW TO CHANGE BODY COLOUR TO SHOW HEALTH STATUS
 //------------------------------------------------------------------------
@@ -128,10 +130,9 @@ ofColor Animals::changeColour(ofColor healthyCol) {
     else if (mHealth > 0 && mHealth <= 70) {    //Starving: 0-70
         bodyColor = starvingColor; //turns red
     }
-    else if (mHealth <= 0) {    //Die
+    else if (bIsDead()) {    //Die
         // TO DO
-        //call destructor
-        bodyColor.set(0);
+        // call destructorrrrr
     }
     
     return bodyColor;
@@ -146,6 +147,7 @@ void Animals::decreaseHealth() {
 // HOW TO DIE
 //------------------------------------------------------------------------
 bool Animals::bIsDead() {
-    if (mHealth < 0.0) return true;
-    else return false;
+    if (mHealth <= 0.0)
+        return true;
+        else return false;
 }

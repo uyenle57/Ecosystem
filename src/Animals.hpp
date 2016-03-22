@@ -40,6 +40,9 @@ public:
     float mMaxForce, mMaxSpeed, mSize;
     float mRotateTheta, wanderAngle;
     
+    float birthRate;
+    float mutateRate;
+    
     float mPosx, mPosy, mPosz;
     float screenBorder = 2;
 
@@ -52,8 +55,9 @@ public:
 protected:
     
     DNA *dna;
-    
-    Animals *reproduce();
+    //DNA parentGene;
+
+    //Animals *reproduce(Animals &partner, float prob);
     
     ofColor changeColour(ofColor healthyCol);
     

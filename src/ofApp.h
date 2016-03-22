@@ -36,7 +36,7 @@ class ofApp : public ofBaseApp{
     
     
     
-    DNA dna;
+    DNA parentDNA, childDNA;
     
     // ORGANISMS
     std::vector< unique_ptr<Organism>> organism;
@@ -52,11 +52,11 @@ class ofApp : public ofBaseApp{
     
     int numAnimals = 3;
     
-    shared_ptr<Frogs> frogs; //babyFrogs;
-    shared_ptr<BigFish> bigFish; //babyFish;
+    shared_ptr<Frogs> frogs;
+    shared_ptr<BigFish> bigFish;
     
-    vector <babyFrog> babyFrogs;
-    vector <babyFish> babyFishes;
+    shared_ptr<babyFrog> babyFrogs;
+    shared_ptr<babyFish> babyFishes;
     
     void eat();
     void reproduce();

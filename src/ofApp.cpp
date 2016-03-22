@@ -32,37 +32,10 @@ void ofApp::setup(){
 
     //Create Animals
     for (int i=0; i < numAnimals; i++) {
-        babyFrogs.push_back(babyFrog(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna));
-        babyFishes.push_back(babyFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna));
-        
-        animals.push_back(unique_ptr<Animals>(new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna)));
-        animals.push_back(unique_ptr<Animals>(new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, dna)));
+        animals.push_back(unique_ptr<Animals>(new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, parentDNA)));
+        animals.push_back(unique_ptr<Animals>(new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, parentDNA)));
     }
 
-}
-
-//--------------------------------------------------------------
-void ofApp::draw() {
-    
-    //Background gradient
-    ofColor colorOne(255);
-    ofColor colorTwo(155, 220, 247);
-    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
-    
-    for (auto & organism : organism) {
-        organism->draw();
-    }
-    for (auto & animals : animals) {
-        animals->draw();
-    }
-    
-    /// just to see the animals
-    for (auto & bfrog: babyFrogs) {
-        bfrog.draw();
-    }
-    for (auto & bfish: babyFishes) {
-        bfish.draw();
-    }
 }
 
 //--------------------------------------------------------------
@@ -103,33 +76,40 @@ void ofApp::eat() {
 //--------------------------------------------------------------
 void ofApp::reproduce() {
    
-    for (auto & animals : animals) {
-    //Only reproduce if the Animal is healthy
-    if (animals->mHealth >= 130 && animals->mHealth <= 200) {
-        if (ofRandom(1) < 0.05) { //small chance of reproduction
-            DNA childDNA = dna; //create childDNA which is a copy of parent DNA
-            childDNA.mutate(0.01);
-            
-            // TO DO
-            //Check that if any two animals of the same species are close to each other
-            //ofVec3f frogPos = frogs->mPosition;
-            //ofVec3f fishPos = bigFish->mPosition;
-            
-            //float frogDist = frogPos.distance(otherFrog);
-            //float fishDist = bigFish.distance(otherFish);
-            
-            //if (frogDist < 50) {
-            // create a new child at that position
-            // for(int i=0; i < 1; i++) {
-            //  animals.push_back(unique_ptr<Animals>(new babyFrogs(ofRandom(frogDist, frogDist, 0, childDNA)));
-            //}
-            //}
-            
-            //repeat for fish
-            
+    for (int i=0; i < animals.size(); i++) {
         
+        if (ofRandom(1) < animals[i]->birthRate) { //small chance of reproduction
+        
+            //Only reproduce if the Animal is healthy
+            if (animals[i]->mHealth >= 130 && animals[i]->mHealth <= 200) {
+        
+                //create childDNA which is a copy of parent DNA
+                DNA childDNA = parentDNA.crossover(parentDNA); //dna;
+                childDNA.mutate(animals[i]->mutateRate);
+
+                // create a new child at that its parents' positions
+                for(int i=0; i < 1; i++) {
+                    animals.push_back(unique_ptr<Animals>(new babyFrog(animals[i]->mPosition.x, animals[i]->mPosition.y, animals[i]->mPosition.z, childDNA)));
+                    animals.push_back(unique_ptr<Animals>(new babyFish(animals[i]->mPosition.x, animals[i]->mPosition.y, animals[i]->mPosition.z, childDNA)));
+                }
             }
         }
+    }
+}
+
+//--------------------------------------------------------------
+void ofApp::draw() {
+    
+    //Background gradient
+    ofColor colorOne(255);
+    ofColor colorTwo(155, 220, 247);
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
+    
+    for (auto & organism : organism) {
+        organism->draw();
+    }
+    for (auto & animals : animals) {
+        animals->draw();
     }
 }
 
@@ -140,14 +120,6 @@ void ofApp::update() {
     }
     for (auto & animals : animals) {
         animals->update();
-    }
-    
-    //just to see the animals
-    for (auto & bfrog: babyFrogs) {
-        bfrog.update();
-    }
-    for (auto & bfish: babyFishes) {
-        bfish.update();
     }
     
     ofApp::eat();
