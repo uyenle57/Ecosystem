@@ -111,7 +111,7 @@ void ofApp::reproduce() {
 void ofApp::die() {
     
     for (int i=0; i < animals.size(); i++) {
-        if (animals[i]->mHealth <= 0.0) {
+        if (animals[i]->isDead()) {
             animals.erase(animals.begin());
         }
     }

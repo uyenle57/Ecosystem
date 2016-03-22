@@ -50,6 +50,8 @@ public:
     virtual void update() = 0;
     virtual void swim() = 0;
     virtual ofVec3f getPos() = 0;
+    
+    bool isHealthy(), isHungry(), isStarving(), isDead();
 
 protected:
     

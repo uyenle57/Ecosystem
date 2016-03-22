@@ -115,24 +115,40 @@ void Animals::swim() {
 //    }
 //}
 
+// HEALTH STATUS BOOLEANS
+//------------------------------------------------------------------------
+bool Animals::isHealthy() {
+    if (mHealth > 130 && mHealth <= 200)  //Healthy: 130-200
+        return true;
+        else return false;
+}
+bool Animals::isHungry() {
+    if (mHealth > 70 && mHealth <= 130)  //Hungry: 70-130
+        return true;
+        else return false;
+}
+bool Animals::isStarving() {
+    if (mHealth > 0 && mHealth <= 70)  //Healthy: 0-70
+        return true;
+        else return false;
+}
+bool Animals::isDead() {
+    if (mHealth <= 0.0)
+        return true;
+        else return false;
+}
+
+
 // HOW TO CHANGE BODY COLOUR TO SHOW HEALTH STATUS
 //------------------------------------------------------------------------
 ofColor Animals::changeColour(ofColor healthyCol) {
    
     ofColor bodyColor;
     
-    if (mHealth > 130 && mHealth <= 200) {   //Healthy: 130-200
-        bodyColor = healthyCol;
-    }
-    else if (mHealth > 70 && mHealth <= 130) {   //Hungry: 70-130
-        bodyColor = hungryColor;  //turns orange
-    }
-    else if (mHealth > 0 && mHealth <= 70) {    //Starving: 0-70
-        bodyColor = starvingColor; //turns red
-    }
-//    else if (bIsDead()) {    //Die
-//        
-//    }
+    if (isHealthy()) bodyColor = healthyCol; //healthy color depends on the 'bodyColor' value defined in Frogs and BigFish (each animal has its own unique color)
+    else if (isHungry()) bodyColor = hungryColor;  //turns orange
+    else if (isStarving())  bodyColor = starvingColor; //turns red
+
     return bodyColor;
 }
 
