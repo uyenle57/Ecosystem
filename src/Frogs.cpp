@@ -65,7 +65,6 @@ void Frogs::draw() {
 //------------------------------------------------------------------------------------
 void Frogs::update() {
     Frogs::swim();
-    Frogs::eat();
     Animals::swim();
     Animals::update();
     Animals::decreaseHealth();
@@ -86,7 +85,7 @@ void Frogs::swim() {
 }
 
 //------------------------------------------------------------------------------------
-void Frogs::eat() {
-
+ofVec3f Frogs::getPos() {
+    return Frogs::mPosition;
 }
 

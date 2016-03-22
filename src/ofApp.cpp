@@ -35,9 +35,10 @@ void ofApp::setup(){
         animals.push_back(unique_ptr<Animals>(new Frogs(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, parentDNA)));
         animals.push_back(unique_ptr<Animals>(new BigFish(ofRandom(ofGetWidth()), ofRandom(ofGetHeight()), 0, parentDNA)));
     }
-
+    
 }
 
+// HOW ANIMALS EAT ORGANISMS
 //--------------------------------------------------------------
 void ofApp::eat() {
     
@@ -65,34 +66,53 @@ void ofApp::eat() {
                 for(int i=0; i < organism.size(); i++) {
                     organism.erase(organism.begin());   //+indexes[i]
                 }
-                //                for(iter=organism.begin(); iter != organism.end(); iter++) {
-                //                    organism.erase(iter);
-                //                }
+                // for(iter=organism.begin(); iter != organism.end(); iter++) {
+                //      organism.erase(iter);
+                // }
             }
         }
     }
 }
 
+// HOW TO REPRODUCE
 //--------------------------------------------------------------
 void ofApp::reproduce() {
-   
+
     for (int i=0; i < animals.size(); i++) {
-        
+    
         if (ofRandom(1) < animals[i]->birthRate) { //small chance of reproduction
         
             //Only reproduce if the Animal is healthy
             if (animals[i]->mHealth >= 130 && animals[i]->mHealth <= 200) {
         
                 //create childDNA which is a copy of parent DNA
-                DNA childDNA = parentDNA.crossover(parentDNA); //dna;
+                DNA childDNA = parentDNA.crossover(parentDNA);
                 childDNA.mutate(animals[i]->mutateRate);
 
-                // create a new child at that its parents' positions
-                for(int i=0; i < 1; i++) {
-                    animals.push_back(unique_ptr<Animals>(new babyFrog(animals[i]->mPosition.x, animals[i]->mPosition.y, animals[i]->mPosition.z, childDNA)));
-                    animals.push_back(unique_ptr<Animals>(new babyFish(animals[i]->mPosition.x, animals[i]->mPosition.y, animals[i]->mPosition.z, childDNA)));
-                }
+                //check that animals of the same species are close to each other
+                ofVec3f parentFrogPos = animals[i]->getPos();
+                ofVec3f parentFishPos;
+
+                // TO DO
+                // create a new child at its parents' positions
+//                for(int j=0; j < 1; j++) {
+//                    ofVec3f babyAnimalPos = animals[i]->getPos();
+//
+//                    animals.push_back(unique_ptr<Animals>(new babyFrog(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+//                    animals.push_back(unique_ptr<Animals>(new babyFish(babyAnimalPos.x, babyAnimalPos.y, babyAnimalPos.z, childDNA)));
+//                }
             }
+        }
+    }
+}
+
+// HOW ANIMALS DIE (if run out of food)
+//--------------------------------------------------------------
+void ofApp::die() {
+    
+    for (int i=0; i < animals.size(); i++) {
+        if (animals[i]->mHealth <= 0.0) {
+            animals.erase(animals.begin());
         }
     }
 }
@@ -124,6 +144,7 @@ void ofApp::update() {
     
     ofApp::eat();
     ofApp::reproduce();
+    ofApp::die();
 }
 
 //--------------------------------------------------------------

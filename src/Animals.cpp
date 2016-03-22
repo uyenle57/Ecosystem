@@ -15,7 +15,7 @@ Animals::Animals(float x, float y, float z, DNA &dna): mPosx(x), mPosy(y), mPosz
     mVelocity.set(0, 0, 0);
     mAcceleration.set(0, 0, 0);
     
-    birthRate = ofMap(dna.genes[0],0,1,0.4,0.2);
+    birthRate = ofMap(dna.genes[0],0,1,0.01,0.2);
     mutateRate = ofMap(dna.genes[1],0,1,0.15,0.10);
     
     mHealth = 200;
@@ -130,11 +130,9 @@ ofColor Animals::changeColour(ofColor healthyCol) {
     else if (mHealth > 0 && mHealth <= 70) {    //Starving: 0-70
         bodyColor = starvingColor; //turns red
     }
-    else if (bIsDead()) {    //Die
-        // TO DO
-        // call destructorrrrr
-    }
-    
+//    else if (bIsDead()) {    //Die
+//        
+//    }
     return bodyColor;
 }
 
@@ -142,12 +140,6 @@ ofColor Animals::changeColour(ofColor healthyCol) {
 //------------------------------------------------------------------------
 void Animals::decreaseHealth() {
     mHealth -= 0.05;
+    cout << mHealth << endl;
 }
 
-// HOW TO DIE
-//------------------------------------------------------------------------
-bool Animals::bIsDead() {
-    if (mHealth <= 0.0)
-        return true;
-        else return false;
-}

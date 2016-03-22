@@ -20,7 +20,9 @@ public:
     
     virtual ~BigFish();
     
-    void draw(), update(), swim(), eat();
+    void draw(), update(), swim();
+    ofVec3f getPos();
+    ofVec3f getFishPos();
 
 protected:
     float wiggle(int m);

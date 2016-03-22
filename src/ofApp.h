@@ -50,7 +50,7 @@ class ofApp : public ofBaseApp{
     // ANIMALS
     std::vector<unique_ptr<Animals>> animals;
     
-    int numAnimals = 3;
+    int numAnimals = 1; //3;
     
     shared_ptr<Frogs> frogs;
     shared_ptr<BigFish> bigFish;
@@ -60,7 +60,7 @@ class ofApp : public ofBaseApp{
     
     void eat();
     void reproduce();
-
+    void die();
 };
 
 

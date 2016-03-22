@@ -77,7 +77,6 @@ void BigFish::draw() {
 //------------------------------------------------------------------------------------
 void BigFish::update() {
     BigFish::swim();
-    BigFish::eat();
     Animals::decreaseHealth();
     Animals::returnToScreen();
 }
@@ -101,6 +100,6 @@ float BigFish::wiggle(int m) {
 }
 
 //------------------------------------------------------------------------------------
-void BigFish::eat() {
-    
+ofVec3f BigFish::getPos() {
+    return BigFish::mPosition;
 }

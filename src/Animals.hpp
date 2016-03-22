@@ -31,7 +31,6 @@ public:
     
     void operator=(const Animals &A);
     
-    
     ofVec3f mPosition, mVelocity, mAcceleration;
     
     ofColor healthyColor, hungryColor, starvingColor;
@@ -50,12 +49,12 @@ public:
     virtual void draw() = 0;
     virtual void update() = 0;
     virtual void swim() = 0;
-    virtual void eat() = 0;
-    
+    virtual ofVec3f getPos() = 0;
+
 protected:
     
     DNA *dna;
-    //DNA parentGene;
+    DNA parentGene;
 
     //Animals *reproduce(Animals &partner, float prob);
     
@@ -68,8 +67,6 @@ protected:
     void returnToScreen();
     
     void decreaseHealth();
-    
-    bool bIsDead();
     
 };
 #endif /* Animals_hpp */

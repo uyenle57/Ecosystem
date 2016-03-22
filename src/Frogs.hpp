@@ -20,7 +20,8 @@ public:
     
     virtual ~Frogs();
     
-    void draw(), update(), swim(), eat();
+    void draw(), update(), swim();
+    ofVec3f getPos();
     
 protected:
     ofColor(bodyColor);
