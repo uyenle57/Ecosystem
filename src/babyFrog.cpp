@@ -13,6 +13,8 @@ babyFrog::babyFrog(float babyFrogX, float babyFrogY, float babyFrogZ, DNA &dna) 
     mPosition.set(babyFrogX, babyFrogY, babyFrogZ);
     
     mSize = ofMap(dna.genes[0], 0, 1, 30, 30);
+    
+    species = "babyFrog"; //set different species name to prevent baby animals from reproducing
 }
 
 babyFrog::~babyFrog() {

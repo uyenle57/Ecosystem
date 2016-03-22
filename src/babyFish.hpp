@@ -23,7 +23,7 @@ public:
     void draw(), update();
     
     float mSize;
-        
+    
 };
 
 

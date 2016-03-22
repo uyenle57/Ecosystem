@@ -13,6 +13,8 @@ babyFish::babyFish(float babyFishX, float babyFishY, float babyFishZ, DNA &dna) 
     mPosition.set(babyFishX, babyFishY, babyFishZ);
     
     mSize = ofMap(dna.genes[0], 0, 1, 5,5);
+    
+    species = "babyFish"; //set different species name to prevent baby animals from reproducing
 }
 
 babyFish::~babyFish() {

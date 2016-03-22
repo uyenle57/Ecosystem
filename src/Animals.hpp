@@ -53,7 +53,7 @@ public:
     
     bool isHealthy(), isHungry(), isStarving(), isDead();
     
-    string species;
+    string species; //for checking of two animals are of the same species for reproduction in ofApp
 
 protected:
     

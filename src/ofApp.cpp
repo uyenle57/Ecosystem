@@ -43,20 +43,33 @@ void ofApp::setup(){
 void ofApp::eat() {
     
     for(int i=0; i < organism.size(); i++) {
-        ofVec3f foodlocation = organism[i]->getPos(); //Organisms are food sources
         
-        for(int j=0; j < animals.size(); j++) {
+        if (organism[i]->bAlive) {  //If the organism is alive
+        
+            //Do the eating
+            ofVec3f foodlocation = organism[i]->getPos(); //Organisms are food sources
+        
+            for(int j=0; j < animals.size(); j++) {
             
             //If Animal is touching any food
             float dist = animals[j]->mPosition.distance(foodlocation);
             float sumRadii = organism[i]->mSize + animals[j]->mSize;
             
             if (dist < sumRadii) {
-                if (animals[j]->mHealth >= 0 && animals[j]->mHealth <= 200) { //increase health within boundaries of 0-200
+                if (animals[j]->mHealth <= 200) { //increase health within boundaries of 0-200
                     animals[j]->mHealth += 5;
                 }
-                //Delete organism at its index position
-                organism.erase(organism.begin()+i);
+                
+                //Turn the boolean for drawing the organism off
+                organism[i]->bAlive = false;
+                
+                //this didn't work so I used booleans instead
+//                auto toremove = std::remove_if(organism.begin(), organism.end(), [](unique_ptr<Organism> &org){
+//                                                   bool dead = !org->isAlive();
+//                                                   return dead;
+//                                               });
+//                organism.erase(toremove, organism.end());
+                }
             }
         }
     }
@@ -100,10 +113,9 @@ void ofApp::reproduce() {
 // HOW ANIMALS DIE (if run out of food)
 //--------------------------------------------------------------
 void ofApp::die() {
-    
     for (int i=0; i < animals.size(); i++) {
         if (animals[i]->isDead()) {
-            animals.erase(animals.begin());
+            animals.erase(animals.begin()+i);
         }
     }
 }
@@ -117,7 +129,8 @@ void ofApp::draw() {
     ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
     
     for (auto & organism : organism) {
-        organism->draw();
+        if (organism->bAlive)
+            organism->draw();
     }
     for (auto & animals : animals) {
         animals->draw();

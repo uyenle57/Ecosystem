@@ -16,6 +16,8 @@ Organism::Organism(float x, float y, float z): mPosx(x), mPosy(y), mPosz(z){
     mRotateTheta = 0;
     mMaxForce = 5.0;
     mMaxSpeed = 5;
+    
+    bAlive = true;
 }
 
 Organism::~Organism() {
@@ -64,3 +66,7 @@ void Organism::seekTarget(ofVec3f target) {
     applyForce(mSteer);
 }
 
+//--------------------------------------------------------------
+bool Organism::isAlive() {
+    return !dead;
+}

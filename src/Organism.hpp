@@ -35,7 +35,8 @@ public:
     
     ofColor bodyColor;
     
-    bool bIsDead;
+    bool isAlive();
+    bool bAlive;
     
     //Pure virtual functions
     virtual void draw() = 0;
@@ -43,12 +44,17 @@ public:
     virtual void update() = 0;
 
     virtual ofVec3f getPos() = 0;
+   
+    
+protected:
     
     void swimUpdate();
     void returnToScreen();
     void applyForce(ofVec3f force);
     void seekTarget(ofVec3f target);
     void resetForce();
+    
+    bool dead = false;
     
 };
 
