@@ -21,7 +21,7 @@ Organisms are the food source for Animals. They don't eat, mate or die. New orga
 Animals don't eat each other, only eat Organisms to survive. They also reproduce if they're healthy.
 Animals die if run out of food.
 Animals show signs of hunger by changing their body colour:
- - Hungry = green
- - Dying = red
+ - Hungry = orange
+ - Starving = red
  - Dead = disappear
 
